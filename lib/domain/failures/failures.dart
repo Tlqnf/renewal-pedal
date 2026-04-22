@@ -1,10 +1,3 @@
-// ============================================================
-// FILE: failure.dart
-// LAYER: domain
-// RESPONSIBILITY: 에러 타입 정의 (Result 패턴)
-// DEPENDENCIES: None
-// ============================================================
-
 abstract class Failure {
   final String message;
   const Failure(this.message);

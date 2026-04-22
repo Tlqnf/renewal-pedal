@@ -14,7 +14,7 @@ class PedalApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Pedal',
       theme: AppTheme.light,
-      routerConfig: AppRouter.router,
+      routerConfig: AppRouter.createRouter(),
     );
   }
 }

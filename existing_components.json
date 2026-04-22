@@ -1,0 +1,15 @@
+{
+  "components": [
+    {
+      "name": "AppBottomNavBar",
+      "path": "lib/common/components/navigation/app_bottom_nav_bar.dart",
+      "props": ["currentIndex: int", "onTap: ValueChanged<int>"]
+    }
+  ],
+  "theme": {
+    "colors": "lib/common/theme/app_colors.dart",
+    "text_styles": "lib/common/theme/app_text_styles.dart",
+    "spacing": "lib/common/theme/app_spacing.dart",
+    "radius": "lib/common/theme/app_radius.dart"
+  }
+}

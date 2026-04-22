@@ -4,8 +4,8 @@ class AppColors {
   AppColors._();
 
   // Gray
-  static const Color gray0   = Color(0xFFFFFFFF);
-  static const Color gray50  = Color(0xFFF5F5F5);
+  static const Color gray0 = Color(0xFFFFFFFF);
+  static const Color gray50 = Color(0xFFF5F5F5);
   static const Color gray100 = Color(0xFFEEEEEE);
   static const Color gray200 = Color(0xFFE0E0E0);
   static const Color gray300 = Color(0xFFBDBDBD);
@@ -16,10 +16,10 @@ class AppColors {
   static const Color gray900 = Color(0xFF202020);
 
   // Semantic
-  static const Color error   = Color(0xFFFF312D);
+  static const Color error = Color(0xFFFF312D);
   static const Color warning = Color(0xFFFFAA00);
   static const Color success = Color(0xFF56C85A);
-  static const Color info    = Color(0xFF00A5FF);
+  static const Color info = Color(0xFF00A5FF);
 
   // Primary
   static const Color primary100 = Color(0xFFE3F2FD);
@@ -46,4 +46,7 @@ class AppColors {
   static const Color textPrimary = gray900;
   static const Color textSecondary = gray600;
   static const Color textDisabled = gray400;
+
+  static const Color kakaoBackground = Color(0xFFF5E10D);
+  static const Color naverBackground = Color(0xFF03C95B);
 }

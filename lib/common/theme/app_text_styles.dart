@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pedal/common/theme/app_colors.dart';
+import 'app_colors.dart';
 
 class AppTextStyles {
   AppTextStyles._();
