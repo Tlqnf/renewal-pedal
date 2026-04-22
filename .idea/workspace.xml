@@ -6,14 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="62d700c4-45eb-442d-9f31-1b7a82837cbb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/theme/app_colors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/theme/app_colors.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/theme/app_text_styles.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/theme/app_text_styles.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/common/theme/app_theme.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/theme/app_theme.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/routes/app_router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/routes/app_router.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/domain/failures/failure.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pedal.iml" beforeDir="false" afterPath="$PROJECT_DIR$/pedal.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/routes/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/routes/app_routes.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/home/pages/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/home/pages/home_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/main/pages/main_page.dart" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

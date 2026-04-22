@@ -7,7 +7,7 @@ import 'package:pedal/common/theme/app_radius.dart';
 import 'package:pedal/core/constants/constants.dart';
 import 'package:pedal/common/components/navigation/app_bottom_nav_bar.dart';
 
-class MainPage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   final String userName;
   final int pointBalance;
   final String motivationMessage;
@@ -28,7 +28,7 @@ class MainPage extends StatelessWidget {
   final VoidCallback onEventTap;
   final VoidCallback onBannerTap;
 
-  const MainPage({
+  const HomePage({
     super.key,
     required this.userName,
     required this.pointBalance,
@@ -115,10 +115,7 @@ class MainPage extends StatelessWidget {
                       ),
                     ),
             ),
-            AppBottomNavBar(
-              currentIndex: currentNavIndex,
-              onTap: onNavTap,
-            ),
+            AppBottomNavBar(currentIndex: currentNavIndex, onTap: onNavTap),
           ],
         ),
       ),
@@ -179,9 +176,7 @@ class _MainAppBar extends StatelessWidget {
           // 포인트 잔액
           Text(
             '₩ ${_formatNumber(pointBalance)}',
-            style: AppTextStyles.titSm.copyWith(
-              color: AppColors.textPrimary,
-            ),
+            style: AppTextStyles.titSm.copyWith(color: AppColors.textPrimary),
           ),
 
           const Spacer(),
@@ -218,10 +213,7 @@ class _AppBarIconButton extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
 
-  const _AppBarIconButton({
-    required this.icon,
-    required this.onTap,
-  });
+  const _AppBarIconButton({required this.icon, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -230,11 +222,7 @@ class _AppBarIconButton extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: EdgeInsets.all(AppSpacing.xs),
-        child: Icon(
-          icon,
-          color: AppColors.textPrimary,
-          size: 24,
-        ),
+        child: Icon(icon, color: AppColors.textPrimary, size: 24),
       ),
     );
   }
@@ -299,15 +287,10 @@ class _GreetingSection extends StatelessWidget {
         children: [
           Text(
             '$userName님 오늘도 오셨군요!',
-            style: AppTextStyles.txtMd.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: AppTextStyles.txtMd.copyWith(color: AppColors.textSecondary),
           ),
           SizedBox(height: AppSpacing.xs),
-          Text(
-            motivationMessage,
-            style: AppTextStyles.titXl,
-          ),
+          Text(motivationMessage, style: AppTextStyles.titXl),
         ],
       ),
     );
@@ -389,28 +372,19 @@ class _StatCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           useIconFallback
-              ? Icon(
-                  fallbackIcon,
-                  size: 48,
-                  color: AppColors.warning,
-                )
+              ? Icon(fallbackIcon, size: 48, color: AppColors.warning)
               : Image.asset(
                   imagePath,
                   width: 48,
                   height: 48,
                   fit: BoxFit.contain,
-                  errorBuilder: (_, _, _) => Icon(
-                    fallbackIcon,
-                    size: 48,
-                    color: AppColors.gray300,
-                  ),
+                  errorBuilder: (_, _, _) =>
+                      Icon(fallbackIcon, size: 48, color: AppColors.gray300),
                 ),
           SizedBox(height: AppSpacing.sm),
           Text(
             '$label: $value',
-            style: AppTextStyles.txtSm.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: AppTextStyles.txtSm.copyWith(color: AppColors.textSecondary),
             textAlign: TextAlign.center,
           ),
         ],
@@ -447,16 +421,13 @@ class _AiMissionCard extends StatelessWidget {
               Image.asset(
                 AppConstants.background,
                 fit: BoxFit.cover,
-                errorBuilder: (_, _, _) => Container(
-                  color: AppColors.primary100,
-                ),
+                errorBuilder: (_, _, _) =>
+                    Container(color: AppColors.primary100),
               ),
 
               // 반투명 오버레이
               // TODO: AppColors.overlayDark 추가 필요
-              Container(
-                color: AppColors.gray900.withValues(alpha: 0.25),
-              ),
+              Container(color: AppColors.gray900.withValues(alpha: 0.25)),
 
               // 컨텐츠
               Padding(
@@ -554,9 +525,7 @@ class _ShortcutMenu extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
       child: Row(
         children: items
-            .map(
-              (item) => Expanded(child: _ShortcutItemWidget(item: item)),
-            )
+            .map((item) => Expanded(child: _ShortcutItemWidget(item: item)))
             .toList(),
       ),
     );
@@ -612,9 +581,7 @@ class _ShortcutItemWidget extends StatelessWidget {
           SizedBox(height: AppSpacing.xs),
           Text(
             item.label,
-            style: AppTextStyles.txtXs.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: AppTextStyles.txtXs.copyWith(color: AppColors.textSecondary),
           ),
         ],
       ),
