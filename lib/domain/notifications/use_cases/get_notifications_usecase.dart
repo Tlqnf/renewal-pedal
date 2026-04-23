@@ -1,10 +1,3 @@
-// ============================================================
-// FILE: get_notifications_usecase.dart
-// LAYER: domain
-// RESPONSIBILITY: 알림 목록 조회
-// DEPENDENCIES: NotificationRepository
-// ============================================================
-
 import 'package:dartz/dartz.dart';
 import 'package:pedal/domain/notifications/entities/notification_entity.dart';
 import 'package:pedal/domain/failures/failures.dart';

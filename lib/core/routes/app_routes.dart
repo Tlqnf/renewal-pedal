@@ -13,6 +13,7 @@ class AppRoutes {
   static const String eventRequest = '/event/:eventId/request';
   static const String ranking = '/ranking';
   static const String my = '/my';
+  static const String myRoutesList = '/my/routes';
   static const String notificationList = '/notification/list';
   static const String notificationDetail = '/notification/detail';
 

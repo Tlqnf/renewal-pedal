@@ -1,10 +1,3 @@
-// ============================================================
-// FILE: login_usecase.dart
-// LAYER: domain
-// RESPONSIBILITY: Google/Kakao/Naver 소셜 로그인 UseCase (토큰 유효성 검증 + Repository 호출)
-// DEPENDENCIES: AuthRepository, AuthResultEntity, Failure
-// ============================================================
-
 import 'package:dartz/dartz.dart';
 import 'package:pedal/domain/auth/entities/auth_result_entity.dart';
 import 'package:pedal/domain/failures/failures.dart';

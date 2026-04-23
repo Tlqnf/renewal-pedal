@@ -21,16 +21,15 @@ class ChallengeListItem extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
         child: Row(
           children: [
-            Container(
-              width: 48,
-              height: 48,
-              decoration: BoxDecoration(
-                color: AppColors.primary100,
-                shape: BoxShape.circle,
-              ),
-              child: const Center(
-                child: Icon(Icons.flag_rounded, color: AppColors.primary, size: 24),
-              ),
+            CircleAvatar(
+              radius: 28,
+              backgroundColor: AppColors.primary100,
+              backgroundImage: challenge.thumbnailUrl != null
+                  ? NetworkImage(challenge.thumbnailUrl!)
+                  : null,
+              child: challenge.thumbnailUrl == null
+                  ? const Icon(Icons.flag_rounded, color: AppColors.primary, size: 24)
+                  : null,
             ),
             SizedBox(width: AppSpacing.md),
             Expanded(

@@ -37,6 +37,10 @@ import 'package:pedal/features/my/viewmodels/my_view_model.dart';
 import 'package:pedal/domain/my/use_cases/get_my_profile_use_case.dart';
 import 'package:pedal/domain/my/use_cases/get_my_activity_use_case.dart';
 import 'package:pedal/data/my/repositories/my_repository_impl.dart';
+import 'package:pedal/features/my/pages/my_routes_list_page.dart';
+import 'package:pedal/features/my/viewmodels/my_routes_list_view_model.dart';
+import 'package:pedal/domain/my/use_cases/get_saved_routes_use_case.dart';
+import 'package:pedal/mock/sources/my_routes_mock_repository.dart';
 
 class AppRouter {
   static GoRouter createRouter() => GoRouter(
@@ -173,6 +177,24 @@ class AppRouter {
             getMyActivityUseCase: GetMyActivityUseCase(MyRepositoryImpl()),
           ),
           child: MyPage(onBack: () => context.pop()),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.myRoutesList,
+        builder: (context, state) => ChangeNotifierProvider(
+          create: (_) => MyRoutesListViewModel(
+            GetSavedRoutesUseCase(MyRoutesMockRepository()),
+          )..fetchRoutes(),
+          child: Consumer<MyRoutesListViewModel>(
+            builder: (context, vm, _) => MyRoutesListPage(
+              routeList: vm.routeList,
+              routeCount: vm.routeCount,
+              isLoading: vm.isLoading,
+              errorMessage: vm.errorMessage,
+              onBack: () => context.pop(),
+              onRouteTap: (id) {},
+            ),
+          ),
         ),
       ),
     ],

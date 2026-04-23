@@ -1,10 +1,3 @@
-// ============================================================
-// FILE: setup_profile_usecase.dart
-// LAYER: domain
-// RESPONSIBILITY: 초기 프로필 설정 UseCase (닉네임 검증 + Repository 호출)
-// DEPENDENCIES: AuthRepository, Failure
-// ============================================================
-
 import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:pedal/domain/failures/failures.dart';

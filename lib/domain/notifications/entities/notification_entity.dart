@@ -1,10 +1,3 @@
-// ============================================================
-// FILE: notification_entity.dart
-// LAYER: domain/entities
-// RESPONSIBILITY: 알림 엔티티
-// DEPENDENCIES: NotificationType
-// ============================================================
-
 import 'package:pedal/domain/notifications/enums/notification_type.dart';
 
 class NotificationEntity {

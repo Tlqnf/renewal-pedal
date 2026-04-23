@@ -17,25 +17,26 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.lg, AppSpacing.md, AppSpacing.sm),
-      child: Row(
-        children: [
-          Text(title, style: AppTextStyles.titSm),
-          SizedBox(width: AppSpacing.xs),
-          Text(
-            '$count',
-            style: AppTextStyles.titSm.copyWith(color: AppColors.primary),
-          ),
-          const Spacer(),
-          GestureDetector(
-            onTap: onMoreTap,
-            child: Text(
-              '더보기',
-              style: AppTextStyles.txtXs.copyWith(color: AppColors.textSecondary),
+    return GestureDetector(
+      onTap: onMoreTap,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.lg, AppSpacing.md, AppSpacing.sm),
+        child: Row(
+          children: [
+            Text(title, style: AppTextStyles.titSm),
+            SizedBox(width: AppSpacing.xs),
+            Text(
+              '$count',
+              style: AppTextStyles.titSm.copyWith(color: AppColors.primary),
             ),
-          ),
-        ],
+            const Spacer(),
+            Icon(
+              Icons.chevron_right,
+              color: AppColors.textSecondary,
+              size: 20,
+            ),
+          ],
+        ),
       ),
     );
   }
