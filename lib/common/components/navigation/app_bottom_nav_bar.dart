@@ -35,11 +35,7 @@ class AppBottomNavBar extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           // Notch background with shadow (전체 높이 채움)
-          Positioned.fill(
-            child: CustomPaint(
-              painter: _NotchPainter(),
-            ),
-          ),
+          Positioned.fill(child: CustomPaint(painter: _NotchPainter())),
           // Nav items (상단 64 영역에만)
           Positioned(
             top: 0,
@@ -86,8 +82,8 @@ class AppBottomNavBar extends StatelessWidget {
 
 class _NotchPainter extends CustomPainter {
   static const double _notchHalfWidth = 28.0; // 노치 가로 반폭
-  static const double _notchDepth = 22.0;     // 위로 파이는 깊이
-  static const double _edgeCurve = 12.0;      // 진입/복귀 곡선 여유
+  static const double _notchDepth = 22.0; // 위로 파이는 깊이
+  static const double _edgeCurve = 12.0; // 진입/복귀 곡선 여유
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -100,15 +96,21 @@ class _NotchPainter extends CustomPainter {
       ..lineTo(x1 - _edgeCurve, 0)
       // 왼쪽 진입: y=0 → 노치 최저점(-_notchDepth) 으로 내려가는 S커브
       ..cubicTo(
-        x1 - _edgeCurve / 2, 0,          // 제어점1: 수평 유지
-        x1, -_notchDepth,                 // 제어점2: 노치 깊이
-        cx, -_notchDepth,                 // 노치 중앙 최저점
+        x1 - _edgeCurve / 2,
+        0, // 제어점1: 수평 유지
+        x1,
+        -_notchDepth, // 제어점2: 노치 깊이
+        cx,
+        -_notchDepth, // 노치 중앙 최저점
       )
       // 오른쪽 복귀: 노치 최저점 → y=0
       ..cubicTo(
-        x2, -_notchDepth,                 // 제어점1: 노치 깊이
-        x2 + _edgeCurve / 2, 0,           // 제어점2: 수평 유지
-        x2 + _edgeCurve, 0,               // y=0 복귀
+        x2,
+        -_notchDepth, // 제어점1: 노치 깊이
+        x2 + _edgeCurve / 2,
+        0, // 제어점2: 수평 유지
+        x2 + _edgeCurve,
+        0, // y=0 복귀
       )
       ..lineTo(size.width, 0)
       ..lineTo(size.width, size.height)
@@ -146,10 +148,7 @@ class _NavItem extends StatelessWidget {
         children: [
           Icon(item.icon, color: color, size: 24),
           SizedBox(height: AppSpacing.xs),
-          Text(
-            item.label,
-            style: AppTextStyles.titXs.copyWith(color: color),
-          ),
+          Text(item.label, style: AppTextStyles.titXs.copyWith(color: color)),
         ],
       ),
     );

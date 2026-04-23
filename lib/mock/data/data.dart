@@ -5,3 +5,6 @@ export 'my_mock_data.dart';
 export 'my_routes_mock_data.dart';
 export 'my_feed_mock_data.dart';
 export 'my_feed_detail_mock_data.dart';
+export 'activity_crew_detail_mock_data.dart';
+export 'activity_mock_data.dart';
+export 'activity_challenge_detail_mock_data.dart';

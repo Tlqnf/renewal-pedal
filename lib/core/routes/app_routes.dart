@@ -16,7 +16,9 @@ class AppRoutes {
   static const String myRoutesList = '/my/routes';
   static const String notificationList = '/notification/list';
   static const String notificationDetail = '/notification/detail';
+  static const String activityCrewDetail = '/activity/crew/:crewId';
 
   static String eventDetailPath(String eventId) => '/event/$eventId';
   static String eventRequestPath(String eventId) => '/event/$eventId/request';
+  static String activityCrewDetailPath(String crewId) => '/activity/crew/$crewId';
 }

@@ -48,9 +48,7 @@ class PrimaryButton extends StatelessWidget {
         child: Center(
           child: Text(
             label,
-            style: AppTextStyles.titMd.copyWith(
-              color: AppColors.surface,
-            ),
+            style: AppTextStyles.titMd.copyWith(color: AppColors.surface),
           ),
         ),
       ),

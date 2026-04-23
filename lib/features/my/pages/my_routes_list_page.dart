@@ -70,7 +70,7 @@ class MyRoutesListPage extends StatelessWidget {
     return ListView.separated(
       padding: EdgeInsets.all(AppSpacing.md),
       itemCount: routeList.length,
-      separatorBuilder: (_, __) => SizedBox(height: AppSpacing.sm),
+      separatorBuilder: (_, _) => SizedBox(height: AppSpacing.sm),
       itemBuilder: (context, index) {
         final route = routeList[index];
         return RouteCard(

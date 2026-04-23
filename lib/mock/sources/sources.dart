@@ -5,3 +5,5 @@ export 'my_mock_repository.dart';
 export 'my_routes_mock_repository.dart';
 export 'my_feed_mock_repository.dart';
 export 'my_feed_detail_mock_repository.dart';
+export 'activity_crew_detail_mock_repository.dart';
+export 'activity_mock_repository.dart';

@@ -5,7 +5,6 @@ import 'package:pedal/common/theme/app_text_styles.dart';
 import 'package:pedal/common/theme/app_spacing.dart';
 import 'package:pedal/common/theme/app_radius.dart';
 import 'package:pedal/core/constants/constants.dart';
-import 'package:pedal/common/components/navigation/app_bottom_nav_bar.dart';
 
 class HomePage extends StatelessWidget {
   final String userName;
@@ -115,15 +114,12 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
             ),
-            AppBottomNavBar(currentIndex: currentNavIndex, onTap: onNavTap),
           ],
         ),
       ),
     );
   }
 }
-
-// ─── App Bar ─────────────────────────────────────────────────
 
 class _MainAppBar extends StatelessWidget {
   final int pointBalance;

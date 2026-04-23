@@ -6,10 +6,23 @@
   <component name="ChangeListManager">
     <list default="true" id="62d700c4-45eb-442d-9f31-1b7a82837cbb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/components/appbars/pedal_appbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/components/appbars/pedal_appbar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/components/buttons/primary_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/components/buttons/primary_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/components/lists/items/settings_list_item.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/components/lists/items/settings_list_item.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/components/navigation/app_bottom_nav_bar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/components/navigation/app_bottom_nav_bar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/layouts/layouts.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/layouts/main_scaffold.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/layouts/main_scaffold.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/theme/app_spacing.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/theme/app_spacing.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/common/theme/app_text_styles.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/common/theme/app_text_styles.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/routes/app_router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/routes/app_router.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/routes/app_routes.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/routes/app_routes.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/features/home/pages/home_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/home/pages/home_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/main/pages/main_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/my/pages/my_feed_detail_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/my/pages/my_feed_detail_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/my/pages/my_routes_list_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/my/pages/my_routes_list_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/my/widgets/route_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/my/widgets/route_card.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/statistics/pages/statistics_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/statistics/pages/statistics_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mock/data/data.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mock/data/data.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/mock/sources/sources.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/mock/sources/sources.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -41,6 +41,11 @@ import 'package:pedal/features/my/pages/my_routes_list_page.dart';
 import 'package:pedal/features/my/viewmodels/my_routes_list_view_model.dart';
 import 'package:pedal/domain/my/use_cases/get_saved_routes_use_case.dart';
 import 'package:pedal/mock/sources/my_routes_mock_repository.dart';
+import 'package:pedal/features/activity/pages/activity_crew_detail_page.dart';
+import 'package:pedal/features/activity/viewmodels/crew_detail_view_model.dart';
+import 'package:pedal/domain/activity/use_cases/get_crew_detail_use_case.dart';
+import 'package:pedal/domain/activity/use_cases/join_crew_use_case.dart';
+import 'package:pedal/mock/sources/activity_crew_detail_mock_repository.dart';
 
 class AppRouter {
   static GoRouter createRouter() => GoRouter(
@@ -196,6 +201,23 @@ class AppRouter {
             ),
           ),
         ),
+      ),
+      GoRoute(
+        path: AppRoutes.activityCrewDetail,
+        builder: (context, state) {
+          final crewId = state.pathParameters['crewId'] ?? '';
+          final mockRepo = ActivityCrewDetailMockRepository();
+          return ChangeNotifierProvider(
+            create: (_) => CrewDetailViewModel(
+              getCrewDetailUseCase: GetCrewDetailUseCase(mockRepo),
+              joinCrewUseCase: JoinCrewUseCase(mockRepo),
+            ),
+            child: ActivityCrewDetailPageConnected(
+              crewId: crewId,
+              onBackTap: () => context.pop(),
+            ),
+          );
+        },
       ),
     ],
   );

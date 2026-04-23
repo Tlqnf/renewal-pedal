@@ -39,11 +39,7 @@ class SettingsListItem extends StatelessWidget {
                     : AppColors.textPrimary,
               ),
             ),
-            Icon(
-              Icons.chevron_right,
-              color: AppColors.textSecondary,
-              size: 24,
-            ),
+            Icon(Icons.chevron_right, color: AppColors.textSecondary, size: 24),
           ],
         ),
       ),

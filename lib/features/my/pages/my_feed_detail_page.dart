@@ -6,9 +6,7 @@ import 'package:pedal/common/theme/app_text_styles.dart';
 import 'package:pedal/common/theme/app_spacing.dart';
 import 'package:pedal/features/my/viewmodels/my_feed_detail_view_model.dart';
 
-// ---------------------------------------------------------------------------
 // Pure View — ViewModel 연결 없음. 모든 상태/액션은 props로 주입.
-// ---------------------------------------------------------------------------
 
 class MyFeedDetailPage extends StatelessWidget {
   // 상태값
@@ -143,9 +141,6 @@ class MyFeedDetailPage extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Sub-widgets (private, page-local)
-// ---------------------------------------------------------------------------
 
 class _FeedAuthorRow extends StatelessWidget {
   final String? profileImageUrl;
@@ -401,10 +396,7 @@ class _ExpandableContent extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
 // Connected Widget — ViewModel 주입용
-// ---------------------------------------------------------------------------
-
 class MyFeedDetailPageConnected extends StatefulWidget {
   final String feedId;
 

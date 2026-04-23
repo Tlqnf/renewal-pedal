@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pedal/common/theme/app_colors.dart';
 import 'package:pedal/common/theme/app_spacing.dart';
-import 'package:pedal/common/components/navigation/app_bottom_nav_bar.dart';
 import 'package:pedal/domain/statistics/entities/daily_stat_entity.dart';
 import 'package:pedal/domain/statistics/entities/challenge_badge_entity.dart';
 import 'package:pedal/features/statistics/viewmodels/statistics_view_model.dart';
@@ -30,8 +29,6 @@ class StatisticsPage extends StatelessWidget {
 
   final VoidCallback onPreviousWeek;
   final VoidCallback onNextWeek;
-  final int currentNavIndex;
-  final ValueChanged<int> onNavTap;
 
   const StatisticsPage({
     super.key,
@@ -46,11 +43,9 @@ class StatisticsPage extends StatelessWidget {
     required this.weeklyMaxSpeedKmh,
     required this.challengeBadges,
     required this.isLoading,
-    required this.errorMessage,
+    this.errorMessage,
     required this.onPreviousWeek,
     required this.onNextWeek,
-    required this.currentNavIndex,
-    required this.onNavTap,
   });
 
   @override
@@ -67,10 +62,6 @@ class StatisticsPage extends StatelessWidget {
                   ),
                 )
               : _buildContent(),
-      bottomNavigationBar: AppBottomNavBar(
-        currentIndex: currentNavIndex,
-        onTap: onNavTap,
-      ),
     );
   }
 
@@ -190,8 +181,6 @@ class _StatisticsPageConnectedState extends State<StatisticsPageConnected> {
           errorMessage: vm.errorMessage,
           onPreviousWeek: vm.onPreviousWeek,
           onNextWeek: vm.onNextWeek,
-          currentNavIndex: widget.currentNavIndex,
-          onNavTap: widget.onNavTap,
         );
       },
     );

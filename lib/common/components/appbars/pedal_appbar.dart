@@ -34,9 +34,7 @@ class PedalAppBar extends StatelessWidget implements PreferredSizeWidget {
           SizedBox(width: AppSpacing.sm),
           Text(
             subSection ?? '',
-            style: AppTextStyles.txtLg.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: AppTextStyles.txtLg.copyWith(color: AppColors.textSecondary),
           ),
         ],
       ),

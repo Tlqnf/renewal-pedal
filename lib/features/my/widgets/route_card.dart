@@ -58,7 +58,7 @@ class RouteCard extends StatelessWidget {
                       width: 110,
                       height: 90,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => _placeholderThumbnail(),
+                      errorBuilder: (_, _, _) => _placeholderThumbnail(),
                     )
                   : _placeholderThumbnail(),
             ),
