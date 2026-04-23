@@ -8,7 +8,11 @@ class ChallengeListItem extends StatelessWidget {
   final ChallengeEntity challenge;
   final VoidCallback onTap;
 
-  const ChallengeListItem({super.key, required this.challenge, required this.onTap});
+  const ChallengeListItem({
+    super.key,
+    required this.challenge,
+    required this.onTap,
+  });
 
   String _formatDate(DateTime d) =>
       '${d.year}.${d.month.toString().padLeft(2, '0')}.${d.day.toString().padLeft(2, '0')}';
@@ -18,7 +22,10 @@ class ChallengeListItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.sm,
+        ),
         child: Row(
           children: [
             CircleAvatar(
@@ -28,7 +35,11 @@ class ChallengeListItem extends StatelessWidget {
                   ? NetworkImage(challenge.thumbnailUrl!)
                   : null,
               child: challenge.thumbnailUrl == null
-                  ? const Icon(Icons.flag_rounded, color: AppColors.primary, size: 24)
+                  ? const Icon(
+                      Icons.flag_rounded,
+                      color: AppColors.primary,
+                      size: 24,
+                    )
                   : null,
             ),
             SizedBox(width: AppSpacing.md),
@@ -40,23 +51,37 @@ class ChallengeListItem extends StatelessWidget {
                   SizedBox(height: AppSpacing.xs),
                   Text(
                     '${_formatDate(challenge.startDate)} ~ ${_formatDate(challenge.endDate)}',
-                    style: AppTextStyles.txtXs.copyWith(color: AppColors.textSecondary),
+                    style: AppTextStyles.txtXs.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                   SizedBox(height: AppSpacing.xs),
                   Row(
                     children: [
-                      const Icon(Icons.directions_bike_rounded, size: 12, color: AppColors.textSecondary),
+                      const Icon(
+                        Icons.directions_bike_rounded,
+                        size: 12,
+                        color: AppColors.textSecondary,
+                      ),
                       SizedBox(width: AppSpacing.xs),
                       Text(
                         '${challenge.distanceKm.toStringAsFixed(0)}km',
-                        style: AppTextStyles.txt2xs.copyWith(color: AppColors.textSecondary),
+                        style: AppTextStyles.txt2xs.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                       SizedBox(width: AppSpacing.md),
-                      const Icon(Icons.people_outline_rounded, size: 12, color: AppColors.textSecondary),
+                      const Icon(
+                        Icons.people_outline_rounded,
+                        size: 12,
+                        color: AppColors.textSecondary,
+                      ),
                       SizedBox(width: AppSpacing.xs),
                       Text(
                         '${challenge.participantCount}명',
-                        style: AppTextStyles.txt2xs.copyWith(color: AppColors.textSecondary),
+                        style: AppTextStyles.txt2xs.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                     ],
                   ),

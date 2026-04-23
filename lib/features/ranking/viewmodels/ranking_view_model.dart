@@ -6,7 +6,7 @@ class RankingViewModel extends ChangeNotifier {
   final GetRankingUseCase _getRankingUseCase;
 
   RankingViewModel({required GetRankingUseCase getRankingUseCase})
-      : _getRankingUseCase = getRankingUseCase;
+    : _getRankingUseCase = getRankingUseCase;
 
   int selectedTabIndex = 0;
   List<RankingEntity> rankingList = [];

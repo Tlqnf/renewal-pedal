@@ -4,7 +4,9 @@ import 'package:pedal/domain/failures/failures.dart';
 
 class RankingRepositoryImpl implements RankingRepository {
   @override
-  Future<({Failure? failure, List<RankingEntity>? data})> getRanking(RankingTab tab) async {
+  Future<({Failure? failure, List<RankingEntity>? data})> getRanking(
+    RankingTab tab,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 300));
 
     final unit = switch (tab) {

@@ -42,9 +42,7 @@ class ChallengeTabView extends StatelessWidget {
 
     return CustomScrollView(
       slivers: [
-        SliverToBoxAdapter(
-          child: ChallengeBanner(stats: stats),
-        ),
+        SliverToBoxAdapter(child: ChallengeBanner(stats: stats)),
         SliverToBoxAdapter(
           child: Container(
             color: AppColors.background,
@@ -58,16 +56,13 @@ class ChallengeTabView extends StatelessWidget {
           ),
         ),
         SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) {
-              final challenge = challenges[index];
-              return ChallengeListItem(
-                challenge: challenge,
-                onTap: () => onChallengeTap(challenge.id),
-              );
-            },
-            childCount: challenges.length,
-          ),
+          delegate: SliverChildBuilderDelegate((context, index) {
+            final challenge = challenges[index];
+            return ChallengeListItem(
+              challenge: challenge,
+              onTap: () => onChallengeTap(challenge.id),
+            );
+          }, childCount: challenges.length),
         ),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.xxl)),
       ],

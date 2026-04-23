@@ -73,10 +73,7 @@ class MyRoutesListPage extends StatelessWidget {
       separatorBuilder: (_, _) => SizedBox(height: AppSpacing.sm),
       itemBuilder: (context, index) {
         final route = routeList[index];
-        return RouteCard(
-          route: route,
-          onTap: () => onRouteTap(route.id),
-        );
+        return RouteCard(route: route, onTap: () => onRouteTap(route.id));
       },
     );
   }

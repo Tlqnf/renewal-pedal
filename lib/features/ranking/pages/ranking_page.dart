@@ -61,17 +61,24 @@ class _RankingPageState extends State<RankingPage> {
               Expanded(
                 child: vm.isLoading
                     ? const Center(
-                        child: CircularProgressIndicator(color: AppColors.primary),
+                        child: CircularProgressIndicator(
+                          color: AppColors.primary,
+                        ),
                       )
                     : ListView(
                         children: [
                           if (vm.rankingList.length >= 3)
-                            RankingPodiumSection(top3: vm.rankingList.take(3).toList()),
+                            RankingPodiumSection(
+                              top3: vm.rankingList.take(3).toList(),
+                            ),
                           const Divider(height: 1, color: AppColors.divider),
-                          ...vm.rankingList.skip(3).map(
+                          ...vm.rankingList
+                              .skip(3)
+                              .map(
                                 (entity) => RankingListItem(
                                   entity: entity,
-                                  onTap: () => widget.onUserTap?.call(entity.userId),
+                                  onTap: () =>
+                                      widget.onUserTap?.call(entity.userId),
                                 ),
                               ),
                           if (vm.errorMessage != null)

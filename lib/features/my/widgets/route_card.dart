@@ -9,11 +9,7 @@ class RouteCard extends StatelessWidget {
   final SavedRouteEntity route;
   final VoidCallback onTap;
 
-  const RouteCard({
-    super.key,
-    required this.route,
-    required this.onTap,
-  });
+  const RouteCard({super.key, required this.route, required this.onTap});
 
   String _formatDuration(int minutes) {
     final h = minutes ~/ 60;

@@ -6,7 +6,8 @@ import 'package:pedal/domain/failures/failures.dart';
 
 abstract class MyRepository {
   Future<({Failure? failure, MyProfileEntity? data})> getMyProfile();
-  Future<({Failure? failure, List<ChallengeEntity>? data})> getParticipatedChallenges();
+  Future<({Failure? failure, List<ChallengeEntity>? data})>
+  getParticipatedChallenges();
   Future<({Failure? failure, List<CrewEntity>? data})> getParticipatedCrews();
   Future<({Failure? failure, List<SavedRouteEntity>? data})> getSavedRoutes();
 }

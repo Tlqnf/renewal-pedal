@@ -10,8 +10,8 @@ class EventDetailViewModel extends ChangeNotifier {
   EventDetailViewModel({
     required GetEventDetailUseCase getEventDetailUseCase,
     required ParticipateEventUseCase participateEventUseCase,
-  })  : _getEventDetailUseCase = getEventDetailUseCase,
-        _participateEventUseCase = participateEventUseCase;
+  }) : _getEventDetailUseCase = getEventDetailUseCase,
+       _participateEventUseCase = participateEventUseCase;
 
   EventDetailEntity? event;
   bool isLoading = false;

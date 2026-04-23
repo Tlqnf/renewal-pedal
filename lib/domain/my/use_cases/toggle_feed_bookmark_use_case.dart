@@ -10,6 +10,9 @@ class ToggleFeedBookmarkUseCase {
     required String feedId,
     required bool isBookmarked,
   }) {
-    return _repository.toggleBookmark(feedId: feedId, isBookmarked: isBookmarked);
+    return _repository.toggleBookmark(
+      feedId: feedId,
+      isBookmarked: isBookmarked,
+    );
   }
 }

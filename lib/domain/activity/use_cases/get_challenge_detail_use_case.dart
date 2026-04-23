@@ -7,7 +7,9 @@ class GetChallengeDetailUseCase {
 
   GetChallengeDetailUseCase(this._repository);
 
-  Future<({Failure? failure, ChallengeDetailEntity? data})> call(String challengeId) {
+  Future<({Failure? failure, ChallengeDetailEntity? data})> call(
+    String challengeId,
+  ) {
     return _repository.getChallengeDetail(challengeId);
   }
 }

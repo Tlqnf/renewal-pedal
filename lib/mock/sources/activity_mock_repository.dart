@@ -33,13 +33,15 @@ class ActivityMockRepository implements ActivityRepository {
     String challengeId,
   ) async {
     await Future.delayed(const Duration(milliseconds: 400));
-    return (failure: null, data: ActivityChallengeDetailMockData.challengeDetail);
+    return (
+      failure: null,
+      data: ActivityChallengeDetailMockData.challengeDetail,
+    );
   }
 
   @override
-  Future<({Failure? failure, List<ChallengeRankingEntity>? data})> getChallengeRanking(
-    String challengeId,
-  ) async {
+  Future<({Failure? failure, List<ChallengeRankingEntity>? data})>
+  getChallengeRanking(String challengeId) async {
     await Future.delayed(const Duration(milliseconds: 300));
     return (failure: null, data: ActivityChallengeDetailMockData.rankingList);
   }

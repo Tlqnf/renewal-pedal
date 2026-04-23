@@ -32,19 +32,22 @@ class MyMockRepository implements MyRepository {
   }
 
   @override
-  Future<({Failure? failure, List<ChallengeEntity>? data})> getParticipatedChallenges() async {
+  Future<({Failure? failure, List<ChallengeEntity>? data})>
+  getParticipatedChallenges() async {
     await Future.delayed(const Duration(milliseconds: 500));
     return (failure: null, data: MyMockData.challengeList);
   }
 
   @override
-  Future<({Failure? failure, List<CrewEntity>? data})> getParticipatedCrews() async {
+  Future<({Failure? failure, List<CrewEntity>? data})>
+  getParticipatedCrews() async {
     await Future.delayed(const Duration(milliseconds: 400));
     return (failure: null, data: <CrewEntity>[]);
   }
 
   @override
-  Future<({Failure? failure, List<SavedRouteEntity>? data})> getSavedRoutes() async {
+  Future<({Failure? failure, List<SavedRouteEntity>? data})>
+  getSavedRoutes() async {
     await Future.delayed(const Duration(milliseconds: 400));
     return (failure: null, data: <SavedRouteEntity>[]);
   }

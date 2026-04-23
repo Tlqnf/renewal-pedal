@@ -45,10 +45,7 @@ class _LoginPageState extends State<LoginPage> {
             onTermsTap: (label) {
               context.push(
                 AppRoutes.termsDetail,
-                extra: {
-                  'title': label,
-                  'sections': <TermsSection>[],
-                },
+                extra: {'title': label, 'sections': <TermsSection>[]},
               );
             },
           ),
@@ -80,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(height: 37,),
+                          const SizedBox(height: 37),
                           Text(
                             '로그인',
                             style: AppTextStyles.titSm.copyWith(
@@ -203,10 +200,7 @@ class _TermsDialogState extends State<_TermsDialog> {
               ),
             ),
             const SizedBox(height: 14),
-            Container(
-              height: 1,
-              color: AppColors.gray100,
-            ),
+            Container(height: 1, color: AppColors.gray100),
             const SizedBox(height: 10),
             for (var index = 0; index < _labels.length; index++) ...[
               _AgreementTile(
@@ -225,10 +219,7 @@ class _TermsDialogState extends State<_TermsDialog> {
             Row(
               children: [
                 Expanded(
-                  child: CancelButton(
-                    label: '취소',
-                    onPressed: widget.onCancel,
-                  ),
+                  child: CancelButton(label: '취소', onPressed: widget.onCancel),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
@@ -315,11 +306,7 @@ class _AgreementCheckIcon extends StatelessWidget {
         ),
       ),
       child: checked
-          ? const Icon(
-              Icons.check_rounded,
-              color: AppColors.surface,
-              size: 18,
-            )
+          ? const Icon(Icons.check_rounded, color: AppColors.surface, size: 18)
           : null,
     );
   }
@@ -354,17 +341,16 @@ class _SocialLoginButton extends StatelessWidget {
           decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: BorderRadius.circular(LoginPage.buttonBorderRadius),
-            border: borderColor == null ? null : Border.all(color: borderColor!),
+            border: borderColor == null
+                ? null
+                : Border.all(color: borderColor!),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset(
-                  iconAssetPath,
-                  fit: BoxFit.contain,
-                ),
+                Image.asset(iconAssetPath, fit: BoxFit.contain),
                 Text(
                   label,
                   style: AppTextStyles.txtMd.copyWith(

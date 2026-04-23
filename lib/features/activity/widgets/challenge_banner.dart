@@ -23,10 +23,7 @@ class ChallengeBanner extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            '가족 · 친구 · 동료들과\n챌린지를 만들어 함께 도전하세요',
-            style: AppTextStyles.titLg,
-          ),
+          Text('가족 · 친구 · 동료들과\n챌린지를 만들어 함께 도전하세요', style: AppTextStyles.titLg),
           SizedBox(height: AppSpacing.md),
           Container(
             padding: EdgeInsets.symmetric(
@@ -90,10 +87,7 @@ class _StatItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text(
-          value,
-          style: AppTextStyles.titMd,
-        ),
+        Text(value, style: AppTextStyles.titMd),
         SizedBox(height: AppSpacing.xs),
         Text(
           label,
@@ -107,10 +101,6 @@ class _StatItem extends StatelessWidget {
 class _Divider extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 1,
-      height: 32,
-      color: AppColors.border,
-    );
+    return Container(width: 1, height: 32, color: AppColors.border);
   }
 }

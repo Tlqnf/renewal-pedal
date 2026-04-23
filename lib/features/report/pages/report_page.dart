@@ -41,10 +41,7 @@ class _ReportPageState extends State<ReportPage> {
           children: [
             Expanded(
               child: ListView.separated(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 32,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 32),
                 itemCount: _reasons.length,
                 separatorBuilder: (_, _) =>
                     Divider(height: 1, color: AppColors.border),
@@ -58,12 +55,7 @@ class _ReportPageState extends State<ReportPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(
-                16,
-                AppSpacing.md,
-                16,
-                32,
-              ),
+              padding: EdgeInsets.fromLTRB(16, AppSpacing.md, 16, 32),
               child: PrimaryButton(
                 label: '신고하기',
                 disabled: _selectedIndex == null,

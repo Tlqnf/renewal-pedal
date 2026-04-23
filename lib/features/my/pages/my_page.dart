@@ -150,11 +150,17 @@ class _ProfileTab extends StatelessWidget {
               ),
               child: Row(
                 children: [
-                  const Icon(Icons.person_add_alt_1_rounded, color: AppColors.surface, size: 20),
+                  const Icon(
+                    Icons.person_add_alt_1_rounded,
+                    color: AppColors.surface,
+                    size: 20,
+                  ),
                   SizedBox(width: AppSpacing.sm),
                   Text(
                     '친구 초대하고 5000P 받기',
-                    style: AppTextStyles.titXs.copyWith(color: AppColors.surface),
+                    style: AppTextStyles.titXs.copyWith(
+                      color: AppColors.surface,
+                    ),
                   ),
                   const Spacer(),
                   const Icon(Icons.chevron_right, color: AppColors.surface),
@@ -170,9 +176,24 @@ class _ProfileTab extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _ActivityIcon(emoji: '🔔', label: '알림', count: profile.notificationCount, onTap: () {}),
-                _ActivityIcon(emoji: '🔖', label: '스크랩', count: profile.scrapCount, onTap: () {}),
-                _ActivityIcon(emoji: '❤️', label: '좋아요', count: profile.likeCount, onTap: () {}),
+                _ActivityIcon(
+                  emoji: '🔔',
+                  label: '알림',
+                  count: profile.notificationCount,
+                  onTap: () {},
+                ),
+                _ActivityIcon(
+                  emoji: '🔖',
+                  label: '스크랩',
+                  count: profile.scrapCount,
+                  onTap: () {},
+                ),
+                _ActivityIcon(
+                  emoji: '❤️',
+                  label: '좋아요',
+                  count: profile.likeCount,
+                  onTap: () {},
+                ),
               ],
             ),
           ),
@@ -186,17 +207,27 @@ class _ProfileTab extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.md, AppSpacing.md, AppSpacing.xs),
+                  padding: EdgeInsets.fromLTRB(
+                    AppSpacing.md,
+                    AppSpacing.md,
+                    AppSpacing.md,
+                    AppSpacing.xs,
+                  ),
                   child: Row(
                     children: [
                       Text('게시물', style: AppTextStyles.titSm),
                       SizedBox(width: AppSpacing.xs),
                       Text(
                         '${profile.postCount}',
-                        style: AppTextStyles.titSm.copyWith(color: AppColors.primary),
+                        style: AppTextStyles.titSm.copyWith(
+                          color: AppColors.primary,
+                        ),
                       ),
                       const Spacer(),
-                      const Icon(Icons.chevron_right, color: AppColors.textSecondary),
+                      const Icon(
+                        Icons.chevron_right,
+                        color: AppColors.textSecondary,
+                      ),
                     ],
                   ),
                 ),
@@ -215,7 +246,11 @@ class _ProfileTab extends StatelessWidget {
                     child: Container(
                       color: AppColors.gray100,
                       child: const Center(
-                        child: Icon(Icons.image_outlined, color: AppColors.gray300, size: 28),
+                        child: Icon(
+                          Icons.image_outlined,
+                          color: AppColors.gray300,
+                          size: 28,
+                        ),
                       ),
                     ),
                   ),

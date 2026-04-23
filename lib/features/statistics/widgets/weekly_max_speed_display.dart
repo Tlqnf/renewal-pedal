@@ -7,10 +7,7 @@ import 'package:pedal/common/theme/app_radius.dart';
 class WeeklyMaxSpeedDisplay extends StatelessWidget {
   final double maxSpeedKmh;
 
-  const WeeklyMaxSpeedDisplay({
-    super.key,
-    required this.maxSpeedKmh,
-  });
+  const WeeklyMaxSpeedDisplay({super.key, required this.maxSpeedKmh});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +28,7 @@ class WeeklyMaxSpeedDisplay extends StatelessWidget {
         children: [
           Text(
             '이번 주 최고 속력',
-            style: AppTextStyles.txtXs.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: AppTextStyles.txtXs.copyWith(color: AppColors.textSecondary),
           ),
           SizedBox(height: AppSpacing.sm),
           Container(
@@ -41,10 +36,7 @@ class WeeklyMaxSpeedDisplay extends StatelessWidget {
             height: 100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                color: AppColors.secondary100,
-                width: 3,
-              ),
+              border: Border.all(color: AppColors.secondary100, width: 3),
             ),
             child: Center(
               child: RichText(

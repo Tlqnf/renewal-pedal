@@ -42,10 +42,7 @@ class CommentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 16,
-        vertical: AppSpacing.md,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: AppSpacing.md),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -133,9 +130,7 @@ class CommentItem extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(
-                            isExpanded
-                                ? Icons.expand_less
-                                : Icons.expand_more,
+                            isExpanded ? Icons.expand_less : Icons.expand_more,
                             size: 20,
                             color: AppColors.textSecondary,
                           ),

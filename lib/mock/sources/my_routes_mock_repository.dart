@@ -8,7 +8,8 @@ import 'package:pedal/mock/data/my_routes_mock_data.dart';
 
 class MyRoutesMockRepository implements MyRepository {
   @override
-  Future<({Failure? failure, List<SavedRouteEntity>? data})> getSavedRoutes() async {
+  Future<({Failure? failure, List<SavedRouteEntity>? data})>
+  getSavedRoutes() async {
     await Future.delayed(const Duration(milliseconds: 500));
     return (failure: null, data: MyRoutesMockData.routeList);
   }
@@ -20,13 +21,15 @@ class MyRoutesMockRepository implements MyRepository {
   }
 
   @override
-  Future<({Failure? failure, List<ChallengeEntity>? data})> getParticipatedChallenges() async {
+  Future<({Failure? failure, List<ChallengeEntity>? data})>
+  getParticipatedChallenges() async {
     await Future.delayed(const Duration(milliseconds: 300));
     return (failure: null, data: null);
   }
 
   @override
-  Future<({Failure? failure, List<CrewEntity>? data})> getParticipatedCrews() async {
+  Future<({Failure? failure, List<CrewEntity>? data})>
+  getParticipatedCrews() async {
     await Future.delayed(const Duration(milliseconds: 300));
     return (failure: null, data: null);
   }

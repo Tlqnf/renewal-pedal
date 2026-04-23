@@ -63,7 +63,11 @@ class _PodiumItem extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (showCrown)
-          const Icon(Icons.emoji_events_rounded, color: Color(0xFFFFD700), size: 24)
+          const Icon(
+            Icons.emoji_events_rounded,
+            color: Color(0xFFFFD700),
+            size: 24,
+          )
         else
           const SizedBox(height: 24),
         SizedBox(height: AppSpacing.xs),
@@ -79,7 +83,11 @@ class _PodiumItem extends StatelessWidget {
                 border: Border.all(color: _badgeColor, width: 2),
               ),
               child: const Center(
-                child: Icon(Icons.person_rounded, color: AppColors.gray400, size: 32),
+                child: Icon(
+                  Icons.person_rounded,
+                  color: AppColors.gray400,
+                  size: 32,
+                ),
               ),
             ),
             Positioned(
@@ -95,7 +103,9 @@ class _PodiumItem extends StatelessWidget {
                 child: Center(
                   child: Text(
                     '${entity.rank}',
-                    style: AppTextStyles.tit2xs.copyWith(color: AppColors.surface),
+                    style: AppTextStyles.tit2xs.copyWith(
+                      color: AppColors.surface,
+                    ),
                   ),
                 ),
               ),

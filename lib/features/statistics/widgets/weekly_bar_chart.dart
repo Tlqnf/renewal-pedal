@@ -22,8 +22,7 @@ class WeeklyBarChart extends StatelessWidget {
   });
 
   String _formatDateHeader(DateTime start, DateTime end) {
-    final startStr =
-        '${start.year} ${start.month}월 ${start.day}일';
+    final startStr = '${start.year} ${start.month}월 ${start.day}일';
     final endStr = '${end.year} ${end.month}월 ${end.day}일';
     return '$startStr ~ $endStr';
   }
@@ -31,9 +30,7 @@ class WeeklyBarChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final maxDistance = weeklyStats.isNotEmpty
-        ? weeklyStats
-            .map((s) => s.distanceKm)
-            .reduce((a, b) => a > b ? a : b)
+        ? weeklyStats.map((s) => s.distanceKm).reduce((a, b) => a > b ? a : b)
         : 40.0;
     final chartMax = (maxDistance / 10).ceil() * 10.0;
     final today = DateTime.now();
@@ -129,7 +126,8 @@ class WeeklyBarChart extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: weeklyStats.asMap().entries.map((entry) {
                       final stat = entry.value;
-                      final isToday = stat.date.year == today.year &&
+                      final isToday =
+                          stat.date.year == today.year &&
                           stat.date.month == today.month &&
                           stat.date.day == today.day;
                       final barRatio = chartMax > 0

@@ -5,9 +5,8 @@ import 'package:pedal/domain/my/use_cases/get_my_feed_list_use_case.dart';
 class MyFeedListViewModel extends ChangeNotifier {
   final GetMyFeedListUseCase _getMyFeedListUseCase;
 
-  MyFeedListViewModel({
-    required GetMyFeedListUseCase getMyFeedListUseCase,
-  }) : _getMyFeedListUseCase = getMyFeedListUseCase;
+  MyFeedListViewModel({required GetMyFeedListUseCase getMyFeedListUseCase})
+    : _getMyFeedListUseCase = getMyFeedListUseCase;
 
   // 상태
   List<FeedEntity> _feeds = [];
@@ -23,7 +22,10 @@ class MyFeedListViewModel extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
 
-  Future<void> loadFeedList({required String userId, required String userName}) async {
+  Future<void> loadFeedList({
+    required String userId,
+    required String userName,
+  }) async {
     _userName = userName;
     _isLoading = true;
     _errorMessage = null;

@@ -78,10 +78,7 @@ class MyCrewListPage extends StatelessWidget {
       itemCount: crewList.length,
       itemBuilder: (context, index) {
         final crew = crewList[index];
-        return CrewCard(
-          crew: crew,
-          onTap: () => onCrewTap(crew.id),
-        );
+        return CrewCard(crew: crew, onTap: () => onCrewTap(crew.id));
       },
     );
   }
@@ -91,7 +88,8 @@ class MyCrewListPageConnected extends StatefulWidget {
   const MyCrewListPageConnected({super.key});
 
   @override
-  State<MyCrewListPageConnected> createState() => _MyCrewListPageConnectedState();
+  State<MyCrewListPageConnected> createState() =>
+      _MyCrewListPageConnectedState();
 }
 
 class _MyCrewListPageConnectedState extends State<MyCrewListPageConnected> {

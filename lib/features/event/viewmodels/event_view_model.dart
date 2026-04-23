@@ -6,7 +6,7 @@ class EventViewModel extends ChangeNotifier {
   final GetEventsUseCase _getEventsUseCase;
 
   EventViewModel({required GetEventsUseCase getEventsUseCase})
-      : _getEventsUseCase = getEventsUseCase;
+    : _getEventsUseCase = getEventsUseCase;
 
   List<EventEntity> events = [];
   int currentImageIndex = 0;

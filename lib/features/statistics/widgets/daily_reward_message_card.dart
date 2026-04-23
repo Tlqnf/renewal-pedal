@@ -7,10 +7,7 @@ import 'package:pedal/common/theme/app_radius.dart';
 class DailyRewardMessageCard extends StatelessWidget {
   final String message;
 
-  const DailyRewardMessageCard({
-    super.key,
-    required this.message,
-  });
+  const DailyRewardMessageCard({super.key, required this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +35,7 @@ class DailyRewardMessageCard extends StatelessWidget {
               borderRadius: AppRadius.mdAll,
             ),
             child: const Center(
-              child: Text(
-                '🍗',
-                style: TextStyle(fontSize: 32),
-              ),
+              child: Text('🍗', style: TextStyle(fontSize: 32)),
             ),
           ),
           SizedBox(width: AppSpacing.md),

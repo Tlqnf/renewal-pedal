@@ -13,8 +13,16 @@ class RidingStatsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = [
-      _StatItem('🚴', '자전거 거리', '${profile.ridingDistanceKm.toStringAsFixed(1)}km'),
-      _StatItem('🔥', '총칼로리', '${profile.totalCaloriesKcal.toStringAsFixed(0)}kcal'),
+      _StatItem(
+        '🚴',
+        '자전거 거리',
+        '${profile.ridingDistanceKm.toStringAsFixed(1)}km',
+      ),
+      _StatItem(
+        '🔥',
+        '총칼로리',
+        '${profile.totalCaloriesKcal.toStringAsFixed(0)}kcal',
+      ),
       _StatItem('⏱', '총 시간', '${profile.totalHours}h'),
       _StatItem('📅', '총 일수', '${profile.totalDays}일'),
     ];
@@ -63,11 +71,15 @@ class _StatCell extends StatelessWidget {
             children: [
               Text(
                 item.value,
-                style: AppTextStyles.titSm.copyWith(color: AppColors.primary500),
+                style: AppTextStyles.titSm.copyWith(
+                  color: AppColors.primary500,
+                ),
               ),
               Text(
                 item.label,
-                style: AppTextStyles.txt2xs.copyWith(color: AppColors.textSecondary),
+                style: AppTextStyles.txt2xs.copyWith(
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),

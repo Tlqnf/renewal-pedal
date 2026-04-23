@@ -61,9 +61,7 @@ class MyFeedListPage extends StatelessWidget {
     }
 
     if (errorMessage != null) {
-      return Center(
-        child: Text(errorMessage!, style: AppTextStyles.txtSm),
-      );
+      return Center(child: Text(errorMessage!, style: AppTextStyles.txtSm));
     }
 
     return CustomScrollView(
@@ -96,16 +94,13 @@ class MyFeedListPage extends StatelessWidget {
                 mainAxisSpacing: 1,
                 childAspectRatio: 1,
               ),
-              delegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final feed = feeds[index];
-                  return FeedGridItem(
-                    feed: feed,
-                    onTap: () => onFeedTap(feed.id),
-                  );
-                },
-                childCount: feeds.length,
-              ),
+              delegate: SliverChildBuilderDelegate((context, index) {
+                final feed = feeds[index];
+                return FeedGridItem(
+                  feed: feed,
+                  onTap: () => onFeedTap(feed.id),
+                );
+              }, childCount: feeds.length),
             ),
           ),
       ],
@@ -136,9 +131,9 @@ class _MyFeedListPageConnectedState extends State<MyFeedListPageConnected> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<MyFeedListViewModel>().loadFeedList(
-            userId: widget.userId,
-            userName: widget.userName,
-          );
+        userId: widget.userId,
+        userName: widget.userName,
+      );
     });
   }
 

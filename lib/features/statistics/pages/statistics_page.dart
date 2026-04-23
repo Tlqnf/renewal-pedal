@@ -55,13 +55,13 @@ class StatisticsPage extends StatelessWidget {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : errorMessage != null
-              ? Center(
-                  child: Text(
-                    errorMessage!,
-                    style: const TextStyle(color: AppColors.error),
-                  ),
-                )
-              : _buildContent(),
+          ? Center(
+              child: Text(
+                errorMessage!,
+                style: const TextStyle(color: AppColors.error),
+              ),
+            )
+          : _buildContent(),
     );
   }
 
@@ -87,9 +87,7 @@ class StatisticsPage extends StatelessWidget {
         // 오늘 칭찬 메시지 카드
         if (dailyRewardMessage != null)
           SliverToBoxAdapter(
-            child: DailyRewardMessageCard(
-              message: dailyRewardMessage!,
-            ),
+            child: DailyRewardMessageCard(message: dailyRewardMessage!),
           ),
         if (dailyRewardMessage != null)
           SliverToBoxAdapter(child: SizedBox(height: AppSpacing.md)),
@@ -117,9 +115,7 @@ class StatisticsPage extends StatelessWidget {
                 ),
                 SizedBox(width: AppSpacing.sm),
                 Expanded(
-                  child: WeeklyMaxSpeedDisplay(
-                    maxSpeedKmh: weeklyMaxSpeedKmh,
-                  ),
+                  child: WeeklyMaxSpeedDisplay(maxSpeedKmh: weeklyMaxSpeedKmh),
                 ),
               ],
             ),
@@ -127,11 +123,7 @@ class StatisticsPage extends StatelessWidget {
         ),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.md)),
         // 챌린지 뱃지 그리드
-        SliverToBoxAdapter(
-          child: ChallengeBadgeGrid(
-            badges: challengeBadges,
-          ),
-        ),
+        SliverToBoxAdapter(child: ChallengeBadgeGrid(badges: challengeBadges)),
         SliverToBoxAdapter(child: SizedBox(height: AppSpacing.xl)),
       ],
     );

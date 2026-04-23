@@ -38,9 +38,7 @@ class WeeklyTimeCircleIndicator extends StatelessWidget {
         children: [
           Text(
             '이번 주 시간',
-            style: AppTextStyles.txtXs.copyWith(
-              color: AppColors.textSecondary,
-            ),
+            style: AppTextStyles.txtXs.copyWith(color: AppColors.textSecondary),
           ),
           SizedBox(height: AppSpacing.sm),
           Container(
@@ -48,10 +46,7 @@ class WeeklyTimeCircleIndicator extends StatelessWidget {
             height: 100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(
-                color: AppColors.primary200,
-                width: 3,
-              ),
+              border: Border.all(color: AppColors.primary200, width: 3),
             ),
             child: Center(
               child: Text(

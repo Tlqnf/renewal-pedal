@@ -67,7 +67,11 @@ class CalendarRideLogItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          const Icon(Icons.subdirectory_arrow_right, size: 16, color: AppColors.textSecondary),
+          const Icon(
+            Icons.subdirectory_arrow_right,
+            size: 16,
+            color: AppColors.textSecondary,
+          ),
           SizedBox(width: AppSpacing.xs),
           Text(
             '${log.date.month}/${log.date.day}',

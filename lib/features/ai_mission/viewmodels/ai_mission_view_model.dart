@@ -10,8 +10,8 @@ class AiMissionViewModel extends ChangeNotifier {
   AiMissionViewModel({
     required GetAiMissionsUseCase getAiMissionsUseCase,
     required GenerateAiMissionUseCase generateAiMissionUseCase,
-  })  : _getAiMissionsUseCase = getAiMissionsUseCase,
-        _generateAiMissionUseCase = generateAiMissionUseCase;
+  }) : _getAiMissionsUseCase = getAiMissionsUseCase,
+       _generateAiMissionUseCase = generateAiMissionUseCase;
 
   List<AiMissionCardEntity> missionCards = [];
   bool isLoading = false;

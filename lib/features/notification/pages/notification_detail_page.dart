@@ -20,7 +20,9 @@ class _NotificationDetailPageState extends State<NotificationDetailPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<NotificationViewModel>().loadNotificationById(widget.notificationId);
+      context.read<NotificationViewModel>().loadNotificationById(
+        widget.notificationId,
+      );
     });
   }
 
@@ -28,63 +30,63 @@ class _NotificationDetailPageState extends State<NotificationDetailPage> {
   Widget build(BuildContext context) {
     return Consumer<NotificationViewModel>(
       builder: (context, viewModel, _) {
-          final notification = viewModel.notificationDetail;
-          if (notification == null) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
-          }
+        final notification = viewModel.notificationDetail;
+        if (notification == null) {
+          return const Scaffold(
+            body: Center(child: CircularProgressIndicator()),
+          );
+        }
 
-          return Scaffold(
-            backgroundColor: AppColors.background,
-            appBar: BackAppBar(
-              title: '알림 상세',
-              onBackPressed: () => Navigator.pop(context),
-            ),
-            body: SafeArea(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: AppSpacing.lg,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // 제목
-                      Text(
-                        notification.title,
-                        style: AppTextStyles.titLg.copyWith(
-                          color: AppColors.textPrimary,
-                        ),
+        return Scaffold(
+          backgroundColor: AppColors.background,
+          appBar: BackAppBar(
+            title: '알림 상세',
+            onBackPressed: () => Navigator.pop(context),
+          ),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: AppSpacing.lg,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // 제목
+                    Text(
+                      notification.title,
+                      style: AppTextStyles.titLg.copyWith(
+                        color: AppColors.textPrimary,
                       ),
+                    ),
 
-                      SizedBox(height: AppSpacing.sm),
+                    SizedBox(height: AppSpacing.sm),
 
-                      // 날짜
-                      Text(
-                        notification.date,
-                        style: AppTextStyles.txtSm.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
+                    // 날짜
+                    Text(
+                      notification.date,
+                      style: AppTextStyles.txtSm.copyWith(
+                        color: AppColors.textSecondary,
                       ),
+                    ),
 
-                      SizedBox(height: AppSpacing.xl),
+                    SizedBox(height: AppSpacing.xl),
 
-                      // 내용
-                      Text(
-                        notification.message,
-                        style: AppTextStyles.txtSm.copyWith(
-                          color: AppColors.textPrimary,
-                        ),
+                    // 내용
+                    Text(
+                      notification.message,
+                      style: AppTextStyles.txtSm.copyWith(
+                        color: AppColors.textPrimary,
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          );
-        },
-      );
+          ),
+        );
+      },
+    );
   }
 }

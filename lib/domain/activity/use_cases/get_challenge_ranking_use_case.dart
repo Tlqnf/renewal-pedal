@@ -7,7 +7,9 @@ class GetChallengeRankingUseCase {
 
   GetChallengeRankingUseCase(this._repository);
 
-  Future<({Failure? failure, List<ChallengeRankingEntity>? data})> call(String challengeId) {
+  Future<({Failure? failure, List<ChallengeRankingEntity>? data})> call(
+    String challengeId,
+  ) {
     return _repository.getChallengeRanking(challengeId);
   }
 }

@@ -5,8 +5,9 @@ import 'package:pedal/domain/event/use_cases/submit_event_request_use_case.dart'
 class EventRequestViewModel extends ChangeNotifier {
   final SubmitEventRequestUseCase _submitEventRequestUseCase;
 
-  EventRequestViewModel({required SubmitEventRequestUseCase submitEventRequestUseCase})
-      : _submitEventRequestUseCase = submitEventRequestUseCase;
+  EventRequestViewModel({
+    required SubmitEventRequestUseCase submitEventRequestUseCase,
+  }) : _submitEventRequestUseCase = submitEventRequestUseCase;
 
   String? selectedEventId;
   String? selectedEventTitle;

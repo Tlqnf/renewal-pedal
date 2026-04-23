@@ -37,24 +37,24 @@ class _NotificationListPageState extends State<NotificationListPage> {
         child: viewModel.isLoading
             ? const Center(child: CircularProgressIndicator())
             : viewModel.errorMessage != null
-                ? Center(child: Text(viewModel.errorMessage!))
-                : ListView.builder(
-                    itemCount: viewModel.notifications.length,
-                    itemBuilder: (context, index) {
-                      final notification = viewModel.notifications[index];
-                      return NotificationCard(
-                        type: notification.type,
-                        message: notification.message,
-                        timeAgo: notification.timeAgo,
-                        isRead: notification.isRead,
-                        onTap: () {
-                          context.push(
-                            '${AppRoutes.notificationDetail}?id=${notification.id}',
-                          );
-                        },
+            ? Center(child: Text(viewModel.errorMessage!))
+            : ListView.builder(
+                itemCount: viewModel.notifications.length,
+                itemBuilder: (context, index) {
+                  final notification = viewModel.notifications[index];
+                  return NotificationCard(
+                    type: notification.type,
+                    message: notification.message,
+                    timeAgo: notification.timeAgo,
+                    isRead: notification.isRead,
+                    onTap: () {
+                      context.push(
+                        '${AppRoutes.notificationDetail}?id=${notification.id}',
                       );
                     },
-                  ),
+                  );
+                },
+              ),
       ),
     );
   }

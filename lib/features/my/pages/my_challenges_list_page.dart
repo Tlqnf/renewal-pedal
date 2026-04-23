@@ -48,12 +48,18 @@ class MyChallengesListPage extends StatelessWidget {
     }
     if (errorMessage != null) {
       return Center(
-        child: Text(errorMessage!, style: AppTextStyles.txtSm.copyWith(color: AppColors.textSecondary)),
+        child: Text(
+          errorMessage!,
+          style: AppTextStyles.txtSm.copyWith(color: AppColors.textSecondary),
+        ),
       );
     }
     if (challenges.isEmpty) {
       return Center(
-        child: Text('참여한 챌린지가 없습니다.', style: AppTextStyles.txtSm.copyWith(color: AppColors.textSecondary)),
+        child: Text(
+          '참여한 챌린지가 없습니다.',
+          style: AppTextStyles.txtSm.copyWith(color: AppColors.textSecondary),
+        ),
       );
     }
     return ListView.builder(

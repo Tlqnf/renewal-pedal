@@ -4,7 +4,8 @@ import 'package:pedal/domain/failures/failures.dart';
 
 class AiMissionRepositoryImpl implements AiMissionRepository {
   @override
-  Future<({Failure? failure, List<AiMissionCardEntity>? data})> getAiMissions() async {
+  Future<({Failure? failure, List<AiMissionCardEntity>? data})>
+  getAiMissions() async {
     await Future.delayed(const Duration(milliseconds: 300));
     return (
       failure: null,
@@ -35,7 +36,8 @@ class AiMissionRepositoryImpl implements AiMissionRepository {
   }
 
   @override
-  Future<({Failure? failure, AiMissionCardEntity? data})> generateAiMission() async {
+  Future<({Failure? failure, AiMissionCardEntity? data})>
+  generateAiMission() async {
     await Future.delayed(const Duration(milliseconds: 500));
     return (
       failure: null,

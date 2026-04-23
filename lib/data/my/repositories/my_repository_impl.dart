@@ -30,7 +30,8 @@ class MyRepositoryImpl implements MyRepository {
   }
 
   @override
-  Future<({Failure? failure, List<ChallengeEntity>? data})> getParticipatedChallenges() async {
+  Future<({Failure? failure, List<ChallengeEntity>? data})>
+  getParticipatedChallenges() async {
     await Future.delayed(const Duration(milliseconds: 300));
     return (
       failure: null,
@@ -56,7 +57,8 @@ class MyRepositoryImpl implements MyRepository {
   }
 
   @override
-  Future<({Failure? failure, List<CrewEntity>? data})> getParticipatedCrews() async {
+  Future<({Failure? failure, List<CrewEntity>? data})>
+  getParticipatedCrews() async {
     await Future.delayed(const Duration(milliseconds: 300));
     return (
       failure: null,
@@ -84,7 +86,8 @@ class MyRepositoryImpl implements MyRepository {
   }
 
   @override
-  Future<({Failure? failure, List<SavedRouteEntity>? data})> getSavedRoutes() async {
+  Future<({Failure? failure, List<SavedRouteEntity>? data})>
+  getSavedRoutes() async {
     await Future.delayed(const Duration(milliseconds: 300));
     return (
       failure: null,

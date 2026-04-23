@@ -20,38 +20,40 @@ class RankingFilterTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
-      padding: EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: AppSpacing.sm,
+      ),
       child: Row(
-        children: List.generate(
-          tabs.length,
-          (index) {
-            final isSelected = index == selectedIndex;
-            return GestureDetector(
-              onTap: () => onTabChanged(index),
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                margin: EdgeInsets.only(right: AppSpacing.sm),
-                padding: EdgeInsets.symmetric(
-                  horizontal: AppSpacing.md,
-                  vertical: AppSpacing.sm,
-                ),
-                decoration: BoxDecoration(
-                  color: isSelected ? AppColors.primary : AppColors.surface,
-                  borderRadius: AppRadius.fullAll,
-                  border: Border.all(
-                    color: isSelected ? AppColors.primary : AppColors.border,
-                  ),
-                ),
-                child: Text(
-                  tabs[index],
-                  style: AppTextStyles.titXs.copyWith(
-                    color: isSelected ? AppColors.surface : AppColors.textSecondary,
-                  ),
+        children: List.generate(tabs.length, (index) {
+          final isSelected = index == selectedIndex;
+          return GestureDetector(
+            onTap: () => onTabChanged(index),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              margin: EdgeInsets.only(right: AppSpacing.sm),
+              padding: EdgeInsets.symmetric(
+                horizontal: AppSpacing.md,
+                vertical: AppSpacing.sm,
+              ),
+              decoration: BoxDecoration(
+                color: isSelected ? AppColors.primary : AppColors.surface,
+                borderRadius: AppRadius.fullAll,
+                border: Border.all(
+                  color: isSelected ? AppColors.primary : AppColors.border,
                 ),
               ),
-            );
-          },
-        ),
+              child: Text(
+                tabs[index],
+                style: AppTextStyles.titXs.copyWith(
+                  color: isSelected
+                      ? AppColors.surface
+                      : AppColors.textSecondary,
+                ),
+              ),
+            ),
+          );
+        }),
       ),
     );
   }

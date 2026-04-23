@@ -8,18 +8,36 @@ class GetCalendarDataUseCase {
 
   GetCalendarDataUseCase(this._repository);
 
-  Future<({Failure? failure, CalendarMonthlyStatsEntity? stats, List<CalendarWeekSectionEntity>? sections})> call({
-    required int year,
-    required int month,
-  }) async {
-    final statsResult = await _repository.getMonthlyStats(year: year, month: month);
+  Future<
+    ({
+      Failure? failure,
+      CalendarMonthlyStatsEntity? stats,
+      List<CalendarWeekSectionEntity>? sections,
+    })
+  >
+  call({required int year, required int month}) async {
+    final statsResult = await _repository.getMonthlyStats(
+      year: year,
+      month: month,
+    );
     if (statsResult.failure != null) {
       return (failure: statsResult.failure, stats: null, sections: null);
     }
-    final sectionsResult = await _repository.getWeekSections(year: year, month: month);
+    final sectionsResult = await _repository.getWeekSections(
+      year: year,
+      month: month,
+    );
     if (sectionsResult.failure != null) {
-      return (failure: sectionsResult.failure, stats: statsResult.data, sections: null);
+      return (
+        failure: sectionsResult.failure,
+        stats: statsResult.data,
+        sections: null,
+      );
     }
-    return (failure: null, stats: statsResult.data, sections: sectionsResult.data);
+    return (
+      failure: null,
+      stats: statsResult.data,
+      sections: sectionsResult.data,
+    );
   }
 }

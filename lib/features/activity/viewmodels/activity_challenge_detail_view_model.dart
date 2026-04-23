@@ -14,9 +14,9 @@ class ActivityChallengeDetailViewModel extends ChangeNotifier {
     required GetChallengeDetailUseCase getChallengeDetailUseCase,
     required GetChallengeRankingUseCase getChallengeRankingUseCase,
     required ParticipateChallengeUseCase participateChallengeUseCase,
-  })  : _getChallengeDetailUseCase = getChallengeDetailUseCase,
-        _getChallengeRankingUseCase = getChallengeRankingUseCase,
-        _participateChallengeUseCase = participateChallengeUseCase;
+  }) : _getChallengeDetailUseCase = getChallengeDetailUseCase,
+       _getChallengeRankingUseCase = getChallengeRankingUseCase,
+       _participateChallengeUseCase = participateChallengeUseCase;
 
   // State
   ChallengeDetailEntity? _challengeDetail;

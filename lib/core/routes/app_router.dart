@@ -95,8 +95,12 @@ class AppRouter {
         path: AppRoutes.aiMission,
         builder: (context, state) => ChangeNotifierProvider(
           create: (_) => AiMissionViewModel(
-            getAiMissionsUseCase: GetAiMissionsUseCase(AiMissionRepositoryImpl()),
-            generateAiMissionUseCase: GenerateAiMissionUseCase(AiMissionRepositoryImpl()),
+            getAiMissionsUseCase: GetAiMissionsUseCase(
+              AiMissionRepositoryImpl(),
+            ),
+            generateAiMissionUseCase: GenerateAiMissionUseCase(
+              AiMissionRepositoryImpl(),
+            ),
           ),
           child: AiMissionPage(onClose: () => context.pop()),
         ),
@@ -105,7 +109,9 @@ class AppRouter {
         path: AppRoutes.calendar,
         builder: (context, state) => ChangeNotifierProvider(
           create: (_) => CalendarViewModel(
-            getCalendarDataUseCase: GetCalendarDataUseCase(CalendarRepositoryImpl()),
+            getCalendarDataUseCase: GetCalendarDataUseCase(
+              CalendarRepositoryImpl(),
+            ),
           ),
           child: CalendarPage(
             onBack: () => context.pop(),
@@ -122,7 +128,8 @@ class AppRouter {
           ),
           child: EventPage(
             onBack: () => context.pop(),
-            onDetailTap: () => context.push(AppRoutes.eventDetailPath('event_1')),
+            onDetailTap: () =>
+                context.push(AppRoutes.eventDetailPath('event_1')),
           ),
         ),
       ),
@@ -132,8 +139,12 @@ class AppRouter {
           final eventId = state.pathParameters['eventId'] ?? '';
           return ChangeNotifierProvider(
             create: (_) => EventDetailViewModel(
-              getEventDetailUseCase: GetEventDetailUseCase(EventRepositoryImpl()),
-              participateEventUseCase: ParticipateEventUseCase(EventRepositoryImpl()),
+              getEventDetailUseCase: GetEventDetailUseCase(
+                EventRepositoryImpl(),
+              ),
+              participateEventUseCase: ParticipateEventUseCase(
+                EventRepositoryImpl(),
+              ),
             ),
             child: EventDetailPage(
               eventId: eventId,
@@ -149,7 +160,9 @@ class AppRouter {
           final extra = state.extra as Map<String, dynamic>? ?? {};
           return ChangeNotifierProvider(
             create: (_) => EventRequestViewModel(
-              submitEventRequestUseCase: SubmitEventRequestUseCase(EventRepositoryImpl()),
+              submitEventRequestUseCase: SubmitEventRequestUseCase(
+                EventRepositoryImpl(),
+              ),
             ),
             child: EventRequestPage(
               eventId: eventId,

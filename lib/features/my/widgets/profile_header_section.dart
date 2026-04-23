@@ -38,7 +38,11 @@ class ProfileHeaderSection extends StatelessWidget {
                   border: Border.all(color: AppColors.border),
                 ),
                 child: const Center(
-                  child: Icon(Icons.person_rounded, color: AppColors.gray400, size: 36),
+                  child: Icon(
+                    Icons.person_rounded,
+                    color: AppColors.gray400,
+                    size: 36,
+                  ),
                 ),
               ),
               SizedBox(width: AppSpacing.md),
@@ -47,7 +51,10 @@ class ProfileHeaderSection extends StatelessWidget {
               ),
               IconButton(
                 onPressed: onSettingsTap,
-                icon: const Icon(Icons.settings_outlined, color: AppColors.textPrimary),
+                icon: const Icon(
+                  Icons.settings_outlined,
+                  color: AppColors.textPrimary,
+                ),
               ),
             ],
           ),
@@ -79,7 +86,9 @@ class ProfileHeaderSection extends StatelessWidget {
                   ),
                   child: Text(
                     '신고하기',
-                    style: AppTextStyles.txtXs.copyWith(color: AppColors.textSecondary),
+                    style: AppTextStyles.txtXs.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ),
               ),
@@ -96,7 +105,11 @@ class _CountItem extends StatelessWidget {
   final int count;
   final VoidCallback onTap;
 
-  const _CountItem({required this.label, required this.count, required this.onTap});
+  const _CountItem({
+    required this.label,
+    required this.count,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

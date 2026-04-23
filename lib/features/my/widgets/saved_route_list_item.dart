@@ -9,7 +9,11 @@ class SavedRouteListItem extends StatelessWidget {
   final SavedRouteEntity route;
   final VoidCallback onTap;
 
-  const SavedRouteListItem({super.key, required this.route, required this.onTap});
+  const SavedRouteListItem({
+    super.key,
+    required this.route,
+    required this.onTap,
+  });
 
   String _formatDateTime(DateTime d) =>
       '${d.year}.${d.month.toString().padLeft(2, '0')}.${d.day.toString().padLeft(2, '0')} '
@@ -24,7 +28,10 @@ class SavedRouteListItem extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: AppSpacing.sm),
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSpacing.md,
+          vertical: AppSpacing.sm,
+        ),
         child: Row(
           children: [
             ClipRRect(
@@ -34,7 +41,11 @@ class SavedRouteListItem extends StatelessWidget {
                 height: 64,
                 color: AppColors.gray100,
                 child: const Center(
-                  child: Icon(Icons.map_outlined, color: AppColors.gray400, size: 28),
+                  child: Icon(
+                    Icons.map_outlined,
+                    color: AppColors.gray400,
+                    size: 28,
+                  ),
                 ),
               ),
             ),
@@ -47,12 +58,16 @@ class SavedRouteListItem extends StatelessWidget {
                   SizedBox(height: AppSpacing.xs),
                   Text(
                     '${route.distanceKm.toStringAsFixed(1)}km  ·  $duration',
-                    style: AppTextStyles.txtXs.copyWith(color: AppColors.primary),
+                    style: AppTextStyles.txtXs.copyWith(
+                      color: AppColors.primary,
+                    ),
                   ),
                   SizedBox(height: AppSpacing.xs),
                   Text(
                     _formatDateTime(route.savedAt),
-                    style: AppTextStyles.txt2xs.copyWith(color: AppColors.textSecondary),
+                    style: AppTextStyles.txt2xs.copyWith(
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ],
               ),

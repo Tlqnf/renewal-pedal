@@ -8,10 +8,7 @@ import 'package:pedal/domain/statistics/entities/challenge_badge_entity.dart';
 class ChallengeBadgeGrid extends StatelessWidget {
   final List<ChallengeBadgeEntity> badges;
 
-  const ChallengeBadgeGrid({
-    super.key,
-    required this.badges,
-  });
+  const ChallengeBadgeGrid({super.key, required this.badges});
 
   String _formatDate(DateTime date) {
     return '${date.year}.${date.month.toString().padLeft(2, '0')}.${date.day.toString().padLeft(2, '0')}';
@@ -38,9 +35,7 @@ class ChallengeBadgeGrid extends StatelessWidget {
         children: [
           Text(
             '챌린지 뱃지',
-            style: AppTextStyles.titSm.copyWith(
-              color: AppColors.textPrimary,
-            ),
+            style: AppTextStyles.titSm.copyWith(color: AppColors.textPrimary),
           ),
           SizedBox(height: AppSpacing.md),
           GridView.builder(
@@ -71,10 +66,7 @@ class _BadgeItem extends StatelessWidget {
   final ChallengeBadgeEntity badge;
   final String formattedDate;
 
-  const _BadgeItem({
-    required this.badge,
-    required this.formattedDate,
-  });
+  const _BadgeItem({required this.badge, required this.formattedDate});
 
   @override
   Widget build(BuildContext context) {
@@ -87,10 +79,7 @@ class _BadgeItem extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: AppColors.gray100,
-            border: Border.all(
-              color: AppColors.gray200,
-              width: 1,
-            ),
+            border: Border.all(color: AppColors.gray200, width: 1),
           ),
           child: badge.imageUrl != null
               ? ClipOval(
@@ -104,18 +93,12 @@ class _BadgeItem extends StatelessWidget {
                     ),
                   ),
                 )
-              : Icon(
-                  Icons.emoji_events,
-                  color: AppColors.warning,
-                  size: 32,
-                ),
+              : Icon(Icons.emoji_events, color: AppColors.warning, size: 32),
         ),
         const SizedBox(height: 4),
         Text(
           badge.title,
-          style: AppTextStyles.txt2xs.copyWith(
-            color: AppColors.textPrimary,
-          ),
+          style: AppTextStyles.txt2xs.copyWith(color: AppColors.textPrimary),
           textAlign: TextAlign.center,
           maxLines: 2,
           overflow: TextOverflow.ellipsis,

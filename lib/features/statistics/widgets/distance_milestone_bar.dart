@@ -16,7 +16,9 @@ class DistanceMilestoneBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final maxTarget = milestoneTargets.isNotEmpty ? milestoneTargets.last : 10.0;
+    final maxTarget = milestoneTargets.isNotEmpty
+        ? milestoneTargets.last
+        : 10.0;
     final progress = (todayDistanceKm / maxTarget).clamp(0.0, 1.0);
 
     return Container(

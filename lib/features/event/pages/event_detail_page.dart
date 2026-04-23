@@ -125,10 +125,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                             SizedBox(height: AppSpacing.md),
                             Divider(color: AppColors.divider),
                             SizedBox(height: AppSpacing.md),
-                            Text(
-                              event.description,
-                              style: AppTextStyles.txtMd,
-                            ),
+                            Text(event.description, style: AppTextStyles.txtMd),
                             SizedBox(height: AppSpacing.lg),
                             Text('참여 방법', style: AppTextStyles.titMd),
                             SizedBox(height: AppSpacing.md),

@@ -10,7 +10,6 @@ import 'package:pedal/domain/activity/entities/challenge_detail_entity.dart';
 import 'package:pedal/domain/activity/entities/challenge_ranking_entity.dart';
 import 'package:pedal/features/activity/viewmodels/activity_challenge_detail_view_model.dart';
 
-
 class ActivityChallengeDetailPage extends StatelessWidget {
   final ChallengeDetailEntity? challengeDetail;
   final bool isLoading;
@@ -67,26 +66,30 @@ class ActivityChallengeDetailPage extends StatelessWidget {
           ],
         ),
         body: isLoading
-            ? const Center(child: CircularProgressIndicator(color: AppColors.primary))
+            ? const Center(
+                child: CircularProgressIndicator(color: AppColors.primary),
+              )
             : errorMessage != null
-                ? Center(
-                    child: Text(
-                      errorMessage!,
-                      style: AppTextStyles.txtMd.copyWith(color: AppColors.textSecondary),
-                    ),
-                  )
-                : challengeDetail == null
-                    ? const SizedBox.shrink()
-                    : _ChallengeDetailBody(
-                        challengeDetail: challengeDetail!,
-                        isDescriptionExpanded: isDescriptionExpanded,
-                        selectedTabIndex: selectedTabIndex,
-                        isParticipating: isParticipating,
-                        rankingList: rankingList,
-                        onParticipatePressed: onParticipatePressed,
-                        onToggleDescription: onToggleDescription,
-                        onTabChanged: onTabChanged,
-                      ),
+            ? Center(
+                child: Text(
+                  errorMessage!,
+                  style: AppTextStyles.txtMd.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+              )
+            : challengeDetail == null
+            ? const SizedBox.shrink()
+            : _ChallengeDetailBody(
+                challengeDetail: challengeDetail!,
+                isDescriptionExpanded: isDescriptionExpanded,
+                selectedTabIndex: selectedTabIndex,
+                isParticipating: isParticipating,
+                rankingList: rankingList,
+                onParticipatePressed: onParticipatePressed,
+                onToggleDescription: onToggleDescription,
+                onTabChanged: onTabChanged,
+              ),
       ),
     );
   }
@@ -172,7 +175,8 @@ class _ChallengeDetailBannerSection extends StatelessWidget {
           ? Image.network(
               imageUrl!,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => _BannerPlaceholder(),
+              errorBuilder: (context, error, stackTrace) =>
+                  _BannerPlaceholder(),
             )
           : _BannerPlaceholder(),
     );
@@ -185,7 +189,11 @@ class _BannerPlaceholder extends StatelessWidget {
     return Container(
       color: AppColors.primary100,
       child: const Center(
-        child: Icon(Icons.directions_bike_rounded, color: AppColors.primary, size: 64),
+        child: Icon(
+          Icons.directions_bike_rounded,
+          color: AppColors.primary,
+          size: 64,
+        ),
       ),
     );
   }
@@ -240,11 +248,17 @@ class _ChallengeDetailInfoCard extends StatelessWidget {
           // Date range
           Row(
             children: [
-              const Icon(Icons.calendar_today_outlined, size: 14, color: AppColors.textSecondary),
+              const Icon(
+                Icons.calendar_today_outlined,
+                size: 14,
+                color: AppColors.textSecondary,
+              ),
               SizedBox(width: AppSpacing.xs),
               Text(
                 '${_formatDate(challengeDetail.startDate)} ~ ${_formatDate(challengeDetail.endDate)}',
-                style: AppTextStyles.txtXs.copyWith(color: AppColors.textSecondary),
+                style: AppTextStyles.txtXs.copyWith(
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),
@@ -270,7 +284,9 @@ class _ChallengeDetailInfoCard extends StatelessWidget {
               height: 1.6,
             ),
             maxLines: isDescriptionExpanded ? null : 3,
-            overflow: isDescriptionExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
+            overflow: isDescriptionExpanded
+                ? TextOverflow.visible
+                : TextOverflow.ellipsis,
           ),
           if (isLong) ...[
             SizedBox(height: AppSpacing.xs),
@@ -300,7 +316,10 @@ class _TagChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: AppSpacing.sm, vertical: AppSpacing.xs),
+      padding: EdgeInsets.symmetric(
+        horizontal: AppSpacing.sm,
+        vertical: AppSpacing.xs,
+      ),
       decoration: BoxDecoration(
         color: AppColors.primary100,
         borderRadius: AppRadius.fullAll,
@@ -404,9 +423,6 @@ class _ChallengeTabBar extends StatelessWidget {
   }
 }
 
-
-
-
 class _InfoTab extends StatelessWidget {
   final ChallengeDetailEntity challengeDetail;
 
@@ -434,13 +450,11 @@ class _InfoTab extends StatelessWidget {
               children: [
                 _InfoRow(
                   label: '목표 거리',
-                  value: '${challengeDetail.targetDistanceKm.toStringAsFixed(0)}km',
+                  value:
+                      '${challengeDetail.targetDistanceKm.toStringAsFixed(0)}km',
                 ),
                 SizedBox(height: AppSpacing.sm),
-                const _InfoRow(
-                  label: '참여 방법',
-                  value: '앱에서 라이딩 기록 후 자동 집계',
-                ),
+                const _InfoRow(label: '참여 방법', value: '앱에서 라이딩 기록 후 자동 집계'),
                 SizedBox(height: AppSpacing.sm),
                 _InfoRow(
                   label: '기간',
@@ -489,17 +503,13 @@ class _InfoRow extends StatelessWidget {
             style: AppTextStyles.txtXs.copyWith(color: AppColors.textSecondary),
           ),
         ),
-        Expanded(
-          child: Text(value, style: AppTextStyles.txtXs),
-        ),
+        Expanded(child: Text(value, style: AppTextStyles.txtXs)),
       ],
     );
   }
 }
 
-
 // Ranking Tab
-
 
 class _RankingTab extends StatelessWidget {
   final List<ChallengeRankingEntity> rankingList;
@@ -519,14 +529,14 @@ class _RankingTab extends StatelessWidget {
     return ListView.separated(
       padding: EdgeInsets.symmetric(vertical: AppSpacing.sm),
       itemCount: rankingList.length,
-      separatorBuilder: (context, index) => const Divider(height: 1, color: AppColors.divider),
+      separatorBuilder: (context, index) =>
+          const Divider(height: 1, color: AppColors.divider),
       itemBuilder: (context, index) {
         return ChallengeRankingListItem(entity: rankingList[index]);
       },
     );
   }
 }
-
 
 class ChallengeRankingListItem extends StatelessWidget {
   final ChallengeRankingEntity entity;
@@ -552,7 +562,9 @@ class ChallengeRankingListItem extends StatelessWidget {
                 : Center(
                     child: Text(
                       '${entity.rank}',
-                      style: AppTextStyles.titXs.copyWith(color: AppColors.textSecondary),
+                      style: AppTextStyles.titXs.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ),
           ),
@@ -578,14 +590,16 @@ class ChallengeRankingListItem extends StatelessWidget {
                       ),
                     ),
                   )
-                : const Icon(Icons.person_rounded, color: AppColors.gray400, size: 24),
+                : const Icon(
+                    Icons.person_rounded,
+                    color: AppColors.gray400,
+                    size: 24,
+                  ),
           ),
           SizedBox(width: AppSpacing.sm),
 
           // Nickname
-          Expanded(
-            child: Text(entity.nickname, style: AppTextStyles.titXs),
-          ),
+          Expanded(child: Text(entity.nickname, style: AppTextStyles.titXs)),
 
           // Distance
           Text(
@@ -617,10 +631,7 @@ class _RankBadge extends StatelessWidget {
     return Container(
       width: 28,
       height: 28,
-      decoration: BoxDecoration(
-        color: _color,
-        shape: BoxShape.circle,
-      ),
+      decoration: BoxDecoration(color: _color, shape: BoxShape.circle),
       child: Center(
         child: Text(
           '$rank',
@@ -650,9 +661,9 @@ class _ActivityChallengeDetailPageConnectedState
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<ActivityChallengeDetailViewModel>()
-          .loadChallengeDetail(widget.challengeId);
+      context.read<ActivityChallengeDetailViewModel>().loadChallengeDetail(
+        widget.challengeId,
+      );
     });
   }
 
@@ -672,7 +683,8 @@ class _ActivityChallengeDetailPageConnectedState
           onSharePressed: () {
             // TODO: 공유 기능 구현
           },
-          onParticipatePressed: () => vm.onParticipatePressed(widget.challengeId),
+          onParticipatePressed: () =>
+              vm.onParticipatePressed(widget.challengeId),
           onToggleDescription: vm.onToggleDescription,
           onTabChanged: vm.onTabChanged,
         );

@@ -13,9 +13,9 @@ class MyFeedDetailViewModel extends ChangeNotifier {
     required GetFeedDetailUseCase getFeedDetailUseCase,
     required ToggleFeedLikeUseCase toggleFeedLikeUseCase,
     required ToggleFeedBookmarkUseCase toggleFeedBookmarkUseCase,
-  })  : _getFeedDetailUseCase = getFeedDetailUseCase,
-        _toggleFeedLikeUseCase = toggleFeedLikeUseCase,
-        _toggleFeedBookmarkUseCase = toggleFeedBookmarkUseCase;
+  }) : _getFeedDetailUseCase = getFeedDetailUseCase,
+       _toggleFeedLikeUseCase = toggleFeedLikeUseCase,
+       _toggleFeedBookmarkUseCase = toggleFeedBookmarkUseCase;
 
   // 상태 (View props에서 역추적)
   FeedDetailEntity? _feed;

@@ -7,7 +7,7 @@ class CalendarViewModel extends ChangeNotifier {
   final GetCalendarDataUseCase _getCalendarDataUseCase;
 
   CalendarViewModel({required GetCalendarDataUseCase getCalendarDataUseCase})
-      : _getCalendarDataUseCase = getCalendarDataUseCase;
+    : _getCalendarDataUseCase = getCalendarDataUseCase;
 
   DateTime focusedMonth = DateTime.now();
   DateTime? selectedDate;

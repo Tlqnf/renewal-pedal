@@ -10,7 +10,10 @@ abstract class ActivityRepository {
   Future<Either<Failure, List<ChallengeEntity>>> getChallenges();
   Future<Either<Failure, List<CrewEntity>>> getRecommendedCrews();
   Future<Either<Failure, ActivityStatsEntity>> getActivityStats();
-  Future<({Failure? failure, ChallengeDetailEntity? data})> getChallengeDetail(String challengeId);
-  Future<({Failure? failure, List<ChallengeRankingEntity>? data})> getChallengeRanking(String challengeId);
+  Future<({Failure? failure, ChallengeDetailEntity? data})> getChallengeDetail(
+    String challengeId,
+  );
+  Future<({Failure? failure, List<ChallengeRankingEntity>? data})>
+  getChallengeRanking(String challengeId);
   Future<({Failure? failure})> participateChallenge(String challengeId);
 }

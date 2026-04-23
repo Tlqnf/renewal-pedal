@@ -13,8 +13,8 @@ class MyViewModel extends ChangeNotifier {
   MyViewModel({
     required GetMyProfileUseCase getMyProfileUseCase,
     required GetMyActivityUseCase getMyActivityUseCase,
-  })  : _getMyProfileUseCase = getMyProfileUseCase,
-        _getMyActivityUseCase = getMyActivityUseCase;
+  }) : _getMyProfileUseCase = getMyProfileUseCase,
+       _getMyActivityUseCase = getMyActivityUseCase;
 
   int selectedTabIndex = 0;
   MyProfileEntity? profile;

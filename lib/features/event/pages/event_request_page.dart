@@ -36,10 +36,10 @@ class _EventRequestPageState extends State<EventRequestPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       context.read<EventRequestViewModel>().setSelectedEvent(
-            id: widget.eventId,
-            title: widget.eventTitle,
-            thumbnailUrl: widget.eventThumbnailUrl,
-          );
+        id: widget.eventId,
+        title: widget.eventTitle,
+        thumbnailUrl: widget.eventThumbnailUrl,
+      );
     });
   }
 
@@ -93,10 +93,7 @@ class _EventRequestPageState extends State<EventRequestPage> {
                         },
                       ),
                       SizedBox(height: AppSpacing.lg),
-                      Text(
-                        '메모 (선택)',
-                        style: AppTextStyles.titSm,
-                      ),
+                      Text('메모 (선택)', style: AppTextStyles.titSm),
                       SizedBox(height: AppSpacing.sm),
                       TextField(
                         controller: _memoController,
@@ -111,15 +108,21 @@ class _EventRequestPageState extends State<EventRequestPage> {
                           fillColor: AppColors.surface,
                           border: OutlineInputBorder(
                             borderRadius: AppRadius.lgAll,
-                            borderSide: const BorderSide(color: AppColors.border),
+                            borderSide: const BorderSide(
+                              color: AppColors.border,
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: AppRadius.lgAll,
-                            borderSide: const BorderSide(color: AppColors.border),
+                            borderSide: const BorderSide(
+                              color: AppColors.border,
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: AppRadius.lgAll,
-                            borderSide: const BorderSide(color: AppColors.primary),
+                            borderSide: const BorderSide(
+                              color: AppColors.primary,
+                            ),
                           ),
                           contentPadding: EdgeInsets.all(AppSpacing.md),
                         ),
@@ -128,7 +131,9 @@ class _EventRequestPageState extends State<EventRequestPage> {
                         SizedBox(height: AppSpacing.sm),
                         Text(
                           vm.errorMessage!,
-                          style: AppTextStyles.txtSm.copyWith(color: AppColors.error),
+                          style: AppTextStyles.txtSm.copyWith(
+                            color: AppColors.error,
+                          ),
                         ),
                       ],
                       SizedBox(height: AppSpacing.xl),

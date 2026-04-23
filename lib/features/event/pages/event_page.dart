@@ -10,11 +10,7 @@ class EventPage extends StatefulWidget {
   final VoidCallback onBack;
   final VoidCallback onDetailTap;
 
-  const EventPage({
-    super.key,
-    required this.onBack,
-    required this.onDetailTap,
-  });
+  const EventPage({super.key, required this.onBack, required this.onDetailTap});
 
   @override
   State<EventPage> createState() => _EventPageState();
@@ -71,7 +67,9 @@ class _EventPageState extends State<EventPage> {
                       children: [
                         if (event != null) ...[
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: AppSpacing.md,
+                            ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -112,7 +110,9 @@ class _EventPageState extends State<EventPage> {
                               event.imageUrls.length,
                               (index) => AnimatedContainer(
                                 duration: const Duration(milliseconds: 200),
-                                margin: EdgeInsets.symmetric(horizontal: AppSpacing.xs / 2),
+                                margin: EdgeInsets.symmetric(
+                                  horizontal: AppSpacing.xs / 2,
+                                ),
                                 width: vm.currentImageIndex == index ? 16 : 8,
                                 height: 8,
                                 decoration: BoxDecoration(
@@ -130,7 +130,9 @@ class _EventPageState extends State<EventPage> {
                             padding: EdgeInsets.all(AppSpacing.md),
                             child: Text(
                               vm.errorMessage!,
-                              style: AppTextStyles.txtSm.copyWith(color: AppColors.error),
+                              style: AppTextStyles.txtSm.copyWith(
+                                color: AppColors.error,
+                              ),
                             ),
                           ),
                         SizedBox(height: AppSpacing.xl),

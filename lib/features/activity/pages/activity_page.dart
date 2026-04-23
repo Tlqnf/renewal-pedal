@@ -87,8 +87,7 @@ class ActivityPage extends StatelessWidget {
                 return FloatingActionButton(
                   backgroundColor: AppColors.primary,
                   foregroundColor: AppColors.surface,
-                  onPressed:
-                      isChallengeTab ? onCreateChallenge : onCreateCrew,
+                  onPressed: isChallengeTab ? onCreateChallenge : onCreateCrew,
                   child: const Icon(Icons.add),
                 );
               },

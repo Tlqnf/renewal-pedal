@@ -46,10 +46,7 @@ class TermsDescriptionPage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            termsTitle,
-                            style: AppTextStyles.titXl,
-                          ),
+                          Text(termsTitle, style: AppTextStyles.titXl),
                           const SizedBox(height: AppSpacing.lg),
                           ...sections.map(
                             (section) => _TermsSectionItem(section: section),
@@ -89,10 +86,7 @@ class _TermsAppBar extends StatelessWidget {
               color: AppColors.textPrimary,
             ),
             const SizedBox(width: AppSpacing.xs),
-            Text(
-              '이전',
-              style: AppTextStyles.txtMd,
-            ),
+            Text('이전', style: AppTextStyles.txtMd),
           ],
         ),
       ),
@@ -112,10 +106,7 @@ class _TermsSectionItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            section.title,
-            style: AppTextStyles.titSm,
-          ),
+          Text(section.title, style: AppTextStyles.titSm),
           const SizedBox(height: AppSpacing.sm),
           Text(
             section.body,

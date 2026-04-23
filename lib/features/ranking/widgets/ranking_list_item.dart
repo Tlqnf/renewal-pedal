@@ -38,13 +38,15 @@ class RankingListItem extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: const Center(
-                child: Icon(Icons.person_rounded, color: AppColors.gray400, size: 22),
+                child: Icon(
+                  Icons.person_rounded,
+                  color: AppColors.gray400,
+                  size: 22,
+                ),
               ),
             ),
             SizedBox(width: AppSpacing.sm),
-            Expanded(
-              child: Text(entity.nickname, style: AppTextStyles.titXs),
-            ),
+            Expanded(child: Text(entity.nickname, style: AppTextStyles.titXs)),
             Text(
               '${entity.value.toStringAsFixed(entity.unit == 'km' ? 1 : 0)}${entity.unit}',
               style: AppTextStyles.txtSm.copyWith(color: AppColors.primary),

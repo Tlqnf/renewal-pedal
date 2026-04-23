@@ -77,7 +77,9 @@ class _CalendarPageState extends State<CalendarPage> {
                     padding: EdgeInsets.all(AppSpacing.md),
                     child: Text(
                       vm.errorMessage!,
-                      style: AppTextStyles.txtSm.copyWith(color: AppColors.error),
+                      style: AppTextStyles.txtSm.copyWith(
+                        color: AppColors.error,
+                      ),
                     ),
                   ),
                 ...vm.weekSections.map(
@@ -154,10 +156,12 @@ class _CalendarGrid extends StatelessWidget {
               if (index < startWeekday) return const SizedBox.shrink();
               final day = index - startWeekday + 1;
               final date = DateTime(focusedMonth.year, focusedMonth.month, day);
-              final isToday = date.year == today.year &&
+              final isToday =
+                  date.year == today.year &&
                   date.month == today.month &&
                   date.day == today.day;
-              final isSelected = selectedDate != null &&
+              final isSelected =
+                  selectedDate != null &&
                   date.year == selectedDate!.year &&
                   date.month == selectedDate!.month &&
                   date.day == selectedDate!.day;
@@ -170,8 +174,8 @@ class _CalendarGrid extends StatelessWidget {
                     color: isSelected
                         ? AppColors.primary
                         : isToday
-                            ? AppColors.primary100
-                            : null,
+                        ? AppColors.primary100
+                        : null,
                     shape: BoxShape.circle,
                   ),
                   child: Center(
@@ -181,8 +185,8 @@ class _CalendarGrid extends StatelessWidget {
                         color: isSelected
                             ? AppColors.surface
                             : isToday
-                                ? AppColors.primary
-                                : AppColors.textPrimary,
+                            ? AppColors.primary
+                            : AppColors.textPrimary,
                         fontWeight: isToday || isSelected
                             ? FontWeight.w600
                             : FontWeight.w400,

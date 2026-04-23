@@ -6,10 +6,8 @@ import 'package:pedal/domain/failures/failures.dart';
 
 class CalendarRepositoryImpl implements CalendarRepository {
   @override
-  Future<({Failure? failure, CalendarMonthlyStatsEntity? data})> getMonthlyStats({
-    required int year,
-    required int month,
-  }) async {
+  Future<({Failure? failure, CalendarMonthlyStatsEntity? data})>
+  getMonthlyStats({required int year, required int month}) async {
     await Future.delayed(const Duration(milliseconds: 300));
     return (
       failure: null,
@@ -25,10 +23,8 @@ class CalendarRepositoryImpl implements CalendarRepository {
   }
 
   @override
-  Future<({Failure? failure, List<CalendarWeekSectionEntity>? data})> getWeekSections({
-    required int year,
-    required int month,
-  }) async {
+  Future<({Failure? failure, List<CalendarWeekSectionEntity>? data})>
+  getWeekSections({required int year, required int month}) async {
     await Future.delayed(const Duration(milliseconds: 300));
     return (
       failure: null,

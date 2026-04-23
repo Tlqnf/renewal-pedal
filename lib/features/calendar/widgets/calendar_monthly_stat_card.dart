@@ -32,7 +32,10 @@ class CalendarMonthlyStatCard extends StatelessWidget {
           SizedBox(height: AppSpacing.md),
           Row(
             children: [
-              _StatItem(label: '주행거리', value: '${stats.totalDistanceKm.toStringAsFixed(1)}km'),
+              _StatItem(
+                label: '주행거리',
+                value: '${stats.totalDistanceKm.toStringAsFixed(1)}km',
+              ),
               _StatItem(label: '평균페이스', value: stats.avgPace),
               _StatItem(label: '시간', value: '${h}h ${m}m'),
               _StatItem(label: '소모칼로리', value: '${stats.totalCalorieKcal}kcal'),
@@ -63,7 +66,9 @@ class _StatItem extends StatelessWidget {
           SizedBox(height: AppSpacing.xs),
           Text(
             label,
-            style: AppTextStyles.txt2xs.copyWith(color: AppColors.textSecondary),
+            style: AppTextStyles.txt2xs.copyWith(
+              color: AppColors.textSecondary,
+            ),
             textAlign: TextAlign.center,
           ),
         ],

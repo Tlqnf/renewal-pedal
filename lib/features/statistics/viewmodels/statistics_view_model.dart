@@ -11,8 +11,8 @@ class StatisticsViewModel extends ChangeNotifier {
   StatisticsViewModel({
     required GetWeeklyStatsUseCase getWeeklyStatsUseCase,
     required GetChallengeBadgesUseCase getChallengeBadgesUseCase,
-  })  : _getWeeklyStatsUseCase = getWeeklyStatsUseCase,
-        _getChallengeBadgesUseCase = getChallengeBadgesUseCase;
+  }) : _getWeeklyStatsUseCase = getWeeklyStatsUseCase,
+       _getChallengeBadgesUseCase = getChallengeBadgesUseCase;
 
   // 상태
   double todayDistanceKm = 0.0;
@@ -43,10 +43,7 @@ class StatisticsViewModel extends ChangeNotifier {
     errorMessage = null;
     notifyListeners();
 
-    await Future.wait([
-      _loadWeeklyStats(),
-      _loadChallengeBadges(),
-    ]);
+    await Future.wait([_loadWeeklyStats(), _loadChallengeBadges()]);
 
     isLoading = false;
     notifyListeners();
@@ -58,26 +55,27 @@ class StatisticsViewModel extends ChangeNotifier {
       weekEnd: selectedWeekEnd,
     );
 
-    result.fold(
-      (failure) => errorMessage = failure.message,
-      (stats) {
-        weeklyStats = stats;
-        _computeDerivedStats(stats);
-      },
-    );
+    result.fold((failure) => errorMessage = failure.message, (stats) {
+      weeklyStats = stats;
+      _computeDerivedStats(stats);
+    });
   }
 
   void _computeDerivedStats(List<DailyStatEntity> stats) {
     final today = DateTime.now();
-    final todayStat = stats.where((s) =>
-        s.date.year == today.year &&
-        s.date.month == today.month &&
-        s.date.day == today.day);
+    final todayStat = stats.where(
+      (s) =>
+          s.date.year == today.year &&
+          s.date.month == today.month &&
+          s.date.day == today.day,
+    );
 
     todayDistanceKm = todayStat.isNotEmpty ? todayStat.first.distanceKm : 0.0;
 
-    weeklyTotalDurationSeconds =
-        stats.fold(0, (sum, s) => sum + s.durationSeconds);
+    weeklyTotalDurationSeconds = stats.fold(
+      0,
+      (sum, s) => sum + s.durationSeconds,
+    );
 
     weeklyMaxSpeedKmh = stats.isNotEmpty
         ? stats.map((s) => s.maxSpeedKmh).reduce((a, b) => a > b ? a : b)
@@ -112,8 +110,7 @@ class StatisticsViewModel extends ChangeNotifier {
   }
 
   void onPreviousWeek() {
-    selectedWeekStart =
-        selectedWeekStart.subtract(const Duration(days: 7));
+    selectedWeekStart = selectedWeekStart.subtract(const Duration(days: 7));
     selectedWeekEnd = selectedWeekEnd.subtract(const Duration(days: 7));
     _loadWeeklyStats().then((_) => notifyListeners());
   }

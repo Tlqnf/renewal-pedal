@@ -37,7 +37,9 @@ class MyTabBar extends StatelessWidget {
                 _tabs[i],
                 textAlign: TextAlign.center,
                 style: AppTextStyles.titXs.copyWith(
-                  color: isSelected ? AppColors.primary : AppColors.textSecondary,
+                  color: isSelected
+                      ? AppColors.primary
+                      : AppColors.textSecondary,
                 ),
               ),
             ),

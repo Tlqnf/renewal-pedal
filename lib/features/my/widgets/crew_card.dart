@@ -25,12 +25,18 @@ class CrewCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.lg)),
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(AppRadius.lg),
+              ),
               child: Container(
                 height: 80,
                 color: AppColors.gray100,
                 child: const Center(
-                  child: Icon(Icons.group_rounded, color: AppColors.gray400, size: 32),
+                  child: Icon(
+                    Icons.group_rounded,
+                    color: AppColors.gray400,
+                    size: 32,
+                  ),
                 ),
               ),
             ),
@@ -39,16 +45,27 @@ class CrewCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(crew.name, style: AppTextStyles.titXs, maxLines: 1, overflow: TextOverflow.ellipsis),
+                  Text(
+                    crew.name,
+                    style: AppTextStyles.titXs,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                   SizedBox(height: AppSpacing.xs),
                   Row(
                     children: [
-                      const Icon(Icons.location_on_outlined, size: 11, color: AppColors.textSecondary),
+                      const Icon(
+                        Icons.location_on_outlined,
+                        size: 11,
+                        color: AppColors.textSecondary,
+                      ),
                       SizedBox(width: 2),
                       Expanded(
                         child: Text(
                           crew.location,
-                          style: AppTextStyles.txt2xs.copyWith(color: AppColors.textSecondary),
+                          style: AppTextStyles.txt2xs.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -58,11 +75,17 @@ class CrewCard extends StatelessWidget {
                   SizedBox(height: 2),
                   Row(
                     children: [
-                      const Icon(Icons.people_outline_rounded, size: 11, color: AppColors.textSecondary),
+                      const Icon(
+                        Icons.people_outline_rounded,
+                        size: 11,
+                        color: AppColors.textSecondary,
+                      ),
                       SizedBox(width: 2),
                       Text(
                         '${crew.memberCount}명',
-                        style: AppTextStyles.txt2xs.copyWith(color: AppColors.textSecondary),
+                        style: AppTextStyles.txt2xs.copyWith(
+                          color: AppColors.textSecondary,
+                        ),
                       ),
                     ],
                   ),

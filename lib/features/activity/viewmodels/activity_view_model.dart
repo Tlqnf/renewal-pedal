@@ -15,9 +15,9 @@ class ActivityViewModel extends ChangeNotifier {
     required GetActivityChallengesUseCase getChallengesUseCase,
     required GetRecommendedCrewsUseCase getCrewsUseCase,
     required GetActivityStatsUseCase getStatsUseCase,
-  })  : _getChallengesUseCase = getChallengesUseCase,
-        _getCrewsUseCase = getCrewsUseCase,
-        _getStatsUseCase = getStatsUseCase;
+  }) : _getChallengesUseCase = getChallengesUseCase,
+       _getCrewsUseCase = getCrewsUseCase,
+       _getStatsUseCase = getStatsUseCase;
 
   // 상태
   List<ChallengeEntity> _challenges = [];
@@ -50,11 +50,7 @@ class ActivityViewModel extends ChangeNotifier {
 
   // 초기 로드
   Future<void> init() async {
-    await Future.wait([
-      fetchChallenges(),
-      fetchCrews(),
-      fetchStats(),
-    ]);
+    await Future.wait([fetchChallenges(), fetchCrews(), fetchStats()]);
   }
 
   Future<void> fetchChallenges() async {
@@ -89,10 +85,7 @@ class ActivityViewModel extends ChangeNotifier {
 
   Future<void> fetchStats() async {
     final result = await _getStatsUseCase.execute();
-    result.fold(
-      (failure) {},
-      (entity) => _stats = entity,
-    );
+    result.fold((failure) {}, (entity) => _stats = entity);
     notifyListeners();
   }
 

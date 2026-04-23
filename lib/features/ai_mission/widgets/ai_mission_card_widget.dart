@@ -31,7 +31,9 @@ class AiMissionCardWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.lg)),
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(AppRadius.lg),
+            ),
             child: Container(
               height: 120,
               width: double.infinity,

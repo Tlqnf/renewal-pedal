@@ -16,7 +16,8 @@ class StatisticsMockRepository implements StatisticsRepository {
   }
 
   @override
-  Future<Either<Failure, List<ChallengeBadgeEntity>>> getChallengeBadges() async {
+  Future<Either<Failure, List<ChallengeBadgeEntity>>>
+  getChallengeBadges() async {
     await Future.delayed(const Duration(milliseconds: 300));
     return Right(StatisticsMockData.challengeBadges);
   }

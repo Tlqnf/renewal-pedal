@@ -39,7 +39,9 @@ class _AiMissionPageState extends State<AiMissionPage> {
                 builder: (context, vm, _) {
                   if (vm.isLoading) {
                     return const Center(
-                      child: CircularProgressIndicator(color: AppColors.primary),
+                      child: CircularProgressIndicator(
+                        color: AppColors.primary,
+                      ),
                     );
                   }
                   return SingleChildScrollView(
@@ -81,9 +83,10 @@ class _AiMissionPageState extends State<AiMissionPage> {
                           child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: vm.missionCards.length,
-                            itemBuilder: (context, index) => AiMissionCardWidget(
-                              mission: vm.missionCards[index],
-                            ),
+                            itemBuilder: (context, index) =>
+                                AiMissionCardWidget(
+                                  mission: vm.missionCards[index],
+                                ),
                           ),
                         ),
                         SizedBox(height: AppSpacing.xl),
@@ -136,7 +139,11 @@ class _AiMissionAppBar extends StatelessWidget {
             onTap: onClose,
             child: Padding(
               padding: EdgeInsets.all(AppSpacing.xs),
-              child: const Icon(Icons.close, color: AppColors.textPrimary, size: 24),
+              child: const Icon(
+                Icons.close,
+                color: AppColors.textPrimary,
+                size: 24,
+              ),
             ),
           ),
         ],

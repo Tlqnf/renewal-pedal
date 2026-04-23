@@ -10,8 +10,8 @@ class CrewDetailViewModel extends ChangeNotifier {
   CrewDetailViewModel({
     required GetCrewDetailUseCase getCrewDetailUseCase,
     required JoinCrewUseCase joinCrewUseCase,
-  })  : _getCrewDetailUseCase = getCrewDetailUseCase,
-        _joinCrewUseCase = joinCrewUseCase;
+  }) : _getCrewDetailUseCase = getCrewDetailUseCase,
+       _joinCrewUseCase = joinCrewUseCase;
 
   // 상태
   CrewDetailEntity? _crewDetail;

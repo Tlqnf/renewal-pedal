@@ -67,80 +67,75 @@ class MyFeedDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.surface,
-      appBar: BackAppBar(
-        title: '게시물',
-        onBackPressed: onBack,
-      ),
+      appBar: BackAppBar(title: '게시물', onBackPressed: onBack),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : errorMessage != null
-              ? Center(
-                  child: Text(
-                    errorMessage!,
-                    style: AppTextStyles.txtSm.copyWith(
-                      color: AppColors.textSecondary,
+          ? Center(
+              child: Text(
+                errorMessage!,
+                style: AppTextStyles.txtSm.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+              ),
+            )
+          : SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Author Row
+                  _FeedAuthorRow(
+                    profileImageUrl: authorProfileImageUrl,
+                    nickname: authorNickname,
+                    onMoreTap: onMoreTap,
+                  ),
+
+                  // Feed Image
+                  _FeedImageView(imageUrl: feedImageUrl),
+
+                  // Action Row
+                  _FeedActionRow(
+                    likeCount: likeCount,
+                    commentCount: commentCount,
+                    isLiked: isLiked,
+                    isBookmarked: isBookmarked,
+                    onLikeTap: onLikeTap,
+                    onCommentTap: onCommentTap,
+                    onBookmarkTap: onBookmarkTap,
+                  ),
+
+                  // Hashtag Row
+                  if (hashtags.isNotEmpty) _FeedHashtagRow(hashtags: hashtags),
+
+                  // Expandable Content
+                  _ExpandableContent(
+                    title: title,
+                    content: content,
+                    isExpanded: isContentExpanded,
+                    onToggle: onExpandContent,
+                  ),
+
+                  // Created At
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      AppSpacing.md,
+                      AppSpacing.xs,
+                      AppSpacing.md,
+                      AppSpacing.lg,
+                    ),
+                    child: Text(
+                      _formatDate(createdAt),
+                      style: AppTextStyles.txtXs.copyWith(
+                        color: AppColors.textSecondary,
+                      ),
                     ),
                   ),
-                )
-              : SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Author Row
-                      _FeedAuthorRow(
-                        profileImageUrl: authorProfileImageUrl,
-                        nickname: authorNickname,
-                        onMoreTap: onMoreTap,
-                      ),
-
-                      // Feed Image
-                      _FeedImageView(imageUrl: feedImageUrl),
-
-                      // Action Row
-                      _FeedActionRow(
-                        likeCount: likeCount,
-                        commentCount: commentCount,
-                        isLiked: isLiked,
-                        isBookmarked: isBookmarked,
-                        onLikeTap: onLikeTap,
-                        onCommentTap: onCommentTap,
-                        onBookmarkTap: onBookmarkTap,
-                      ),
-
-                      // Hashtag Row
-                      if (hashtags.isNotEmpty)
-                        _FeedHashtagRow(hashtags: hashtags),
-
-                      // Expandable Content
-                      _ExpandableContent(
-                        title: title,
-                        content: content,
-                        isExpanded: isContentExpanded,
-                        onToggle: onExpandContent,
-                      ),
-
-                      // Created At
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(
-                          AppSpacing.md,
-                          AppSpacing.xs,
-                          AppSpacing.md,
-                          AppSpacing.lg,
-                        ),
-                        child: Text(
-                          _formatDate(createdAt),
-                          style: AppTextStyles.txtXs.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                ],
+              ),
+            ),
     );
   }
 }
-
 
 class _FeedAuthorRow extends StatelessWidget {
   final String? profileImageUrl;
@@ -165,23 +160,18 @@ class _FeedAuthorRow extends StatelessWidget {
           CircleAvatar(
             radius: 20,
             backgroundColor: AppColors.gray100,
-            backgroundImage:
-                profileImageUrl != null ? NetworkImage(profileImageUrl!) : null,
+            backgroundImage: profileImageUrl != null
+                ? NetworkImage(profileImageUrl!)
+                : null,
             child: profileImageUrl == null
                 ? Icon(Icons.person, color: AppColors.gray400, size: 20)
                 : null,
           ),
           SizedBox(width: AppSpacing.sm),
-          Expanded(
-            child: Text(nickname, style: AppTextStyles.titXs),
-          ),
+          Expanded(child: Text(nickname, style: AppTextStyles.titXs)),
           IconButton(
             onPressed: onMoreTap,
-            icon: Icon(
-              Icons.more_vert,
-              color: AppColors.textPrimary,
-              size: 24,
-            ),
+            icon: Icon(Icons.more_vert, color: AppColors.textPrimary, size: 24),
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
           ),
@@ -260,8 +250,7 @@ class _FeedActionRow extends StatelessWidget {
                 Icon(
                   isLiked ? Icons.thumb_up : Icons.thumb_up_outlined,
                   size: 20,
-                  color:
-                      isLiked ? AppColors.primary : AppColors.textSecondary,
+                  color: isLiked ? AppColors.primary : AppColors.textSecondary,
                 ),
                 SizedBox(width: AppSpacing.xs),
                 Text(
@@ -301,8 +290,7 @@ class _FeedActionRow extends StatelessWidget {
             child: Icon(
               isBookmarked ? Icons.bookmark : Icons.bookmark_border,
               size: 22,
-              color:
-                  isBookmarked ? AppColors.primary : AppColors.textSecondary,
+              color: isBookmarked ? AppColors.primary : AppColors.textSecondary,
             ),
           ),
         ],
@@ -332,9 +320,7 @@ class _FeedHashtagRow extends StatelessWidget {
             .map(
               (tag) => Text(
                 '#$tag',
-                style: AppTextStyles.txtXs.copyWith(
-                  color: AppColors.primary,
-                ),
+                style: AppTextStyles.txtXs.copyWith(color: AppColors.primary),
               ),
             )
             .toList(),
@@ -372,11 +358,9 @@ class _ExpandableContent extends StatelessWidget {
           SizedBox(height: AppSpacing.xs),
           Text(
             content,
-            style:
-                AppTextStyles.txtSm.copyWith(color: AppColors.textSecondary),
+            style: AppTextStyles.txtSm.copyWith(color: AppColors.textSecondary),
             maxLines: isExpanded ? null : 2,
-            overflow:
-                isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
+            overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
           ),
           GestureDetector(
             onTap: onToggle,
@@ -407,15 +391,14 @@ class MyFeedDetailPageConnected extends StatefulWidget {
       _MyFeedDetailPageConnectedState();
 }
 
-class _MyFeedDetailPageConnectedState
-    extends State<MyFeedDetailPageConnected> {
+class _MyFeedDetailPageConnectedState extends State<MyFeedDetailPageConnected> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context
-          .read<MyFeedDetailViewModel>()
-          .loadFeedDetail(feedId: widget.feedId);
+      context.read<MyFeedDetailViewModel>().loadFeedDetail(
+        feedId: widget.feedId,
+      );
     });
   }
 

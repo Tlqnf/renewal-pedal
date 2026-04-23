@@ -20,7 +20,12 @@ class SectionHeader extends StatelessWidget {
     return GestureDetector(
       onTap: onMoreTap,
       child: Padding(
-        padding: EdgeInsets.fromLTRB(AppSpacing.md, AppSpacing.lg, AppSpacing.md, AppSpacing.sm),
+        padding: EdgeInsets.fromLTRB(
+          AppSpacing.md,
+          AppSpacing.lg,
+          AppSpacing.md,
+          AppSpacing.sm,
+        ),
         child: Row(
           children: [
             Text(title, style: AppTextStyles.titSm),
@@ -30,11 +35,7 @@ class SectionHeader extends StatelessWidget {
               style: AppTextStyles.titSm.copyWith(color: AppColors.primary),
             ),
             const Spacer(),
-            Icon(
-              Icons.chevron_right,
-              color: AppColors.textSecondary,
-              size: 20,
-            ),
+            Icon(Icons.chevron_right, color: AppColors.textSecondary, size: 20),
           ],
         ),
       ),

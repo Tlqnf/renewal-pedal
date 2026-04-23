@@ -238,9 +238,7 @@ class _FeedCardState extends State<FeedCard> {
                 },
                 itemBuilder: (context, index) {
                   return Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16,
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: 16),
                     child: ClipRRect(
                       borderRadius: AppRadius.lgAll,
                       child: _buildImage(widget.imageUrls[index]),
@@ -295,10 +293,7 @@ class _FeedCardState extends State<FeedCard> {
                               size: 24,
                             ),
                             SizedBox(width: AppSpacing.xs),
-                            Text(
-                              _likes.toString(),
-                              style: AppTextStyles.txtSm,
-                            ),
+                            Text(_likes.toString(), style: AppTextStyles.txtSm),
                           ],
                         ),
                       ),
@@ -325,9 +320,7 @@ class _FeedCardState extends State<FeedCard> {
                   GestureDetector(
                     onTap: _toggleBookmark,
                     child: Icon(
-                      _isBookmarked
-                          ? Icons.bookmark
-                          : Icons.bookmark_border,
+                      _isBookmarked ? Icons.bookmark : Icons.bookmark_border,
                       color: _isBookmarked
                           ? AppColors.primary
                           : AppColors.textSecondary,

@@ -21,10 +21,7 @@ class StatisticsMotivationBanner extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [
-            Color(0xFFB3D9F7),
-            Color(0xFFD6EEFF),
-          ],
+          colors: [Color(0xFFB3D9F7), Color(0xFFD6EEFF)],
         ),
       ),
       child: Stack(
@@ -60,9 +57,7 @@ class StatisticsMotivationBanner extends StatelessWidget {
               children: [
                 Text(
                   motivationMessage,
-                  style: AppTextStyles.titSm.copyWith(
-                    color: AppColors.gray700,
-                  ),
+                  style: AppTextStyles.titSm.copyWith(color: AppColors.gray700),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: AppSpacing.sm),

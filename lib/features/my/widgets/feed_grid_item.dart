@@ -7,11 +7,7 @@ class FeedGridItem extends StatelessWidget {
   final FeedEntity feed;
   final VoidCallback onTap;
 
-  const FeedGridItem({
-    super.key,
-    required this.feed,
-    required this.onTap,
-  });
+  const FeedGridItem({super.key, required this.feed, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +39,7 @@ class FeedGridItem extends StatelessWidget {
                 Icons.collections,
                 color: AppColors.gray0,
                 size: 16,
-                shadows: [
-                  Shadow(
-                    color: Colors.black45,
-                    blurRadius: 4,
-                  ),
-                ],
+                shadows: [Shadow(color: Colors.black45, blurRadius: 4)],
               ),
             ),
         ],

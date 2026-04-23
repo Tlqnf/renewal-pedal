@@ -8,9 +8,6 @@ import 'package:pedal/common/theme/app_radius.dart';
 import 'package:pedal/domain/activity/entities/crew_detail_entity.dart';
 import 'package:pedal/features/activity/viewmodels/crew_detail_view_model.dart';
 
-
-
-
 class ActivityCrewDetailPage extends StatelessWidget {
   final CrewDetailEntity? crewDetail;
   final bool isLoading;
@@ -49,7 +46,10 @@ class ActivityCrewDetailPage extends StatelessWidget {
         onBackPressed: onBackTap,
         actions: [
           IconButton(
-            icon: const Icon(Icons.ios_share_outlined, color: AppColors.textPrimary),
+            icon: const Icon(
+              Icons.ios_share_outlined,
+              color: AppColors.textPrimary,
+            ),
             onPressed: onShareTap,
           ),
         ],
@@ -57,29 +57,28 @@ class ActivityCrewDetailPage extends StatelessWidget {
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : errorMessage != null
-              ? Center(
-                  child: Text(
-                    errorMessage!,
-                    style: AppTextStyles.txtSm.copyWith(color: AppColors.textSecondary),
-                  ),
-                )
-              : crewDetail == null
-                  ? const SizedBox.shrink()
-                  : _CrewDetailBody(
-                      crewDetail: crewDetail!,
-                      isJoined: isJoined,
-                      selectedTabIndex: selectedTabIndex,
-                      memberCount: memberCount,
-                      crewPoint: crewPoint,
-                      onJoinCrew: onJoinCrew,
-                      onTabChanged: onTabChanged,
-                    ),
+          ? Center(
+              child: Text(
+                errorMessage!,
+                style: AppTextStyles.txtSm.copyWith(
+                  color: AppColors.textSecondary,
+                ),
+              ),
+            )
+          : crewDetail == null
+          ? const SizedBox.shrink()
+          : _CrewDetailBody(
+              crewDetail: crewDetail!,
+              isJoined: isJoined,
+              selectedTabIndex: selectedTabIndex,
+              memberCount: memberCount,
+              crewPoint: crewPoint,
+              onJoinCrew: onJoinCrew,
+              onTabChanged: onTabChanged,
+            ),
     );
   }
 }
-
-
-
 
 class ActivityCrewDetailPageConnected extends StatefulWidget {
   final String crewId;
@@ -126,9 +125,6 @@ class _ActivityCrewDetailPageConnectedState
   }
 }
 
-
-
-
 class _CrewDetailBody extends StatelessWidget {
   final CrewDetailEntity crewDetail;
   final bool isJoined;
@@ -164,10 +160,7 @@ class _CrewDetailBody extends StatelessWidget {
             ),
           ),
           SliverToBoxAdapter(
-            child: _CrewStatRow(
-              memberCount: memberCount,
-              crewPoint: crewPoint,
-            ),
+            child: _CrewStatRow(memberCount: memberCount, crewPoint: crewPoint),
           ),
           SliverPersistentHeader(
             pinned: true,
@@ -203,9 +196,6 @@ class _CrewDetailBody extends StatelessWidget {
     );
   }
 }
-
-
-
 
 class _CrewCoverImageSection extends StatefulWidget {
   final String? coverImageUrl;
@@ -279,9 +269,6 @@ class _PlaceholderCover extends StatelessWidget {
   }
 }
 
-
-
-
 class _CrewInfoCard extends StatelessWidget {
   final CrewDetailEntity crewDetail;
   final bool isJoined;
@@ -344,7 +331,9 @@ class _CrewInfoCard extends StatelessWidget {
                       ),
                       child: Text(
                         '가입하기',
-                        style: AppTextStyles.titXs.copyWith(color: AppColors.surface),
+                        style: AppTextStyles.titXs.copyWith(
+                          color: AppColors.surface,
+                        ),
                       ),
                     ),
                   ),
@@ -364,9 +353,13 @@ class _CrewInfoCard extends StatelessWidget {
             // 소개 텍스트
             Text(
               crewDetail.description,
-              style: AppTextStyles.txtSm.copyWith(color: AppColors.textSecondary),
+              style: AppTextStyles.txtSm.copyWith(
+                color: AppColors.textSecondary,
+              ),
               maxLines: isExpanded ? null : 2,
-              overflow: isExpanded ? TextOverflow.visible : TextOverflow.ellipsis,
+              overflow: isExpanded
+                  ? TextOverflow.visible
+                  : TextOverflow.ellipsis,
             ),
             // 펼치기/접기 chevron
             Center(
@@ -413,9 +406,6 @@ class _TagChip extends StatelessWidget {
   }
 }
 
-
-
-
 class _CrewStatRow extends StatelessWidget {
   final int memberCount;
   final int crewPoint;
@@ -443,11 +433,7 @@ class _CrewStatRow extends StatelessWidget {
             Expanded(
               child: _StatItem(label: '크루원', value: memberCount),
             ),
-            VerticalDivider(
-              color: AppColors.border,
-              width: 1,
-              thickness: 1,
-            ),
+            VerticalDivider(color: AppColors.border, width: 1, thickness: 1),
             Expanded(
               child: _StatItem(label: '크루원', value: crewPoint),
             ),
@@ -473,16 +459,11 @@ class _StatItem extends StatelessWidget {
           style: AppTextStyles.txtXs.copyWith(color: AppColors.textSecondary),
         ),
         const SizedBox(height: AppSpacing.xs),
-        Text(
-          value.toString(),
-          style: AppTextStyles.titXl,
-        ),
+        Text(value.toString(), style: AppTextStyles.titXl),
       ],
     );
   }
 }
-
-
 
 class _TabBarDelegate extends SliverPersistentHeaderDelegate {
   final TabBar tabBar;
@@ -497,7 +478,10 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return Container(
       color: AppColors.surface,
       child: Column(
@@ -513,8 +497,6 @@ class _TabBarDelegate extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(_TabBarDelegate oldDelegate) =>
       tabBar != oldDelegate.tabBar;
 }
-
-
 
 class _CrewInfoTab extends StatelessWidget {
   final String description;
@@ -540,9 +522,6 @@ class _CrewInfoTab extends StatelessWidget {
   }
 }
 
-
-
-
 class _CrewLockedInfoSection extends StatelessWidget {
   const _CrewLockedInfoSection();
 
@@ -565,9 +544,6 @@ class _CrewLockedInfoSection extends StatelessWidget {
   }
 }
 
-
-
-
 class _CrewRankingTab extends StatelessWidget {
   final List<CrewMemberRankingEntity> members;
 
@@ -586,8 +562,7 @@ class _CrewRankingTab extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
       itemCount: members.length,
-      separatorBuilder: (_, _) =>
-          Divider(height: 1, color: AppColors.border),
+      separatorBuilder: (_, _) => Divider(height: 1, color: AppColors.border),
       itemBuilder: (context, index) {
         final member = members[index];
         return _CrewMemberRankingItem(member: member);
@@ -647,9 +622,7 @@ class _CrewMemberRankingItem extends StatelessWidget {
                   ),
           ),
           const SizedBox(width: AppSpacing.sm),
-          Expanded(
-            child: Text(member.nickname, style: AppTextStyles.titXs),
-          ),
+          Expanded(child: Text(member.nickname, style: AppTextStyles.titXs)),
           Text(
             '${member.distanceKm.toStringAsFixed(1)}km',
             style: AppTextStyles.txtSm.copyWith(color: AppColors.primary),
