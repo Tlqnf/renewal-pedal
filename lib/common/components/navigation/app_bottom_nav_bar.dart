@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_colors.dart';
-import '../../theme/app_text_styles.dart';
-import '../../theme/app_spacing.dart';
+import 'package:pedal/common/theme/app_colors.dart';
+import 'package:pedal/common/theme/app_text_styles.dart';
+import 'package:pedal/common/theme/app_spacing.dart';
+
+const double _navBarHeight = 64;
 
 enum BottomNavItem {
   home('홈', Icons.home_rounded),
   feed('피드', Icons.article_rounded),
   map('', Icons.map_rounded),
-  activity('활동', Icons.directions_bike_rounded),
+  activity('크루', Icons.directions_bike_rounded),
   stats('통계', Icons.bar_chart_rounded);
 
   const BottomNavItem(this.label, this.icon);
@@ -30,27 +32,25 @@ class AppBottomNavBar extends StatelessWidget {
     final bottomPadding = MediaQuery.of(context).padding.bottom;
 
     return SizedBox(
-      height: 64 + bottomPadding,
+      height: _navBarHeight + bottomPadding,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          // Notch background with shadow (전체 높이 채움)
+          // 배경 + 그림자
           Positioned.fill(child: CustomPaint(painter: _NotchPainter())),
-          // Nav items (상단 64 영역에만)
+          // Nav items
           Positioned(
             top: 0,
             left: 0,
             right: 0,
-            height: 64,
+            height: _navBarHeight,
             child: Row(
               children: List.generate(BottomNavItem.values.length, (index) {
                 final item = BottomNavItem.values[index];
                 final isCenter = index == BottomNavItem.map.index;
                 final isActive = currentIndex == index;
 
-                if (isCenter) {
-                  return Expanded(child: SizedBox.shrink());
-                }
+                if (isCenter) return const Expanded(child: SizedBox.shrink());
 
                 return Expanded(
                   child: _NavItem(
@@ -81,43 +81,32 @@ class AppBottomNavBar extends StatelessWidget {
 }
 
 class _NotchPainter extends CustomPainter {
-  static const double _notchHalfWidth = 28.0; // 노치 가로 반폭
-  static const double _notchDepth = 22.0; // 위로 파이는 깊이
-  static const double _edgeCurve = 12.0; // 진입/복귀 곡선 여유
+  static const double _notchHalfWidth = 28.0;
+  static const double _notchDepth = 22.0;
+  static const double _edgeCurve = 12.0;
 
   @override
   void paint(Canvas canvas, Size size) {
     final cx = size.width / 2;
-    final x1 = cx - _notchHalfWidth; // 노치 왼쪽 끝
-    final x2 = cx + _notchHalfWidth; // 노치 오른쪽 끝
-
+    final x1 = cx - _notchHalfWidth;
+    final x2 = cx + _notchHalfWidth;
     final path = Path()
       ..moveTo(0, 0)
       ..lineTo(x1 - _edgeCurve, 0)
-      // 왼쪽 진입: y=0 → 노치 최저점(-_notchDepth) 으로 내려가는 S커브
-      ..cubicTo(
-        x1 - _edgeCurve / 2,
-        0, // 제어점1: 수평 유지
-        x1,
-        -_notchDepth, // 제어점2: 노치 깊이
-        cx,
-        -_notchDepth, // 노치 중앙 최저점
-      )
-      // 오른쪽 복귀: 노치 최저점 → y=0
-      ..cubicTo(
-        x2,
-        -_notchDepth, // 제어점1: 노치 깊이
-        x2 + _edgeCurve / 2,
-        0, // 제어점2: 수평 유지
-        x2 + _edgeCurve,
-        0, // y=0 복귀
-      )
+      ..cubicTo(x1 - _edgeCurve / 2, 0, x1, -_notchDepth, cx, -_notchDepth)
+      ..cubicTo(x2, -_notchDepth, x2 + _edgeCurve / 2, 0, x2 + _edgeCurve, 0)
       ..lineTo(size.width, 0)
       ..lineTo(size.width, size.height)
       ..lineTo(0, size.height)
       ..close();
 
-    canvas.drawShadow(path, AppColors.gray300.withValues(alpha: 0.5), 4, false);
+    // 그림자: y offset -1 (상단에만 보이도록)
+    canvas.drawShadow(
+      path.shift(const Offset(0, -1)),
+      AppColors.gray900.withValues(alpha: 1),
+      2,
+      false,
+    );
     canvas.drawPath(path, Paint()..color = AppColors.surface);
   }
 
@@ -178,7 +167,7 @@ class _MapFab extends StatelessWidget {
               offset: const Offset(0, 4),
             ),
             BoxShadow(
-              color: AppColors.gray300.withValues(alpha: 0.3),
+              color: AppColors.gray400.withValues(alpha: 0.3),
               blurRadius: 6,
               offset: const Offset(0, -2),
             ),

@@ -28,7 +28,7 @@ class MyTabBar extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
-                    color: isSelected ? AppColors.primary : AppColors.divider,
+                    color: isSelected ? AppColors.primary : AppColors.border,
                     width: isSelected ? 2 : 1,
                   ),
                 ),

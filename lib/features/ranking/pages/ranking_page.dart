@@ -38,7 +38,7 @@ class _RankingPageState extends State<RankingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
       appBar: AppBar(
         backgroundColor: AppColors.surface,
         elevation: 0,
@@ -46,7 +46,7 @@ class _RankingPageState extends State<RankingPage> {
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
           onPressed: widget.onBack,
         ),
-        title: Text('랭킹', style: AppTextStyles.titMd),
+        title: Text('랭킹', style: AppTextStyles.titMdMedium),
         centerTitle: true,
       ),
       body: Consumer<RankingViewModel>(
@@ -71,7 +71,7 @@ class _RankingPageState extends State<RankingPage> {
                             RankingPodiumSection(
                               top3: vm.rankingList.take(3).toList(),
                             ),
-                          const Divider(height: 1, color: AppColors.divider),
+                          const Divider(height: 1, color: AppColors.border),
                           ...vm.rankingList
                               .skip(3)
                               .map(

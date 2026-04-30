@@ -18,7 +18,7 @@ class BackAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
       elevation: 0,
       scrolledUnderElevation: 0, // 중요
       automaticallyImplyLeading: false,
@@ -35,7 +35,7 @@ class BackAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           SizedBox(width: AppSpacing.lg),
-          Text(title, style: AppTextStyles.titMd),
+          Text(title, style: AppTextStyles.titMdMedium),
         ],
       ),
       bottom: PreferredSize(

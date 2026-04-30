@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
+import 'package:pedal/common/theme/app_colors.dart';
 
 class AppTextStyles {
   AppTextStyles._();
@@ -15,19 +15,34 @@ class AppTextStyles {
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
   );
-  static const TextStyle titSm = TextStyle(
+  static const TextStyle titSmMedium = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
   );
-  static const TextStyle titMd = TextStyle(
+  static const TextStyle titSmBold = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textPrimary,
+  );
+  static const TextStyle titMdMedium = TextStyle(
     fontSize: 18,
     fontWeight: FontWeight.w600,
     color: AppColors.textPrimary,
   );
-  static const TextStyle titLg = TextStyle(
+  static const TextStyle titMdBold = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    color: AppColors.textPrimary,
+  );
+  static const TextStyle titLgMedium = TextStyle(
     fontSize: 21,
     fontWeight: FontWeight.w600,
+    color: AppColors.textPrimary,
+  );
+  static const TextStyle titLgBold = TextStyle(
+    fontSize: 21,
+    fontWeight: FontWeight.w700,
     color: AppColors.textPrimary,
   );
   static const TextStyle titXl = TextStyle(

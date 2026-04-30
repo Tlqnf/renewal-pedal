@@ -38,7 +38,7 @@ class _NotificationDetailPageState extends State<NotificationDetailPage> {
         }
 
         return Scaffold(
-          backgroundColor: AppColors.background,
+          backgroundColor: AppColors.surface,
           appBar: BackAppBar(
             title: '알림 상세',
             onBackPressed: () => Navigator.pop(context),
@@ -54,12 +54,7 @@ class _NotificationDetailPageState extends State<NotificationDetailPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // 제목
-                    Text(
-                      notification.title,
-                      style: AppTextStyles.titLg.copyWith(
-                        color: AppColors.textPrimary,
-                      ),
-                    ),
+                    Text(notification.title, style: AppTextStyles.titLgMedium),
 
                     SizedBox(height: AppSpacing.sm),
 

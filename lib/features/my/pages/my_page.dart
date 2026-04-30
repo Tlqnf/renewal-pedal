@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pedal/common/components/appbars/back_appbar.dart';
 import 'package:pedal/common/theme/app_colors.dart';
 import 'package:pedal/common/theme/app_text_styles.dart';
 import 'package:pedal/common/theme/app_spacing.dart';
 import 'package:pedal/common/theme/app_radius.dart';
 import 'package:pedal/features/my/viewmodels/my_view_model.dart';
+import 'package:pedal/features/my/widgets/activity_icon_item.dart';
 import 'package:pedal/features/my/widgets/my_tab_bar.dart';
 import 'package:pedal/features/my/widgets/profile_header_section.dart';
 import 'package:pedal/features/my/widgets/riding_stats_grid.dart';
-import 'package:pedal/features/my/widgets/section_header.dart';
-import 'package:pedal/features/my/widgets/challenge_list_item.dart';
+import 'package:pedal/common/components/lists/section_header.dart';
 import 'package:pedal/features/my/widgets/crew_card.dart';
 import 'package:pedal/features/my/widgets/saved_route_list_item.dart';
 
@@ -17,7 +18,6 @@ class MyPage extends StatefulWidget {
   final VoidCallback onBack;
   final VoidCallback? onSettingsTap;
   final VoidCallback? onInviteFriendTap;
-  final ValueChanged<String>? onChallengeTap;
   final ValueChanged<String>? onCrewTap;
   final ValueChanged<String>? onRouteTap;
   final ValueChanged<String>? onPostTap;
@@ -27,7 +27,6 @@ class MyPage extends StatefulWidget {
     required this.onBack,
     this.onSettingsTap,
     this.onInviteFriendTap,
-    this.onChallengeTap,
     this.onCrewTap,
     this.onRouteTap,
     this.onPostTap,
@@ -49,17 +48,8 @@ class _MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.surface,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
-          onPressed: widget.onBack,
-        ),
-        title: Text('My', style: AppTextStyles.titMd),
-        centerTitle: true,
-      ),
+      backgroundColor: AppColors.surface,
+      appBar: BackAppBar(title: 'My', onBackPressed: widget.onBack),
       body: Consumer<MyViewModel>(
         builder: (context, vm, _) {
           if (vm.isLoading) {
@@ -88,7 +78,6 @@ class _MyPageState extends State<MyPage> {
                     ),
                     _ActivityTab(
                       vm: vm,
-                      onChallengeTap: widget.onChallengeTap,
                       onCrewTap: widget.onCrewTap,
                       onRouteTap: widget.onRouteTap,
                     ),
@@ -176,19 +165,19 @@ class _ProfileTab extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _ActivityIcon(
+                ActivityIconItem(
                   emoji: '🔔',
                   label: '알림',
                   count: profile.notificationCount,
                   onTap: () {},
                 ),
-                _ActivityIcon(
+                ActivityIconItem(
                   emoji: '🔖',
                   label: '스크랩',
                   count: profile.scrapCount,
                   onTap: () {},
                 ),
-                _ActivityIcon(
+                ActivityIconItem(
                   emoji: '❤️',
                   label: '좋아요',
                   count: profile.likeCount,
@@ -215,11 +204,11 @@ class _ProfileTab extends StatelessWidget {
                   ),
                   child: Row(
                     children: [
-                      Text('게시물', style: AppTextStyles.titSm),
+                      Text('게시물', style: AppTextStyles.titSmMedium),
                       SizedBox(width: AppSpacing.xs),
                       Text(
                         '${profile.postCount}',
-                        style: AppTextStyles.titSm.copyWith(
+                        style: AppTextStyles.titSmMedium.copyWith(
                           color: AppColors.primary,
                         ),
                       ),
@@ -258,38 +247,7 @@ class _ProfileTab extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: AppSpacing.xxl),
-        ],
-      ),
-    );
-  }
-}
-
-class _ActivityIcon extends StatelessWidget {
-  final String emoji;
-  final String label;
-  final int count;
-  final VoidCallback onTap;
-
-  const _ActivityIcon({
-    required this.emoji,
-    required this.label,
-    required this.count,
-    required this.onTap,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        children: [
-          Text(emoji, style: const TextStyle(fontSize: 24)),
-          SizedBox(height: AppSpacing.xs),
-          Text(
-            '$label $count',
-            style: AppTextStyles.txtXs.copyWith(color: AppColors.textSecondary),
-          ),
+          SizedBox(height: AppSpacing.x2l),
         ],
       ),
     );
@@ -300,16 +258,10 @@ class _ActivityIcon extends StatelessWidget {
 
 class _ActivityTab extends StatelessWidget {
   final MyViewModel vm;
-  final ValueChanged<String>? onChallengeTap;
   final ValueChanged<String>? onCrewTap;
   final ValueChanged<String>? onRouteTap;
 
-  const _ActivityTab({
-    required this.vm,
-    this.onChallengeTap,
-    this.onCrewTap,
-    this.onRouteTap,
-  });
+  const _ActivityTab({required this.vm, this.onCrewTap, this.onRouteTap});
 
   @override
   Widget build(BuildContext context) {
@@ -317,18 +269,6 @@ class _ActivityTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // 챌린지
-          SectionHeader(
-            title: '참여한 챌린지',
-            count: vm.challenges.length,
-            onMoreTap: () {},
-          ),
-          ...vm.challenges.map(
-            (c) => ChallengeListItem(
-              challenge: c,
-              onTap: () => onChallengeTap?.call(c.id),
-            ),
-          ),
           // 크루
           SectionHeader(
             title: '참여한 크루',
@@ -342,8 +282,8 @@ class _ActivityTab extends StatelessWidget {
               physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
+                crossAxisSpacing: AppSpacing.sm,
+                mainAxisSpacing: AppSpacing.sm,
                 childAspectRatio: 1.4,
               ),
               itemCount: vm.crews.length,
@@ -365,7 +305,7 @@ class _ActivityTab extends StatelessWidget {
               onTap: () => onRouteTap?.call(r.id),
             ),
           ),
-          SizedBox(height: AppSpacing.xxl),
+          SizedBox(height: AppSpacing.x2l),
         ],
       ),
     );

@@ -8,4 +8,7 @@ abstract class NotificationRepository {
 
   // PATCH /notifications/{notification_id}/read
   Future<Either<Failure, void>> readNotification(String notificationId);
+
+  // DELETE /notifications/{notification_id}
+  Future<Either<Failure, void>> deleteNotification(String notificationId);
 }

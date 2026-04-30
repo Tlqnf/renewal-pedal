@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pedal/common/theme/app_colors.dart';
 import 'package:pedal/common/theme/app_text_styles.dart';
 import 'package:pedal/common/theme/app_spacing.dart';
+import 'package:pedal/core/constants/constants.dart';
 import 'package:pedal/core/utils/helpers/date_formatter.dart';
 import 'package:pedal/domain/feed/entities/comment_entity.dart';
 
@@ -46,39 +47,33 @@ class CommentItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _Avatar(imageUrl: authorImage, size: 48),
+          _Avatar(imageUrl: authorImage, size: 36),
           SizedBox(width: AppSpacing.md),
           Expanded(
             child: Column(
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Expanded(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                authorName,
-                                style: AppTextStyles.titSm,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              SizedBox(width: AppSpacing.xs),
-                              Text(
-                                DateFormatter.timeAgo(createdAt),
-                                style: AppTextStyles.txtSm.copyWith(
-                                  color: AppColors.textSecondary,
-                                ),
-                              ),
-                            ],
+                        Text(
+                          authorName,
+                          style: AppTextStyles.titSmMedium,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          DateFormatter.timeAgo(createdAt),
+                          style: AppTextStyles.txtSm.copyWith(
+                            color: AppColors.textSecondary,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(height: AppSpacing.md),
+                    SizedBox(height: 4),
                     // Comment Content
                     Text(
                       content,
@@ -89,7 +84,7 @@ class CommentItem extends StatelessWidget {
                   ],
                 ),
 
-                SizedBox(height: AppSpacing.lg),
+                SizedBox(height: 16),
                 // Actions
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -99,9 +94,9 @@ class CommentItem extends StatelessWidget {
                       child: Row(
                         children: [
                           Icon(
-                            Icons.thumb_up,
+                            Icons.thumb_up_outlined,
                             size: 20,
-                            color: AppColors.textSecondary,
+                            color: AppColors.textThird,
                           ),
                           SizedBox(width: AppSpacing.sm),
                           Text(
@@ -109,7 +104,9 @@ class CommentItem extends StatelessWidget {
                               RegExp(r'\B(?=(\d{3})+(?!\d))'),
                               (match) => ',',
                             ),
-                            style: AppTextStyles.txtSm,
+                            style: AppTextStyles.txtSm.copyWith(
+                              color: AppColors.textThird,
+                            ),
                           ),
                         ],
                       ),
@@ -117,24 +114,23 @@ class CommentItem extends StatelessWidget {
                     SizedBox(width: 24),
                     GestureDetector(
                       onTap: onReply,
-                      child: Text('댓글 달기', style: AppTextStyles.txtSm),
+                      child: Text(
+                        '댓글 달기',
+                        style: AppTextStyles.txtSm.copyWith(
+                          color: AppColors.textThird,
+                        ),
+                      ),
                     ),
                   ],
                 ),
                 // 대댓글 토글 버튼
                 if (replyCount > 0)
                   Padding(
-                    padding: EdgeInsets.only(top: AppSpacing.md),
+                    padding: EdgeInsets.only(top: 12),
                     child: GestureDetector(
                       onTap: onToggleReplies,
                       child: Row(
                         children: [
-                          Icon(
-                            isExpanded ? Icons.expand_less : Icons.expand_more,
-                            size: 20,
-                            color: AppColors.textSecondary,
-                          ),
-                          SizedBox(width: AppSpacing.xs),
                           Text(
                             isExpanded ? '대댓글 접기' : '대댓글 $replyCount개 보기',
                             style: AppTextStyles.txtSm.copyWith(
@@ -185,9 +181,15 @@ class _Avatar extends StatelessWidget {
       child: ClipOval(
         child: Image.network(
           imageUrl,
+          width: size,
+          height: size,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) =>
-              Icon(Icons.person, color: AppColors.textSecondary),
+          errorBuilder: (_, _, _) => Image.asset(
+            AppConstants.profile,
+            width: size,
+            height: size,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );

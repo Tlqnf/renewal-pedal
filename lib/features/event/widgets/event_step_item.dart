@@ -20,7 +20,7 @@ class EventStepItem extends StatelessWidget {
             width: 24,
             height: 24,
             decoration: const BoxDecoration(
-              color: AppColors.primary100,
+              color: AppColors.primary300,
               shape: BoxShape.circle,
             ),
             child: Center(

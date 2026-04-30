@@ -67,7 +67,7 @@ class RouteCard extends StatelessWidget {
                   children: [
                     Text(
                       route.name,
-                      style: AppTextStyles.titSm,
+                      style: AppTextStyles.titSmMedium,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -112,9 +112,9 @@ class RouteCard extends StatelessWidget {
     return Container(
       width: 110,
       height: 90,
-      color: AppColors.gray100,
+      color: AppColors.gray200,
       child: const Center(
-        child: Icon(Icons.map_outlined, color: AppColors.gray400, size: 32),
+        child: Icon(Icons.map_outlined, color: AppColors.gray500, size: 32),
       ),
     );
   }

@@ -29,7 +29,7 @@ class RadioSelectItem extends StatelessWidget {
               height: 24,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: isSelected ? AppColors.primary : AppColors.background,
+                color: isSelected ? AppColors.primary : AppColors.surface,
                 border: Border.all(
                   color: isSelected ? AppColors.primary : AppColors.border,
                   width: 2,
@@ -52,7 +52,7 @@ class RadioSelectItem extends StatelessWidget {
             Expanded(
               child: Text(
                 label,
-                style: AppTextStyles.titSm.copyWith(
+                style: AppTextStyles.titSmMedium.copyWith(
                   color: AppColors.textPrimary,
                 ),
               ),

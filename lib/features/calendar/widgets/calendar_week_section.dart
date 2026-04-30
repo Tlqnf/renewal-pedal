@@ -47,7 +47,7 @@ class CalendarWeekSection extends StatelessWidget {
         ),
         if (isExpanded)
           ...section.rideLogs.map((log) => CalendarRideLogItem(log: log)),
-        Divider(height: 1, color: AppColors.divider),
+        Divider(height: 1, color: AppColors.border),
       ],
     );
   }

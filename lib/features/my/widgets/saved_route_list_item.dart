@@ -39,11 +39,11 @@ class SavedRouteListItem extends StatelessWidget {
               child: Container(
                 width: 64,
                 height: 64,
-                color: AppColors.gray100,
+                color: AppColors.gray200,
                 child: const Center(
                   child: Icon(
                     Icons.map_outlined,
-                    color: AppColors.gray400,
+                    color: AppColors.gray500,
                     size: 28,
                   ),
                 ),

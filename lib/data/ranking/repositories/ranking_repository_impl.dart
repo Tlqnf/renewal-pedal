@@ -1,14 +1,47 @@
+import 'package:pedal/data/api/failure_mapper.dart';
+import 'package:dio/dio.dart';
+import 'package:pedal/data/ranking/sources/ranking_remote_source.dart';
 import 'package:pedal/domain/ranking/entities/ranking_entity.dart';
 import 'package:pedal/domain/ranking/repositories/ranking_repository.dart';
 import 'package:pedal/domain/failures/failures.dart';
 
 class RankingRepositoryImpl implements RankingRepository {
+  final RankingRemoteSource? _remoteSource;
+
+  RankingRepositoryImpl([this._remoteSource]);
+
+  static const _tabToType = {
+    RankingTab.distance: 'distance',
+    RankingTab.streak: 'streak',
+    RankingTab.duration: 'time',
+    RankingTab.calorie: 'calories',
+  };
+
   @override
   Future<({Failure? failure, List<RankingEntity>? data})> getRanking(
     RankingTab tab,
   ) async {
-    await Future.delayed(const Duration(milliseconds: 300));
+    if (_remoteSource == null) {
+      return _getMockRanking(tab);
+    }
 
+    try {
+      final rankingType = _tabToType[tab]!;
+      final response = await _remoteSource.getRanking(rankingType);
+      return (
+        failure: null,
+        data: response.top10.map((e) => e.toEntity()).toList(),
+      );
+    } on DioException catch (e) {
+      return (failure: mapDioException(e), data: null);
+    } catch (_) {
+      return (failure: const UnknownFailure(), data: null);
+    }
+  }
+
+  ({Failure? failure, List<RankingEntity>? data}) _getMockRanking(
+    RankingTab tab,
+  ) {
     final unit = switch (tab) {
       RankingTab.distance => 'km',
       RankingTab.streak => '일',

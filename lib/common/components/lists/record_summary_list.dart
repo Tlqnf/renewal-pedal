@@ -47,7 +47,7 @@ class RecordSummaryList extends StatelessWidget {
                         color: AppColors.textSecondary,
                       ),
                     ),
-                    Text(item.value, style: AppTextStyles.titMd),
+                    Text(item.value, style: AppTextStyles.titMdMedium),
                   ],
                 ),
               ),

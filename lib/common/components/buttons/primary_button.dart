@@ -40,7 +40,7 @@ class PrimaryButton extends StatelessWidget {
               backgroundColor: WidgetStateProperty.resolveWith((states) {
                 if (disabled) return AppColors.textDisabled;
                 if (states.contains(WidgetState.pressed)) {
-                  return AppColors.primary200;
+                  return AppColors.primary400;
                 }
                 return AppColors.primary;
               }),
@@ -48,7 +48,7 @@ class PrimaryButton extends StatelessWidget {
         child: Center(
           child: Text(
             label,
-            style: AppTextStyles.titMd.copyWith(color: AppColors.surface),
+            style: AppTextStyles.titMdMedium.copyWith(color: AppColors.surface),
           ),
         ),
       ),

@@ -1,4 +1,6 @@
-import 'package:pedal/domain/my/entities/challenge_entity.dart';
+import 'package:pedal/data/api/failure_mapper.dart';
+import 'package:dio/dio.dart';
+import 'package:pedal/data/my/sources/my_remote_source.dart';
 import 'package:pedal/domain/my/entities/crew_entity.dart';
 import 'package:pedal/domain/my/entities/my_profile_entity.dart';
 import 'package:pedal/domain/my/entities/saved_route_entity.dart';
@@ -6,107 +8,75 @@ import 'package:pedal/domain/my/repositories/my_repository.dart';
 import 'package:pedal/domain/failures/failures.dart';
 
 class MyRepositoryImpl implements MyRepository {
-  @override
-  Future<({Failure? failure, MyProfileEntity? data})> getMyProfile() async {
-    await Future.delayed(const Duration(milliseconds: 300));
-    return (
-      failure: null,
-      data: const MyProfileEntity(
-        userId: 'user_me',
-        nickname: '페달러',
-        followerCount: 128,
-        followingCount: 64,
-        notificationCount: 3,
-        scrapCount: 12,
-        likeCount: 2,
-        ridingDistanceKm: 324.5,
-        totalCaloriesKcal: 8500,
-        totalHours: 42,
-        totalDays: 18,
-        postCount: 12,
-        postThumbnailUrls: ['', '', '', '', '', ''],
-      ),
-    );
-  }
+  final MyRemoteSource _remoteSource;
+
+  MyRepositoryImpl(this._remoteSource);
 
   @override
-  Future<({Failure? failure, List<ChallengeEntity>? data})>
-  getParticipatedChallenges() async {
-    await Future.delayed(const Duration(milliseconds: 300));
-    return (
-      failure: null,
-      data: [
-        ChallengeEntity(
-          id: 'challenge_1',
-          title: '4월 100km 완주 챌린지',
-          startDate: DateTime(2026, 4, 1),
-          endDate: DateTime(2026, 4, 30),
-          distanceKm: 100,
-          participantCount: 342,
+  Future<({Failure? failure, MyProfileEntity? data})> getMyProfile() async {
+    try {
+      final me = await _remoteSource.getMe();
+      return (
+        failure: null,
+        data: MyProfileEntity(
+          userId: me.id,
+          nickname: me.username,
+          profileImageUrl: me.avatarUrl.isNotEmpty ? me.avatarUrl : null,
+          followerCount: 0,
+          followingCount: 0,
+          notificationCount: 0,
+          scrapCount: 0,
+          likeCount: 0,
+          ridingDistanceKm: 0,
+          totalCaloriesKcal: 0,
+          totalHours: 0,
+          totalDays: 0,
+          postCount: 0,
+          postThumbnailUrls: const [],
         ),
-        ChallengeEntity(
-          id: 'challenge_2',
-          title: '새벽 라이딩 5회 챌린지',
-          startDate: DateTime(2026, 3, 15),
-          endDate: DateTime(2026, 3, 31),
-          distanceKm: 50,
-          participantCount: 178,
-        ),
-      ],
-    );
+      );
+    } on DioException catch (e) {
+      return (failure: mapDioException(e), data: null);
+    } catch (_) {
+      return (failure: const UnknownFailure(), data: null);
+    }
   }
 
   @override
   Future<({Failure? failure, List<CrewEntity>? data})>
   getParticipatedCrews() async {
-    await Future.delayed(const Duration(milliseconds: 300));
-    return (
-      failure: null,
-      data: [
-        const CrewEntity(
-          id: 'crew_1',
-          name: '한강 라이더스',
-          location: '서울 마포구',
-          memberCount: 56,
-        ),
-        const CrewEntity(
-          id: 'crew_2',
-          name: '새벽 페달단',
-          location: '서울 송파구',
-          memberCount: 23,
-        ),
-        const CrewEntity(
-          id: 'crew_3',
-          name: '주말 힐클라이머',
-          location: '경기 하남시',
-          memberCount: 41,
-        ),
-      ],
-    );
+    return (failure: null, data: const <CrewEntity>[]);
   }
 
   @override
   Future<({Failure? failure, List<SavedRouteEntity>? data})>
   getSavedRoutes() async {
-    await Future.delayed(const Duration(milliseconds: 300));
-    return (
-      failure: null,
-      data: [
-        SavedRouteEntity(
-          id: 'route_1',
-          name: '한강 자전거길',
-          distanceKm: 24.3,
-          durationMinutes: 72,
-          savedAt: DateTime(2026, 4, 15, 7, 30),
-        ),
-        SavedRouteEntity(
-          id: 'route_2',
-          name: '북한산 둘레길',
-          distanceKm: 18.7,
-          durationMinutes: 55,
-          savedAt: DateTime(2026, 4, 10, 6, 0),
-        ),
-      ],
-    );
+    try {
+      final routes = await _remoteSource.getMyRoutes();
+      final entities = routes.map((r) {
+        final durationMinutes = _parseDurationToMinutes(r.duration);
+        return SavedRouteEntity(
+          id: r.id,
+          name: r.routeName,
+          distanceKm: r.distance,
+          durationMinutes: durationMinutes,
+          savedAt: DateTime.now(),
+        );
+      }).toList();
+      return (failure: null, data: entities);
+    } on DioException catch (e) {
+      return (failure: mapDioException(e), data: null);
+    } catch (_) {
+      return (failure: const UnknownFailure(), data: null);
+    }
+  }
+
+  /// "2h 30m" → 150, "45m" → 45, 기타 → 0
+  int _parseDurationToMinutes(String duration) {
+    final hourMatch = RegExp(r'(\d+)h').firstMatch(duration);
+    final minMatch = RegExp(r'(\d+)m').firstMatch(duration);
+    final hours = hourMatch != null ? int.parse(hourMatch.group(1)!) : 0;
+    final minutes = minMatch != null ? int.parse(minMatch.group(1)!) : 0;
+    return hours * 60 + minutes;
   }
 }

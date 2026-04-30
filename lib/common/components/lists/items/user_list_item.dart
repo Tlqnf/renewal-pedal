@@ -48,7 +48,7 @@ class UserListItem extends StatelessWidget {
                 children: [
                   Text(
                     username,
-                    style: AppTextStyles.titSm.copyWith(
+                    style: AppTextStyles.titSmMedium.copyWith(
                       color: AppColors.textPrimary,
                     ),
                   ),

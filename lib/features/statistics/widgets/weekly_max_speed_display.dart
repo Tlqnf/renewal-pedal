@@ -18,7 +18,7 @@ class WeeklyMaxSpeedDisplay extends StatelessWidget {
         borderRadius: AppRadius.lgAll,
         boxShadow: [
           BoxShadow(
-            color: AppColors.gray200,
+            color: AppColors.gray300,
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -36,7 +36,7 @@ class WeeklyMaxSpeedDisplay extends StatelessWidget {
             height: 100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: AppColors.secondary100, width: 3),
+              border: Border.all(color: AppColors.secondary300, width: 3),
             ),
             child: Center(
               child: RichText(
@@ -45,14 +45,14 @@ class WeeklyMaxSpeedDisplay extends StatelessWidget {
                   children: [
                     TextSpan(
                       text: maxSpeedKmh.toStringAsFixed(0),
-                      style: AppTextStyles.titMd.copyWith(
-                        color: AppColors.secondary400,
+                      style: AppTextStyles.titMdMedium.copyWith(
+                        color: AppColors.secondary500,
                       ),
                     ),
                     TextSpan(
                       text: '\nkm/h',
                       style: AppTextStyles.txtXs.copyWith(
-                        color: AppColors.secondary400,
+                        color: AppColors.secondary500,
                       ),
                     ),
                   ],

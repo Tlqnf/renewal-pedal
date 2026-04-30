@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:pedal/common/theme/app_colors.dart';
-import 'package:pedal/common/theme/app_text_styles.dart';
-import 'package:pedal/common/theme/app_spacing.dart';
+import 'package:pedal/common/components/appbars/back_appbar.dart';
 import 'package:pedal/common/components/buttons/primary_button.dart';
+import 'package:pedal/common/theme/app_colors.dart';
+import 'package:pedal/common/theme/app_spacing.dart';
+import 'package:pedal/common/theme/app_text_styles.dart';
 import 'package:pedal/features/event/viewmodels/event_view_model.dart';
+import 'package:pedal/features/event/widgets/page_dot_indicator.dart';
 
 class EventPage extends StatefulWidget {
   final VoidCallback onBack;
@@ -36,7 +38,8 @@ class _EventPageState extends State<EventPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
+      appBar: BackAppBar(title: '', onBackPressed: widget.onBack),
       body: SafeArea(
         child: Consumer<EventViewModel>(
           builder: (context, vm, _) {
@@ -49,17 +52,6 @@ class _EventPageState extends State<EventPage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: widget.onBack,
-                  child: Padding(
-                    padding: EdgeInsets.all(AppSpacing.md),
-                    child: const Icon(
-                      Icons.arrow_back,
-                      color: AppColors.textPrimary,
-                      size: 24,
-                    ),
-                  ),
-                ),
                 Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -92,7 +84,7 @@ class _EventPageState extends State<EventPage> {
                               itemCount: event.imageUrls.length,
                               onPageChanged: vm.onPageChanged,
                               itemBuilder: (context, index) => Container(
-                                color: AppColors.primary100,
+                                color: AppColors.primary300,
                                 child: const Center(
                                   child: Icon(
                                     Icons.image_outlined,
@@ -104,25 +96,9 @@ class _EventPageState extends State<EventPage> {
                             ),
                           ),
                           SizedBox(height: AppSpacing.sm),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(
-                              event.imageUrls.length,
-                              (index) => AnimatedContainer(
-                                duration: const Duration(milliseconds: 200),
-                                margin: EdgeInsets.symmetric(
-                                  horizontal: AppSpacing.xs / 2,
-                                ),
-                                width: vm.currentImageIndex == index ? 16 : 8,
-                                height: 8,
-                                decoration: BoxDecoration(
-                                  color: vm.currentImageIndex == index
-                                      ? AppColors.primary
-                                      : AppColors.gray300,
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                              ),
-                            ),
+                          PageDotIndicator(
+                            count: event.imageUrls.length,
+                            currentIndex: vm.currentImageIndex,
                           ),
                         ],
                         if (vm.errorMessage != null)

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
-import 'app_text_styles.dart';
+import 'package:pedal/common/theme/app_colors.dart';
+import 'package:pedal/common/theme/app_text_styles.dart';
 
 class AppTheme {
   AppTheme._();
@@ -12,18 +12,21 @@ class AppTheme {
       error: AppColors.error,
       surface: AppColors.surface,
     ),
-    scaffoldBackgroundColor: AppColors.background,
+    scaffoldBackgroundColor: AppColors.surface,
     textTheme: TextTheme(
       displayLarge: AppTextStyles.tit2xl,
       displayMedium: AppTextStyles.titXl,
-      headlineLarge: AppTextStyles.titLg,
-      headlineMedium: AppTextStyles.titMd,
-      headlineSmall: AppTextStyles.titSm,
+      headlineLarge: AppTextStyles.titLgMedium,
+      headlineMedium: AppTextStyles.titMdMedium,
+      headlineSmall: AppTextStyles.titSmMedium,
       bodyLarge: AppTextStyles.txtXl,
       bodyMedium: AppTextStyles.txtLg,
       labelLarge: AppTextStyles.txtMd,
       bodySmall: AppTextStyles.txtSm,
     ),
-    dividerColor: AppColors.divider,
+    dividerColor: AppColors.border,
+    splashFactory: NoSplash.splashFactory,
+    splashColor: Colors.transparent,
+    highlightColor: Colors.transparent,
   );
 }

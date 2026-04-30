@@ -1,0 +1,53 @@
+import 'package:flutter/material.dart';
+import 'package:pedal/common/theme/app_colors.dart';
+import 'package:pedal/common/theme/app_text_styles.dart';
+import 'package:pedal/common/theme/app_spacing.dart';
+
+class SectionHeader extends StatelessWidget {
+  final String title;
+  final int? count;
+  final VoidCallback? onMoreTap;
+
+  const SectionHeader({
+    super.key,
+    required this.title,
+    this.count,
+    this.onMoreTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onMoreTap,
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(
+          AppSpacing.md,
+          AppSpacing.lg,
+          AppSpacing.md,
+          AppSpacing.sm,
+        ),
+        child: Row(
+          children: [
+            Text(title, style: AppTextStyles.titSmMedium),
+            if (count != null) ...[
+              SizedBox(width: AppSpacing.xs),
+              Text(
+                '$count',
+                style: AppTextStyles.titSmMedium.copyWith(
+                  color: AppColors.primary,
+                ),
+              ),
+            ],
+            const Spacer(),
+            if (onMoreTap != null)
+              Icon(
+                Icons.chevron_right,
+                color: AppColors.textSecondary,
+                size: 20,
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+}

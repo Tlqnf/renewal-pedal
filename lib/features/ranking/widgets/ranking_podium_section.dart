@@ -53,7 +53,7 @@ class _PodiumItem extends StatelessWidget {
       1 => const Color(0xFFFFD700),
       2 => const Color(0xFFC0C0C0),
       3 => const Color(0xFFCD7F32),
-      _ => AppColors.gray400,
+      _ => AppColors.gray500,
     };
   }
 
@@ -78,14 +78,14 @@ class _PodiumItem extends StatelessWidget {
               width: size,
               height: size,
               decoration: BoxDecoration(
-                color: AppColors.gray100,
+                color: AppColors.gray200,
                 shape: BoxShape.circle,
                 border: Border.all(color: _badgeColor, width: 2),
               ),
               child: const Center(
                 child: Icon(
                   Icons.person_rounded,
-                  color: AppColors.gray400,
+                  color: AppColors.gray500,
                   size: 32,
                 ),
               ),

@@ -33,21 +33,21 @@ class ProfileHeaderSection extends StatelessWidget {
                 width: 64,
                 height: 64,
                 decoration: BoxDecoration(
-                  color: AppColors.gray100,
+                  color: AppColors.gray200,
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColors.border),
                 ),
                 child: const Center(
                   child: Icon(
                     Icons.person_rounded,
-                    color: AppColors.gray400,
+                    color: AppColors.gray500,
                     size: 36,
                   ),
                 ),
               ),
               SizedBox(width: AppSpacing.md),
               Expanded(
-                child: Text(profile.nickname, style: AppTextStyles.titLg),
+                child: Text(profile.nickname, style: AppTextStyles.titLgMedium),
               ),
               IconButton(
                 onPressed: onSettingsTap,
@@ -118,7 +118,7 @@ class _CountItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('$count', style: AppTextStyles.titMd),
+          Text('$count', style: AppTextStyles.titMdMedium),
           Text(
             label,
             style: AppTextStyles.txtXs.copyWith(color: AppColors.textSecondary),

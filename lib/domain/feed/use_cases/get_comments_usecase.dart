@@ -1,10 +1,3 @@
-// ============================================================
-// FILE: get_comments_usecase.dart
-// LAYER: domain
-// RESPONSIBILITY: 특정 피드의 댓글 목록 조회
-// DEPENDENCIES: FeedRepository, CommentEntity, Failure
-// ============================================================
-
 import 'package:dartz/dartz.dart';
 import 'package:pedal/domain/feed/entities/comment_entity.dart';
 import 'package:pedal/domain/failures/failures.dart';

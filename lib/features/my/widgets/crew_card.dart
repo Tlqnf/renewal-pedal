@@ -30,11 +30,11 @@ class CrewCard extends StatelessWidget {
               ),
               child: Container(
                 height: 80,
-                color: AppColors.gray100,
+                color: AppColors.gray200,
                 child: const Center(
                   child: Icon(
                     Icons.group_rounded,
-                    color: AppColors.gray400,
+                    color: AppColors.gray500,
                     size: 32,
                   ),
                 ),

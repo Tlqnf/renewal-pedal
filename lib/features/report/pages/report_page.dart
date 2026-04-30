@@ -34,7 +34,7 @@ class _ReportPageState extends State<ReportPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
       appBar: BackAppBar(title: '신고'),
       body: SafeArea(
         child: Column(

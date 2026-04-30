@@ -26,6 +26,12 @@ doc/api/
 *.js.deps
 *.js.map
 
+/android/app/debug
+/android/app/profile
+/android/app/release
+/android/google-services.json
+/android/app/google-services.json
+
 .flutter-plugins
 .flutter-plugins-dependencies
 

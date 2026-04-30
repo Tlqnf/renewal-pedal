@@ -36,7 +36,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
       appBar: AppBar(
         backgroundColor: AppColors.surface,
         elevation: 0,
@@ -44,7 +44,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
           onPressed: widget.onBack,
         ),
-        title: Text('이벤트 상세', style: AppTextStyles.titMd),
+        title: Text('이벤트 상세', style: AppTextStyles.titMdMedium),
         centerTitle: true,
       ),
       body: Consumer<EventDetailViewModel>(
@@ -73,7 +73,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                       Container(
                         width: double.infinity,
                         height: 200,
-                        color: AppColors.primary100,
+                        color: AppColors.primary300,
                         child: const Center(
                           child: Icon(
                             Icons.image_outlined,
@@ -87,7 +87,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(event.title, style: AppTextStyles.titLg),
+                            Text(event.title, style: AppTextStyles.titLgMedium),
                             SizedBox(height: AppSpacing.md),
                             Row(
                               children: [
@@ -123,11 +123,11 @@ class _EventDetailPageState extends State<EventDetailPage> {
                               ],
                             ),
                             SizedBox(height: AppSpacing.md),
-                            Divider(color: AppColors.divider),
+                            Divider(color: AppColors.border),
                             SizedBox(height: AppSpacing.md),
                             Text(event.description, style: AppTextStyles.txtMd),
                             SizedBox(height: AppSpacing.lg),
-                            Text('참여 방법', style: AppTextStyles.titMd),
+                            Text('참여 방법', style: AppTextStyles.titMdMedium),
                             SizedBox(height: AppSpacing.md),
                             ...event.steps.map(
                               (step) => EventStepItem(step: step),

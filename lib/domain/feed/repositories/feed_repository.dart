@@ -1,10 +1,3 @@
-// ============================================================
-// FILE: feed_repository.dart
-// LAYER: domain
-// RESPONSIBILITY: 피드 데이터 접근 인터페이스
-// DEPENDENCIES: FeedEntity, CommentEntity, Failure
-// ============================================================
-
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -29,10 +22,16 @@ abstract class FeedRepository {
   });
 
   // POST /feed/{post_id}/like
-  Future<Either<Failure, void>> toggleLike(String postId);
+  Future<Either<Failure, void>> likePost(String postId);
+
+  // DELETE /feed/{post_id}/like
+  Future<Either<Failure, void>> unlikePost(String postId);
 
   // POST /feed/{post_id}/bookmark
-  Future<Either<Failure, void>> toggleBookmark(String postId);
+  Future<Either<Failure, void>> bookmarkPost(String postId);
+
+  // DELETE /feed/{post_id}/bookmark
+  Future<Either<Failure, void>> unbookmarkPost(String postId);
 
   // GET /feed/{post_id}/comments
   Future<Either<Failure, List<CommentEntity>>> getComments(
@@ -73,4 +72,17 @@ abstract class FeedRepository {
 
   // GET /feed/{post_id}/status
   Future<Either<Failure, FeedStatusEntity>> getFeedStatus(String postId);
+
+  // GET /feed/me
+  Future<Either<Failure, List<FeedEntity>>> getMyFeed({
+    int limit = 20,
+    int offset = 0,
+  });
+
+  // GET /feed/users/{user_id}
+  Future<Either<Failure, List<FeedEntity>>> getUserFeed(
+    String userId, {
+    int limit = 20,
+    int offset = 0,
+  });
 }

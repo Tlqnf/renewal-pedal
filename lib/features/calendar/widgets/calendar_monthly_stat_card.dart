@@ -19,7 +19,7 @@ class CalendarMonthlyStatCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: AppSpacing.md),
       padding: EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.primary100,
+        color: AppColors.primary300,
         borderRadius: AppRadius.lgAll,
       ),
       child: Column(
@@ -27,7 +27,7 @@ class CalendarMonthlyStatCard extends StatelessWidget {
         children: [
           Text(
             '${stats.month}월 통계',
-            style: AppTextStyles.titSm.copyWith(color: AppColors.primary),
+            style: AppTextStyles.titSmMedium.copyWith(color: AppColors.primary),
           ),
           SizedBox(height: AppSpacing.md),
           Row(
@@ -60,7 +60,9 @@ class _StatItem extends StatelessWidget {
         children: [
           Text(
             value,
-            style: AppTextStyles.titSm.copyWith(color: AppColors.primary500),
+            style: AppTextStyles.titSmMedium.copyWith(
+              color: AppColors.primary500,
+            ),
             textAlign: TextAlign.center,
           ),
           SizedBox(height: AppSpacing.xs),

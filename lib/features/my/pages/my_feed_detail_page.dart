@@ -6,74 +6,42 @@ import 'package:pedal/common/theme/app_text_styles.dart';
 import 'package:pedal/common/theme/app_spacing.dart';
 import 'package:pedal/features/my/viewmodels/my_feed_detail_view_model.dart';
 
-// Pure View — ViewModel 연결 없음. 모든 상태/액션은 props로 주입.
-
-class MyFeedDetailPage extends StatelessWidget {
-  // 상태값
+class MyFeedDetailPage extends StatefulWidget {
   final String feedId;
-  final String? authorProfileImageUrl;
-  final String authorNickname;
-  final String feedImageUrl;
-  final int likeCount;
-  final int commentCount;
-  final bool isLiked;
-  final bool isBookmarked;
-  final List<String> hashtags;
-  final String title;
-  final String content;
-  final bool isContentExpanded;
-  final DateTime createdAt;
-  final bool isLoading;
-  final String? errorMessage;
 
-  // 액션
-  final VoidCallback onBack;
-  final VoidCallback onMoreTap;
-  final VoidCallback onLikeTap;
-  final VoidCallback onCommentTap;
-  final VoidCallback onBookmarkTap;
-  final VoidCallback onExpandContent;
+  const MyFeedDetailPage({super.key, required this.feedId});
 
-  const MyFeedDetailPage({
-    super.key,
-    required this.feedId,
-    this.authorProfileImageUrl,
-    required this.authorNickname,
-    required this.feedImageUrl,
-    required this.likeCount,
-    required this.commentCount,
-    required this.isLiked,
-    required this.isBookmarked,
-    required this.hashtags,
-    required this.title,
-    required this.content,
-    required this.isContentExpanded,
-    required this.createdAt,
-    required this.isLoading,
-    this.errorMessage,
-    required this.onBack,
-    required this.onMoreTap,
-    required this.onLikeTap,
-    required this.onCommentTap,
-    required this.onBookmarkTap,
-    required this.onExpandContent,
-  });
+  @override
+  State<MyFeedDetailPage> createState() => _MyFeedDetailPageState();
+}
 
-  String _formatDate(DateTime date) {
-    return '${date.year}.${date.month.toString().padLeft(2, '0')}.${date.day.toString().padLeft(2, '0')}';
+class _MyFeedDetailPageState extends State<MyFeedDetailPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<MyFeedDetailViewModel>().loadFeedDetail(
+        feedId: widget.feedId,
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final vm = context.watch<MyFeedDetailViewModel>();
+
     return Scaffold(
       backgroundColor: AppColors.surface,
-      appBar: BackAppBar(title: '게시물', onBackPressed: onBack),
-      body: isLoading
+      appBar: BackAppBar(
+        title: '게시물',
+        onBackPressed: () => Navigator.of(context).pop(),
+      ),
+      body: vm.isLoading
           ? const Center(child: CircularProgressIndicator())
-          : errorMessage != null
+          : vm.errorMessage != null
           ? Center(
               child: Text(
-                errorMessage!,
+                vm.errorMessage!,
                 style: AppTextStyles.txtSm.copyWith(
                   color: AppColors.textSecondary,
                 ),
@@ -83,39 +51,29 @@ class MyFeedDetailPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Author Row
                   _FeedAuthorRow(
-                    profileImageUrl: authorProfileImageUrl,
-                    nickname: authorNickname,
-                    onMoreTap: onMoreTap,
+                    profileImageUrl: vm.authorProfileImageUrl,
+                    nickname: vm.authorNickname,
+                    onMoreTap: vm.onMoreTap,
                   ),
-
-                  // Feed Image
-                  _FeedImageView(imageUrl: feedImageUrl),
-
-                  // Action Row
+                  _FeedImageView(imageUrl: vm.feedImageUrl),
                   _FeedActionRow(
-                    likeCount: likeCount,
-                    commentCount: commentCount,
-                    isLiked: isLiked,
-                    isBookmarked: isBookmarked,
-                    onLikeTap: onLikeTap,
-                    onCommentTap: onCommentTap,
-                    onBookmarkTap: onBookmarkTap,
+                    likeCount: vm.likeCount,
+                    commentCount: vm.commentCount,
+                    isLiked: vm.isLiked,
+                    isBookmarked: vm.isBookmarked,
+                    onLikeTap: vm.onLikeTap,
+                    onCommentTap: vm.onCommentTap,
+                    onBookmarkTap: vm.onBookmarkTap,
                   ),
-
-                  // Hashtag Row
-                  if (hashtags.isNotEmpty) _FeedHashtagRow(hashtags: hashtags),
-
-                  // Expandable Content
+                  if (vm.hashtags.isNotEmpty)
+                    _FeedHashtagRow(hashtags: vm.hashtags),
                   _ExpandableContent(
-                    title: title,
-                    content: content,
-                    isExpanded: isContentExpanded,
-                    onToggle: onExpandContent,
+                    title: vm.title,
+                    content: vm.content,
+                    isExpanded: vm.isContentExpanded,
+                    onToggle: vm.onExpandContent,
                   ),
-
-                  // Created At
                   Padding(
                     padding: EdgeInsets.fromLTRB(
                       AppSpacing.md,
@@ -124,7 +82,7 @@ class MyFeedDetailPage extends StatelessWidget {
                       AppSpacing.lg,
                     ),
                     child: Text(
-                      _formatDate(createdAt),
+                      _formatDate(vm.createdAt),
                       style: AppTextStyles.txtXs.copyWith(
                         color: AppColors.textSecondary,
                       ),
@@ -134,6 +92,10 @@ class MyFeedDetailPage extends StatelessWidget {
               ),
             ),
     );
+  }
+
+  String _formatDate(DateTime date) {
+    return '${date.year}.${date.month.toString().padLeft(2, '0')}.${date.day.toString().padLeft(2, '0')}';
   }
 }
 
@@ -159,12 +121,12 @@ class _FeedAuthorRow extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 20,
-            backgroundColor: AppColors.gray100,
+            backgroundColor: AppColors.gray200,
             backgroundImage: profileImageUrl != null
                 ? NetworkImage(profileImageUrl!)
                 : null,
             child: profileImageUrl == null
-                ? Icon(Icons.person, color: AppColors.gray400, size: 20)
+                ? Icon(Icons.person, color: AppColors.gray500, size: 20)
                 : null,
           ),
           SizedBox(width: AppSpacing.sm),
@@ -195,17 +157,17 @@ class _FeedImageView extends StatelessWidget {
         width: double.infinity,
         fit: BoxFit.cover,
         errorBuilder: (context, error, stackTrace) => Container(
-          color: AppColors.gray100,
+          color: AppColors.gray200,
           child: Icon(
             Icons.image_not_supported,
-            color: AppColors.gray300,
+            color: AppColors.gray400,
             size: 48,
           ),
         ),
         loadingBuilder: (context, child, loadingProgress) {
           if (loadingProgress == null) return child;
           return Container(
-            color: AppColors.gray100,
+            color: AppColors.gray200,
             child: const Center(child: CircularProgressIndicator()),
           );
         },
@@ -242,7 +204,6 @@ class _FeedActionRow extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // 좋아요
           GestureDetector(
             onTap: onLikeTap,
             child: Row(
@@ -263,7 +224,6 @@ class _FeedActionRow extends StatelessWidget {
             ),
           ),
           SizedBox(width: AppSpacing.md),
-          // 댓글
           GestureDetector(
             onTap: onCommentTap,
             child: Row(
@@ -284,7 +244,6 @@ class _FeedActionRow extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          // 북마크
           GestureDetector(
             onTap: onBookmarkTap,
             child: Icon(
@@ -354,7 +313,7 @@ class _ExpandableContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: AppTextStyles.titSm),
+          Text(title, style: AppTextStyles.titSmMedium),
           SizedBox(height: AppSpacing.xs),
           Text(
             content,
@@ -376,60 +335,6 @@ class _ExpandableContent extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-// Connected Widget — ViewModel 주입용
-class MyFeedDetailPageConnected extends StatefulWidget {
-  final String feedId;
-
-  const MyFeedDetailPageConnected({super.key, required this.feedId});
-
-  @override
-  State<MyFeedDetailPageConnected> createState() =>
-      _MyFeedDetailPageConnectedState();
-}
-
-class _MyFeedDetailPageConnectedState extends State<MyFeedDetailPageConnected> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<MyFeedDetailViewModel>().loadFeedDetail(
-        feedId: widget.feedId,
-      );
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<MyFeedDetailViewModel>(
-      builder: (context, vm, _) {
-        return MyFeedDetailPage(
-          feedId: vm.feedId,
-          authorProfileImageUrl: vm.authorProfileImageUrl,
-          authorNickname: vm.authorNickname,
-          feedImageUrl: vm.feedImageUrl,
-          likeCount: vm.likeCount,
-          commentCount: vm.commentCount,
-          isLiked: vm.isLiked,
-          isBookmarked: vm.isBookmarked,
-          hashtags: vm.hashtags,
-          title: vm.title,
-          content: vm.content,
-          isContentExpanded: vm.isContentExpanded,
-          createdAt: vm.createdAt,
-          isLoading: vm.isLoading,
-          errorMessage: vm.errorMessage,
-          onBack: () => Navigator.of(context).pop(),
-          onMoreTap: vm.onMoreTap,
-          onLikeTap: vm.onLikeTap,
-          onCommentTap: vm.onCommentTap,
-          onBookmarkTap: vm.onBookmarkTap,
-          onExpandContent: vm.onExpandContent,
-        );
-      },
     );
   }
 }

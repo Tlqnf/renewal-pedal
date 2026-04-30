@@ -1,10 +1,3 @@
-// ============================================================
-// FILE: feed_entity.dart
-// LAYER: domain/entities
-// RESPONSIBILITY: 피드 도메인 엔티티
-// DEPENDENCIES: None
-// ============================================================
-
 class FeedEntity {
   final String id;
   final String userId;
@@ -18,6 +11,7 @@ class FeedEntity {
   final int likes;
   final int comments;
   final bool isBookmarked;
+  // TODO: hashtags — List<String> hashtags (예: ['한강', '출근라이딩'])
 
   const FeedEntity({
     required this.id,

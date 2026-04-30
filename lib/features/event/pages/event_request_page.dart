@@ -6,7 +6,7 @@ import 'package:pedal/common/theme/app_spacing.dart';
 import 'package:pedal/common/theme/app_radius.dart';
 import 'package:pedal/common/components/buttons/primary_button.dart';
 import 'package:pedal/features/event/viewmodels/event_request_view_model.dart';
-import 'package:pedal/features/event/widgets/image_upload_box.dart';
+import 'package:pedal/common/components/inputs/image_upload_box.dart';
 
 class EventRequestPage extends StatefulWidget {
   final String eventId;
@@ -52,7 +52,7 @@ class _EventRequestPageState extends State<EventRequestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
       appBar: AppBar(
         backgroundColor: AppColors.surface,
         elevation: 0,
@@ -60,7 +60,7 @@ class _EventRequestPageState extends State<EventRequestPage> {
           icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary),
           onPressed: widget.onBack,
         ),
-        title: Text('이벤트 인증', style: AppTextStyles.titMd),
+        title: Text('이벤트 인증', style: AppTextStyles.titMdMedium),
         centerTitle: true,
       ),
       body: Consumer<EventRequestViewModel>(
@@ -83,17 +83,14 @@ class _EventRequestPageState extends State<EventRequestPage> {
                         thumbnailUrl: widget.eventThumbnailUrl,
                       ),
                       SizedBox(height: AppSpacing.lg),
-                      Text('인증 스크린샷', style: AppTextStyles.titSm),
+                      Text('인증 스크린샷', style: AppTextStyles.titSmMedium),
                       SizedBox(height: AppSpacing.sm),
                       ImageUploadBox(
-                        uploadedImagePath: vm.uploadedImagePath,
-                        onTap: () {
-                          // 실제 구현 시 image_picker 연동
-                          vm.onImagePicked('mock_image_path');
-                        },
+                        imageUrl: vm.uploadedImagePath,
+                        onImageSelected: (path) => vm.onImagePicked(path ?? ''),
                       ),
                       SizedBox(height: AppSpacing.lg),
-                      Text('메모 (선택)', style: AppTextStyles.titSm),
+                      Text('메모 (선택)', style: AppTextStyles.titSmMedium),
                       SizedBox(height: AppSpacing.sm),
                       TextField(
                         controller: _memoController,
@@ -185,7 +182,7 @@ class _SelectedEventCard extends StatelessWidget {
             width: 56,
             height: 56,
             decoration: BoxDecoration(
-              color: AppColors.primary100,
+              color: AppColors.primary300,
               borderRadius: AppRadius.smAll,
             ),
             child: const Center(
@@ -208,7 +205,7 @@ class _SelectedEventCard extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: AppSpacing.xs),
-                Text(title, style: AppTextStyles.titSm),
+                Text(title, style: AppTextStyles.titSmMedium),
               ],
             ),
           ),

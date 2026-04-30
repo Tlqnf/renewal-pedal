@@ -1,79 +1,81 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:pedal/core/routes/app_routes.dart';
 import 'package:pedal/common/components/appbars/back_appbar.dart';
 import 'package:pedal/common/theme/app_colors.dart';
 import 'package:pedal/common/theme/app_text_styles.dart';
 import 'package:pedal/common/theme/app_spacing.dart';
-import 'package:pedal/domain/my/entities/feed_entity.dart';
 import 'package:pedal/features/my/viewmodels/my_feed_list_view_model.dart';
 import 'package:pedal/features/my/widgets/feed_grid_item.dart';
-import 'package:pedal/features/my/widgets/section_header.dart';
+import 'package:pedal/common/components/lists/section_header.dart';
 
-// ─── Pure View (props-only, no ViewModel) ────────────────────────────────────
-
-class MyFeedListPage extends StatelessWidget {
-  // 상태 props
-  final List<FeedEntity> feeds;
-  final int totalCount;
+class MyFeedListPage extends StatefulWidget {
+  final String userId;
   final String userName;
-  final bool isLoading;
-  final String? errorMessage;
-
-  // 액션 props
-  final VoidCallback onBack;
-  final void Function(String feedId) onFeedTap;
-  final VoidCallback onMoreTap;
 
   const MyFeedListPage({
     super.key,
-    required this.feeds,
-    required this.totalCount,
+    required this.userId,
     required this.userName,
-    required this.isLoading,
-    required this.errorMessage,
-    required this.onBack,
-    required this.onFeedTap,
-    required this.onMoreTap,
   });
 
   @override
+  State<MyFeedListPage> createState() => _MyFeedListPageState();
+}
+
+class _MyFeedListPageState extends State<MyFeedListPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<MyFeedListViewModel>().loadFeedList(
+        userId: widget.userId,
+        userName: widget.userName,
+      );
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final vm = context.watch<MyFeedListViewModel>();
+
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
       appBar: BackAppBar(
         title: '게시물',
-        onBackPressed: onBack,
+        onBackPressed: () => Navigator.of(context).pop(),
         actions: [
           Text(
-            '$totalCount',
-            style: AppTextStyles.titSm.copyWith(color: AppColors.primary),
+            '${vm.totalCount}',
+            style: AppTextStyles.titSmMedium.copyWith(color: AppColors.primary),
           ),
           const SizedBox(width: AppSpacing.md),
         ],
       ),
-      body: _buildBody(),
+      body: _buildBody(vm),
     );
   }
 
-  Widget _buildBody() {
-    if (isLoading) {
+  Widget _buildBody(MyFeedListViewModel vm) {
+    if (vm.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (errorMessage != null) {
-      return Center(child: Text(errorMessage!, style: AppTextStyles.txtSm));
+    if (vm.errorMessage != null) {
+      return Center(child: Text(vm.errorMessage!, style: AppTextStyles.txtSm));
     }
 
     return CustomScrollView(
       slivers: [
         SliverToBoxAdapter(
           child: SectionHeader(
-            title: '$userName님의 게시물이에요',
-            count: totalCount,
-            onMoreTap: onMoreTap,
+            title: '${vm.userName}님의 게시물이에요',
+            count: vm.totalCount,
+            onMoreTap: () {},
           ),
         ),
-        if (feeds.isEmpty)
+        if (vm.feeds.isEmpty)
           SliverFillRemaining(
             child: Center(
               child: Text(
@@ -95,67 +97,16 @@ class MyFeedListPage extends StatelessWidget {
                 childAspectRatio: 1,
               ),
               delegate: SliverChildBuilderDelegate((context, index) {
-                final feed = feeds[index];
+                final feed = vm.feeds[index];
                 return FeedGridItem(
                   feed: feed,
-                  onTap: () => onFeedTap(feed.id),
+                  onTap: () =>
+                      context.push(AppRoutes.myFeedDetailPath(feed.id)),
                 );
-              }, childCount: feeds.length),
+              }, childCount: vm.feeds.length),
             ),
           ),
       ],
-    );
-  }
-}
-
-// ─── Connected (ViewModel 연결) ───────────────────────────────────────────────
-
-class MyFeedListPageConnected extends StatefulWidget {
-  final String userId;
-  final String userName;
-
-  const MyFeedListPageConnected({
-    super.key,
-    required this.userId,
-    required this.userName,
-  });
-
-  @override
-  State<MyFeedListPageConnected> createState() =>
-      _MyFeedListPageConnectedState();
-}
-
-class _MyFeedListPageConnectedState extends State<MyFeedListPageConnected> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<MyFeedListViewModel>().loadFeedList(
-        userId: widget.userId,
-        userName: widget.userName,
-      );
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<MyFeedListViewModel>(
-      builder: (context, vm, _) {
-        return MyFeedListPage(
-          feeds: vm.feeds,
-          totalCount: vm.totalCount,
-          userName: vm.userName,
-          isLoading: vm.isLoading,
-          errorMessage: vm.errorMessage,
-          onBack: () => Navigator.of(context).pop(),
-          onFeedTap: (feedId) {
-            // TODO: 피드 상세 라우팅
-          },
-          onMoreTap: () {
-            // TODO: 더보기 라우팅
-          },
-        );
-      },
     );
   }
 }

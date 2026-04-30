@@ -28,11 +28,13 @@ class SectionHeader extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Text(title, style: AppTextStyles.titSm),
+            Text(title, style: AppTextStyles.titSmMedium),
             SizedBox(width: AppSpacing.xs),
             Text(
               '$count',
-              style: AppTextStyles.titSm.copyWith(color: AppColors.primary),
+              style: AppTextStyles.titSmMedium.copyWith(
+                color: AppColors.primary,
+              ),
             ),
             const Spacer(),
             Icon(Icons.chevron_right, color: AppColors.textSecondary, size: 20),

@@ -43,7 +43,7 @@ class WeeklyBarChart extends StatelessWidget {
         borderRadius: AppRadius.lgAll,
         boxShadow: [
           BoxShadow(
-            color: AppColors.gray200,
+            color: AppColors.gray300,
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -147,8 +147,8 @@ class WeeklyBarChart extends StatelessWidget {
                                   child: Container(
                                     decoration: BoxDecoration(
                                       color: isToday
-                                          ? AppColors.primary400
-                                          : AppColors.primary200,
+                                          ? AppColors.primary
+                                          : AppColors.primary400,
                                       borderRadius: const BorderRadius.vertical(
                                         top: Radius.circular(4),
                                       ),

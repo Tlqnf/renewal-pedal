@@ -45,7 +45,7 @@ class NotificationCard extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(AppSpacing.xl),
         decoration: BoxDecoration(
-          color: isRead ? AppColors.surface : AppColors.background,
+          color: isRead ? AppColors.surface : AppColors.primary300,
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +58,7 @@ class NotificationCard extends StatelessWidget {
                   height: 36,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: isRead ? AppColors.background : AppColors.surface,
+                    color: isRead ? AppColors.surface : AppColors.primary300,
                   ),
                   child: Icon(
                     _getIcon(),
@@ -93,7 +93,7 @@ class NotificationCard extends StatelessWidget {
                   // 라벨
                   Text(
                     _getLabel(),
-                    style: AppTextStyles.titMd.copyWith(
+                    style: AppTextStyles.titMdMedium.copyWith(
                       color: isRead
                           ? AppColors.textSecondary
                           : AppColors.textPrimary,

@@ -31,7 +31,7 @@ class RidingStatsGrid extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: AppSpacing.md),
       padding: EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
-        color: AppColors.primary100,
+        color: AppColors.primary300,
         borderRadius: AppRadius.lgAll,
       ),
       child: GridView.count(
@@ -71,7 +71,7 @@ class _StatCell extends StatelessWidget {
             children: [
               Text(
                 item.value,
-                style: AppTextStyles.titSm.copyWith(
+                style: AppTextStyles.titSmMedium.copyWith(
                   color: AppColors.primary500,
                 ),
               ),

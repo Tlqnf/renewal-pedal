@@ -1,10 +1,3 @@
-// ============================================================
-// FILE: comment_entity.dart
-// LAYER: domain
-// RESPONSIBILITY: 댓글 도메인 엔티티
-// DEPENDENCIES: -
-// ============================================================
-
 class CommentEntity {
   final String id;
   final String postId;
@@ -12,6 +5,7 @@ class CommentEntity {
   final String authorAvatarUrl;
   final String content;
   final int likeCount;
+  final bool isLiked;
   final int replyCount;
   final String? parentId;
   final String createdAt;
@@ -23,6 +17,7 @@ class CommentEntity {
     required this.authorAvatarUrl,
     required this.content,
     required this.likeCount,
+    this.isLiked = false,
     required this.replyCount,
     this.parentId,
     required this.createdAt,

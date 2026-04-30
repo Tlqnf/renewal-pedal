@@ -1,4 +1,3 @@
-import 'package:pedal/domain/my/entities/challenge_entity.dart';
 import 'package:pedal/domain/my/entities/crew_entity.dart';
 import 'package:pedal/domain/my/entities/my_profile_entity.dart';
 import 'package:pedal/domain/my/entities/saved_route_entity.dart';
@@ -11,14 +10,6 @@ class MyCrewMockRepository implements MyRepository {
   Future<({Failure? failure, MyProfileEntity? data})> getMyProfile() async {
     throw UnimplementedError(
       'MyCrewMockRepository: getMyProfile not implemented',
-    );
-  }
-
-  @override
-  Future<({Failure? failure, List<ChallengeEntity>? data})>
-  getParticipatedChallenges() async {
-    throw UnimplementedError(
-      'MyCrewMockRepository: getParticipatedChallenges not implemented',
     );
   }
 

@@ -1,10 +1,3 @@
-// ============================================================
-// FILE: create_feed_usecase.dart
-// LAYER: domain
-// RESPONSIBILITY: 피드 생성 (입력 검증 포함)
-// DEPENDENCIES: FeedRepository
-// ============================================================
-
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';

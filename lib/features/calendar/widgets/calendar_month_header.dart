@@ -31,7 +31,7 @@ class CalendarMonthHeader extends StatelessWidget {
           ),
           Text(
             '${focusedMonth.year}년 ${focusedMonth.month}월',
-            style: AppTextStyles.titMd,
+            style: AppTextStyles.titMdMedium,
           ),
           IconButton(
             onPressed: onNext,

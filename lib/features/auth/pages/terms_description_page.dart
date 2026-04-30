@@ -106,7 +106,7 @@ class _TermsSectionItem extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(section.title, style: AppTextStyles.titSm),
+          Text(section.title, style: AppTextStyles.titSmMedium),
           const SizedBox(height: AppSpacing.sm),
           Text(
             section.body,

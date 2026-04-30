@@ -28,7 +28,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
     final viewModel = context.watch<NotificationViewModel>();
 
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
       appBar: BackAppBar(
         title: '알림',
         onBackPressed: () => Navigator.pop(context),
@@ -49,7 +49,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
                     isRead: notification.isRead,
                     onTap: () {
                       context.push(
-                        '${AppRoutes.notificationDetail}?id=${notification.id}',
+                        AppRoutes.notificationDetailPath(notification.id),
                       );
                     },
                   );

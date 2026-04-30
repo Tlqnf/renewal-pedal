@@ -57,7 +57,9 @@ class StatisticsMotivationBanner extends StatelessWidget {
               children: [
                 Text(
                   motivationMessage,
-                  style: AppTextStyles.titSm.copyWith(color: AppColors.gray700),
+                  style: AppTextStyles.titSmMedium.copyWith(
+                    color: AppColors.gray800,
+                  ),
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(height: AppSpacing.sm),
@@ -73,7 +75,7 @@ class StatisticsMotivationBanner extends StatelessWidget {
                       ),
                       TextSpan(
                         text: ' km',
-                        style: AppTextStyles.titLg.copyWith(
+                        style: AppTextStyles.titLgMedium.copyWith(
                           color: AppColors.primary500,
                         ),
                       ),

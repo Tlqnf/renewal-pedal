@@ -3,62 +3,62 @@ import 'package:pedal/common/components/appbars/back_appbar.dart';
 import 'package:pedal/common/theme/app_colors.dart';
 import 'package:pedal/common/theme/app_spacing.dart';
 import 'package:pedal/common/theme/app_text_styles.dart';
-import 'package:pedal/domain/my/entities/crew_entity.dart';
 import 'package:pedal/features/my/widgets/crew_card.dart';
 import 'package:pedal/features/my/viewmodels/my_crew_list_view_model.dart';
 import 'package:provider/provider.dart';
 
-class MyCrewListPage extends StatelessWidget {
-  final List<CrewEntity> crewList;
-  final bool isLoading;
-  final String? errorMessage;
+class MyCrewListPage extends StatefulWidget {
+  const MyCrewListPage({super.key});
 
-  final void Function(String crewId) onCrewTap;
-  final VoidCallback onBack;
+  @override
+  State<MyCrewListPage> createState() => _MyCrewListPageState();
+}
 
-  const MyCrewListPage({
-    super.key,
-    required this.crewList,
-    required this.isLoading,
-    required this.errorMessage,
-    required this.onCrewTap,
-    required this.onBack,
-  });
+class _MyCrewListPageState extends State<MyCrewListPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<MyCrewListViewModel>().fetchCrewList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final vm = context.watch<MyCrewListViewModel>();
+
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
       appBar: BackAppBar(
         title: '참여한 크루',
-        onBackPressed: onBack,
+        onBackPressed: () => Navigator.of(context).pop(),
         actions: [
           Text(
-            '${crewList.length}',
-            style: AppTextStyles.titSm.copyWith(color: AppColors.primary),
+            '${vm.crewList.length}',
+            style: AppTextStyles.titSmMedium.copyWith(color: AppColors.primary),
           ),
           SizedBox(width: AppSpacing.md),
         ],
       ),
-      body: _buildBody(),
+      body: _buildBody(vm),
     );
   }
 
-  Widget _buildBody() {
-    if (isLoading) {
+  Widget _buildBody(MyCrewListViewModel vm) {
+    if (vm.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (errorMessage != null) {
+    if (vm.errorMessage != null) {
       return Center(
         child: Text(
-          errorMessage!,
+          vm.errorMessage!,
           style: AppTextStyles.txtSm.copyWith(color: AppColors.textSecondary),
         ),
       );
     }
 
-    if (crewList.isEmpty) {
+    if (vm.crewList.isEmpty) {
       return Center(
         child: Text(
           '참여한 크루가 없습니다',
@@ -75,45 +75,12 @@ class MyCrewListPage extends StatelessWidget {
         mainAxisSpacing: AppSpacing.sm,
         childAspectRatio: 0.85,
       ),
-      itemCount: crewList.length,
+      itemCount: vm.crewList.length,
       itemBuilder: (context, index) {
-        final crew = crewList[index];
-        return CrewCard(crew: crew, onTap: () => onCrewTap(crew.id));
-      },
-    );
-  }
-}
-
-class MyCrewListPageConnected extends StatefulWidget {
-  const MyCrewListPageConnected({super.key});
-
-  @override
-  State<MyCrewListPageConnected> createState() =>
-      _MyCrewListPageConnectedState();
-}
-
-class _MyCrewListPageConnectedState extends State<MyCrewListPageConnected> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<MyCrewListViewModel>().fetchCrewList();
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Consumer<MyCrewListViewModel>(
-      builder: (context, vm, _) {
-        return MyCrewListPage(
-          crewList: vm.crewList,
-          isLoading: vm.isLoading,
-          errorMessage: vm.errorMessage,
-          onCrewTap: vm.navigateToCrewDetail,
-          onBack: () {
-            vm.navigateBack();
-            Navigator.of(context).pop();
-          },
+        final crew = vm.crewList[index];
+        return CrewCard(
+          crew: crew,
+          onTap: () => vm.navigateToCrewDetail(crew.id),
         );
       },
     );

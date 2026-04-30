@@ -25,7 +25,7 @@ class RankingListItem extends StatelessWidget {
               width: 28,
               child: Text(
                 '${entity.rank}',
-                style: AppTextStyles.titSm,
+                style: AppTextStyles.titSmMedium,
                 textAlign: TextAlign.center,
               ),
             ),
@@ -34,13 +34,13 @@ class RankingListItem extends StatelessWidget {
               width: 40,
               height: 40,
               decoration: const BoxDecoration(
-                color: AppColors.gray100,
+                color: AppColors.gray200,
                 shape: BoxShape.circle,
               ),
               child: const Center(
                 child: Icon(
                   Icons.person_rounded,
-                  color: AppColors.gray400,
+                  color: AppColors.gray500,
                   size: 22,
                 ),
               ),

@@ -28,14 +28,14 @@ class MyRoutesListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
       appBar: BackAppBar(
         title: '저장된 경로',
         onBackPressed: onBack,
         actions: [
           Text(
             '$routeCount',
-            style: AppTextStyles.titMd.copyWith(color: AppColors.primary),
+            style: AppTextStyles.titMdMedium.copyWith(color: AppColors.primary),
           ),
           SizedBox(width: AppSpacing.md),
         ],

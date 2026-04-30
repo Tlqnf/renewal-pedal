@@ -25,7 +25,7 @@ class SettingsListItem extends StatelessWidget {
           vertical: AppSpacing.lg,
         ),
         decoration: BoxDecoration(
-          color: AppColors.background,
+          color: AppColors.surface,
           border: Border(bottom: BorderSide(color: AppColors.border)),
         ),
         child: Row(
@@ -33,7 +33,7 @@ class SettingsListItem extends StatelessWidget {
           children: [
             Text(
               label,
-              style: AppTextStyles.titSm.copyWith(
+              style: AppTextStyles.titSmMedium.copyWith(
                 color: isHighlighted
                     ? AppColors.primary
                     : AppColors.textPrimary,

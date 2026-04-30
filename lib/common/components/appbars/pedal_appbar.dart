@@ -22,15 +22,15 @@ class PedalAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: AppColors.background,
+      backgroundColor: AppColors.surface,
       elevation: 0,
       scrolledUnderElevation: 0, // 중요
-      titleSpacing: AppSpacing.lg,
+      titleSpacing: 16,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(title, style: AppTextStyles.titMd),
+          Text(title, style: AppTextStyles.titMdMedium),
           SizedBox(width: AppSpacing.sm),
           Text(
             subSection ?? '',
@@ -39,10 +39,6 @@ class PedalAppBar extends StatelessWidget implements PreferredSizeWidget {
         ],
       ),
       actions: [
-        IconButton(
-          icon: Icon(Icons.search, color: AppColors.textPrimary, size: 24),
-          onPressed: onSearchTap,
-        ),
         IconButton(
           icon: Icon(
             Icons.notifications_none,

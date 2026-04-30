@@ -29,7 +29,7 @@ class DistanceMilestoneBar extends StatelessWidget {
         borderRadius: AppRadius.lgAll,
         boxShadow: [
           BoxShadow(
-            color: AppColors.gray200,
+            color: AppColors.gray300,
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -48,7 +48,7 @@ class DistanceMilestoneBar extends StatelessWidget {
                   Container(
                     height: 10,
                     decoration: BoxDecoration(
-                      color: AppColors.gray100,
+                      color: AppColors.gray200,
                       borderRadius: AppRadius.fullAll,
                     ),
                   ),
@@ -102,7 +102,7 @@ class DistanceMilestoneBar extends StatelessWidget {
                               shape: BoxShape.circle,
                               color: isAchieved
                                   ? AppColors.warning
-                                  : AppColors.gray200,
+                                  : AppColors.gray300,
                               border: Border.all(
                                 color: AppColors.gray0,
                                 width: 2,
@@ -113,7 +113,7 @@ class DistanceMilestoneBar extends StatelessWidget {
                               size: 14,
                               color: isAchieved
                                   ? AppColors.gray0
-                                  : AppColors.gray400,
+                                  : AppColors.gray500,
                             ),
                           ),
                         ],

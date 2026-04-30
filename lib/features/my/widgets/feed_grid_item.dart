@@ -22,10 +22,10 @@ class FeedGridItem extends StatelessWidget {
               feed.thumbnailUrl,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) => Container(
-                color: AppColors.gray100,
+                color: AppColors.gray200,
                 child: Icon(
                   Icons.image_not_supported_outlined,
-                  color: AppColors.gray300,
+                  color: AppColors.gray400,
                   size: 28,
                 ),
               ),

@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:pedal/domain/my/entities/challenge_entity.dart';
 import 'package:pedal/domain/my/entities/crew_entity.dart';
 import 'package:pedal/domain/my/entities/my_profile_entity.dart';
 import 'package:pedal/domain/my/entities/saved_route_entity.dart';
@@ -16,43 +15,48 @@ class MyViewModel extends ChangeNotifier {
   }) : _getMyProfileUseCase = getMyProfileUseCase,
        _getMyActivityUseCase = getMyActivityUseCase;
 
-  int selectedTabIndex = 0;
-  MyProfileEntity? profile;
-  List<ChallengeEntity> challenges = [];
-  List<CrewEntity> crews = [];
-  List<SavedRouteEntity> savedRoutes = [];
-  bool isLoading = false;
-  String? errorMessage;
+  int _selectedTabIndex = 0;
+  MyProfileEntity? _profile;
+  List<CrewEntity> _crews = [];
+  List<SavedRouteEntity> _savedRoutes = [];
+  bool _isLoading = false;
+  String? _errorMessage;
+
+  int get selectedTabIndex => _selectedTabIndex;
+  MyProfileEntity? get profile => _profile;
+  List<CrewEntity> get crews => _crews;
+  List<SavedRouteEntity> get savedRoutes => _savedRoutes;
+  bool get isLoading => _isLoading;
+  String? get errorMessage => _errorMessage;
 
   Future<void> loadAll() async {
-    isLoading = true;
-    errorMessage = null;
+    _isLoading = true;
+    _errorMessage = null;
     notifyListeners();
 
     final profileResult = await _getMyProfileUseCase();
     if (profileResult.failure != null) {
-      errorMessage = profileResult.failure!.message;
-      isLoading = false;
+      _errorMessage = profileResult.failure!.message;
+      _isLoading = false;
       notifyListeners();
       return;
     }
-    profile = profileResult.data;
+    _profile = profileResult.data;
 
     final activityResult = await _getMyActivityUseCase();
     if (activityResult.failure != null) {
-      errorMessage = activityResult.failure!.message;
+      _errorMessage = activityResult.failure!.message;
     } else {
-      challenges = activityResult.challenges ?? [];
-      crews = activityResult.crews ?? [];
-      savedRoutes = activityResult.routes ?? [];
+      _crews = activityResult.crews ?? [];
+      _savedRoutes = activityResult.routes ?? [];
     }
 
-    isLoading = false;
+    _isLoading = false;
     notifyListeners();
   }
 
   void onTabChanged(int index) {
-    selectedTabIndex = index;
+    _selectedTabIndex = index;
     notifyListeners();
   }
 }

@@ -1,20 +1,23 @@
-// ============================================================
-// FILE: toggle_like_usecase.dart
-// LAYER: domain
-// RESPONSIBILITY: 피드 좋아요 토글
-// DEPENDENCIES: FeedRepository
-// ============================================================
-
 import 'package:dartz/dartz.dart';
 import 'package:pedal/domain/failures/failures.dart';
 import 'package:pedal/domain/feed/repositories/feed_repository.dart';
 
-class ToggleLikeUseCase {
+class LikePostUseCase {
   final FeedRepository _repository;
 
-  ToggleLikeUseCase(this._repository);
+  LikePostUseCase(this._repository);
 
   Future<Either<Failure, void>> execute(String postId) {
-    return _repository.toggleLike(postId);
+    return _repository.likePost(postId);
+  }
+}
+
+class UnlikePostUseCase {
+  final FeedRepository _repository;
+
+  UnlikePostUseCase(this._repository);
+
+  Future<Either<Failure, void>> execute(String postId) {
+    return _repository.unlikePost(postId);
   }
 }

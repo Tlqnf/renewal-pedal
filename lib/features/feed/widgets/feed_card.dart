@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:pedal/common/theme/app_colors.dart';
 import 'package:pedal/common/theme/app_text_styles.dart';
 import 'package:pedal/common/theme/app_spacing.dart';
-import 'package:pedal/common/theme/app_radius.dart';
 import 'package:pedal/common/components/indicators/status_indicator_item.dart';
 import 'package:pedal/core/config/app_config.dart';
+import 'package:pedal/core/constants/constants.dart';
 import 'package:pedal/features/feed/widgets/comments_sheet.dart';
 import 'package:pedal/core/utils/helpers/date_formatter.dart';
 
@@ -69,10 +69,7 @@ class _FeedCardState extends State<FeedCard> {
 
   Widget _buildImage(String url) {
     final fallback = Container(
-      decoration: BoxDecoration(
-        color: AppColors.border,
-        borderRadius: AppRadius.lgAll,
-      ),
+      decoration: BoxDecoration(color: AppColors.border),
       child: Icon(Icons.map, color: AppColors.textSecondary, size: 48),
     );
     final fullUrl = url.startsWith('/')
@@ -116,44 +113,97 @@ class _FeedCardState extends State<FeedCard> {
       context: context,
       isScrollControlled: true,
       useRootNavigator: true,
-      useSafeArea: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
-      builder: (context) => CommentsSheet(
-        postId: widget.postId,
-        commentCount: widget.comments,
-        userAvatarUrl: widget.userAvatarUrl,
-        username: widget.username,
-      ),
+      builder: (context) =>
+          CommentsSheet(postId: widget.postId, commentCount: widget.comments),
     );
   }
 
   void _showMenuBottomSheet() {
     showModalBottomSheet(
       context: context,
-      builder: (context) => Container(
-        padding: EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (widget.isAuthor) ...[
-              ListTile(
-                leading: Icon(Icons.report, color: AppColors.primary),
-                title: Text(
-                  '피드 수정',
-                  style: TextStyle(color: AppColors.primary),
+      isScrollControlled: true,
+      useRootNavigator: true,
+      builder: (context) => DraggableScrollableSheet(
+        initialChildSize: 0.3,
+        minChildSize: 0.25,
+        maxChildSize: 0.3,
+        expand: false,
+        builder: (context, scrollController) => Container(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // 핸들 — scrollController에 연결해야 드래그 인식
+              SingleChildScrollView(
+                controller: scrollController,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: AppSpacing.xl),
+                  child: Center(
+                    child: Container(
+                      width: 50,
+                      height: 4,
+                      decoration: BoxDecoration(
+                        color: AppColors.border,
+                        borderRadius: BorderRadius.circular(2),
+                      ),
+                    ),
+                  ),
                 ),
+              ),
+              if (widget.isAuthor) ...[
+                ListTile(
+                  leading: Icon(
+                    Icons.report,
+                    color: AppColors.primary,
+                    size: 24,
+                  ),
+                  title: Text(
+                    '피드 수정',
+                    style: AppTextStyles.txtMd.copyWith(
+                      color: AppColors.primary,
+                    ),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    widget.onReportFeed?.call();
+                  },
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.report,
+                    color: AppColors.primary,
+                    size: 24,
+                  ),
+                  title: Text(
+                    '피드 삭제',
+                    style: AppTextStyles.txtMd.copyWith(color: AppColors.error),
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                    widget.onReportFeed?.call();
+                  },
+                ),
+              ],
+              ListTile(
+                leading: Icon(
+                  Icons.route,
+                  color: AppColors.textPrimary,
+                  size: 24,
+                ),
+                title: Text('경로 저장', style: AppTextStyles.txtMd),
                 onTap: () {
                   Navigator.pop(context);
-                  widget.onReportFeed?.call();
+                  widget.onSaveRoute?.call();
                 },
               ),
               ListTile(
-                leading: Icon(Icons.report, color: AppColors.primary),
+                leading: Icon(Icons.report, color: AppColors.error, size: 24),
                 title: Text(
-                  '피드 삭제',
-                  style: TextStyle(color: AppColors.primary),
+                  '피드 신고',
+                  style: AppTextStyles.txtMd.copyWith(color: AppColors.error),
                 ),
                 onTap: () {
                   Navigator.pop(context);
@@ -161,23 +211,7 @@ class _FeedCardState extends State<FeedCard> {
                 },
               ),
             ],
-            ListTile(
-              leading: Icon(Icons.route, color: AppColors.textPrimary),
-              title: Text('경로 저장'),
-              onTap: () {
-                Navigator.pop(context);
-                widget.onSaveRoute?.call();
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.report, color: AppColors.primary),
-              title: Text('피드 신고', style: TextStyle(color: AppColors.primary)),
-              onTap: () {
-                Navigator.pop(context);
-                widget.onReportFeed?.call();
-              },
-            ),
-          ],
+          ),
         ),
       ),
     );
@@ -200,16 +234,31 @@ class _FeedCardState extends State<FeedCard> {
                 children: [
                   Row(
                     children: [
-                      CircleAvatar(
-                        radius: 20,
-                        backgroundImage: NetworkImage(
-                          widget.userAvatarUrl.startsWith('/')
-                              ? '${AppConfig.baseUrl.replaceAll(RegExp(r'/$'), '')}${widget.userAvatarUrl}'
-                              : widget.userAvatarUrl,
-                        ),
+                      ClipOval(
+                        child: widget.userAvatarUrl.isNotEmpty
+                            ? Image.network(
+                                widget.userAvatarUrl.startsWith('/')
+                                    ? '${AppConfig.baseUrl.replaceAll(RegExp(r'/$'), '')}${widget.userAvatarUrl}'
+                                    : widget.userAvatarUrl,
+                                width: 40,
+                                height: 40,
+                                fit: BoxFit.cover,
+                                errorBuilder: (_, _, _) => Image.asset(
+                                  AppConstants.profile,
+                                  width: 40,
+                                  height: 40,
+                                  fit: BoxFit.cover,
+                                ),
+                              )
+                            : Image.asset(
+                                AppConstants.profile,
+                                width: 40,
+                                height: 40,
+                                fit: BoxFit.cover,
+                              ),
                       ),
                       SizedBox(width: AppSpacing.md),
-                      Text(widget.username, style: AppTextStyles.txtSm),
+                      Text(widget.username, style: AppTextStyles.titSmMedium),
                     ],
                   ),
                   GestureDetector(
@@ -237,13 +286,7 @@ class _FeedCardState extends State<FeedCard> {
                   });
                 },
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: ClipRRect(
-                      borderRadius: AppRadius.lgAll,
-                      child: _buildImage(widget.imageUrls[index]),
-                    ),
-                  );
+                  return _buildImage(widget.imageUrls[index]);
                 },
               ),
             ),
@@ -285,7 +328,9 @@ class _FeedCardState extends State<FeedCard> {
                         child: Row(
                           children: [
                             Icon(
-                              _isLiked ? Icons.thumb_up : Icons.thumb_up,
+                              _isLiked
+                                  ? Icons.thumb_up
+                                  : Icons.thumb_up_outlined,
                               color: _isLiked
                                   ? AppColors.primary
                                   : AppColors.textSecondary,
@@ -338,9 +383,12 @@ class _FeedCardState extends State<FeedCard> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // TODO: 해시태그 — Wrap + '#태그' chip 형태로 description 아래 표시
+                  // 예: #한강 #출근라이딩 #힐클라이밍
+
                   // 제목
-                  Text(widget.title, style: AppTextStyles.titLg),
-                  SizedBox(height: AppSpacing.md),
+                  Text(widget.title, style: AppTextStyles.titSmBold),
+                  SizedBox(height: 8),
 
                   // 내용 + 더보기/접기
                   Column(
@@ -354,7 +402,7 @@ class _FeedCardState extends State<FeedCard> {
                             ? TextOverflow.visible
                             : TextOverflow.ellipsis,
                       ),
-                      SizedBox(height: AppSpacing.xs),
+                      SizedBox(height: 4),
                       GestureDetector(
                         onTap: () {
                           setState(() {
@@ -363,8 +411,8 @@ class _FeedCardState extends State<FeedCard> {
                         },
                         child: Text(
                           _isExpanded ? '접기' : '더보기',
-                          style: AppTextStyles.titLg.copyWith(
-                            color: AppColors.textSecondary,
+                          style: AppTextStyles.txtSm.copyWith(
+                            color: AppColors.textThird,
                           ),
                         ),
                       ),
@@ -377,7 +425,7 @@ class _FeedCardState extends State<FeedCard> {
                   Text(
                     DateFormatter.timeAgo(widget.date),
                     style: AppTextStyles.txtSm.copyWith(
-                      color: AppColors.textDisabled,
+                      color: AppColors.textThird,
                     ),
                   ),
                 ],

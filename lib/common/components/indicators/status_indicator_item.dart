@@ -17,7 +17,7 @@ class StatusIndicatorItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isActive = status == StatusIndicatorType.active;
-    final color = isActive ? AppColors.primary200 : AppColors.border;
+    final color = isActive ? AppColors.primary400 : AppColors.border;
 
     if (isActive) {
       // Active: Pill shape (타원형 캡슐)

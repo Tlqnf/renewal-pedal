@@ -19,7 +19,7 @@ class DailyRewardMessageCard extends StatelessWidget {
         borderRadius: AppRadius.lgAll,
         boxShadow: [
           BoxShadow(
-            color: AppColors.gray200,
+            color: AppColors.gray300,
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),

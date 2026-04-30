@@ -1,10 +1,3 @@
-// ============================================================
-// FILE: get_feed_list_usecase.dart
-// LAYER: domain
-// RESPONSIBILITY: 피드 목록 조회
-// DEPENDENCIES: FeedRepository
-// ============================================================
-
 import 'package:dartz/dartz.dart';
 import 'package:pedal/domain/feed/entities/feed_entity.dart';
 import 'package:pedal/domain/failures/failures.dart';

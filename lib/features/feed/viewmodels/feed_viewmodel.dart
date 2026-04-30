@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:pedal/data/sources/secure_storage.dart';
 import 'package:pedal/domain/feed/entities/comment_entity.dart';
 import 'package:pedal/domain/feed/entities/feed_entity.dart';
 import 'package:pedal/domain/feed/entities/feed_status_entity.dart';
+import 'package:pedal/domain/feed/use_cases/toggle_bookmark_usecase.dart';
 import 'package:pedal/domain/feed/use_cases/create_comment_usecase.dart';
 import 'package:pedal/domain/feed/use_cases/create_feed_usecase.dart';
 import 'package:pedal/domain/feed/use_cases/delete_feed_usecase.dart';
@@ -12,15 +12,16 @@ import 'package:pedal/domain/feed/use_cases/get_comments_usecase.dart';
 import 'package:pedal/domain/feed/use_cases/get_feed_list_usecase.dart';
 import 'package:pedal/domain/feed/use_cases/get_feed_status_usecase.dart';
 import 'package:pedal/domain/feed/use_cases/get_replies_usecase.dart';
-import 'package:pedal/domain/feed/use_cases/toggle_bookmark_usecase.dart';
-import 'package:pedal/domain/feed/use_cases/toggle_comment_like_usecase.dart';
 import 'package:pedal/domain/feed/use_cases/toggle_like_usecase.dart';
+import 'package:pedal/domain/feed/use_cases/toggle_comment_like_usecase.dart';
 import 'package:pedal/domain/feed/use_cases/update_feed_usecase.dart';
 
 class FeedViewModel extends ChangeNotifier {
   final GetFeedListUseCase _getFeedListUseCase;
-  final ToggleLikeUseCase _toggleLikeUseCase;
-  final ToggleBookmarkUseCase _toggleBookmarkUseCase;
+  final LikePostUseCase _likePostUseCase;
+  final UnlikePostUseCase _unlikePostUseCase;
+  final BookmarkPostUseCase _bookmarkPostUseCase;
+  final UnbookmarkPostUseCase _unbookmarkPostUseCase;
   final GetCommentsUseCase _getCommentsUseCase;
   final CreateCommentUseCase _createCommentUseCase;
   final ToggleCommentLikeUseCase _toggleCommentLikeUseCase;
@@ -29,12 +30,14 @@ class FeedViewModel extends ChangeNotifier {
   final UpdateFeedUseCase _updateFeedUseCase;
   final DeleteFeedUseCase _deleteFeedUseCase;
   final GetFeedStatusUseCase _getFeedStatusUseCase;
-  final SecureStorage _secureStorage;
+  final String? _initialUserId;
 
   FeedViewModel(
     this._getFeedListUseCase,
-    this._toggleLikeUseCase,
-    this._toggleBookmarkUseCase,
+    this._likePostUseCase,
+    this._unlikePostUseCase,
+    this._bookmarkPostUseCase,
+    this._unbookmarkPostUseCase,
     this._getCommentsUseCase,
     this._createCommentUseCase,
     this._toggleCommentLikeUseCase,
@@ -42,9 +45,9 @@ class FeedViewModel extends ChangeNotifier {
     this._createFeedUseCase,
     this._updateFeedUseCase,
     this._deleteFeedUseCase,
-    this._getFeedStatusUseCase,
-    this._secureStorage,
-  );
+    this._getFeedStatusUseCase, {
+    String? currentUserId,
+  }) : _initialUserId = currentUserId;
 
   List<FeedEntity> _feeds = [];
   FeedEntity? _feedDetail;
@@ -91,7 +94,7 @@ class FeedViewModel extends ChangeNotifier {
     _errorMessage = null;
     notifyListeners();
 
-    _currentUserId ??= await _secureStorage.readUserId();
+    _currentUserId ??= _initialUserId;
 
     final result = await _getFeedListUseCase.execute();
 
@@ -117,12 +120,20 @@ class FeedViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  /// 좋아요 상태에 따라 likePost / unlikePost 호출
   Future<void> toggleLike(String feedId) async {
-    final result = await _toggleLikeUseCase.execute(feedId);
+    final status = _feedStatuses[feedId];
+    final isCurrentlyLiked = status?.isLiked ?? false;
+
+    final result = isCurrentlyLiked
+        ? await _unlikePostUseCase.execute(feedId)
+        : await _likePostUseCase.execute(feedId);
+
     result.fold((failure) => debugPrint('좋아요 토글 실패: ${failure.message}'), (_) {
       final index = _feeds.indexWhere((f) => f.id == feedId);
       if (index != -1) {
         final feed = _feeds[index];
+        final delta = isCurrentlyLiked ? -1 : 1;
         _feeds[index] = FeedEntity(
           id: feed.id,
           userId: feed.userId,
@@ -133,17 +144,29 @@ class FeedViewModel extends ChangeNotifier {
           title: feed.title,
           description: feed.description,
           date: feed.date,
-          likes: feed.likes + 1,
+          likes: feed.likes + delta,
           comments: feed.comments,
           isBookmarked: feed.isBookmarked,
         );
-        notifyListeners();
       }
+      // 상태 캐시 업데이트
+      _feedStatuses[feedId] = FeedStatusEntity(
+        isLiked: !isCurrentlyLiked,
+        isBookmarked: status?.isBookmarked ?? false,
+      );
+      notifyListeners();
     });
   }
 
+  /// 북마크 상태에 따라 bookmarkPost / unbookmarkPost 호출
   Future<void> toggleBookmark(String feedId) async {
-    final result = await _toggleBookmarkUseCase.execute(feedId);
+    final status = _feedStatuses[feedId];
+    final isCurrentlyBookmarked = status?.isBookmarked ?? false;
+
+    final result = isCurrentlyBookmarked
+        ? await _unbookmarkPostUseCase.execute(feedId)
+        : await _bookmarkPostUseCase.execute(feedId);
+
     result.fold((failure) => debugPrint('북마크 토글 실패: ${failure.message}'), (_) {
       final index = _feeds.indexWhere((f) => f.id == feedId);
       if (index != -1) {
@@ -160,10 +183,15 @@ class FeedViewModel extends ChangeNotifier {
           date: feed.date,
           likes: feed.likes,
           comments: feed.comments,
-          isBookmarked: !feed.isBookmarked,
+          isBookmarked: !isCurrentlyBookmarked,
         );
-        notifyListeners();
       }
+      // 상태 캐시 업데이트
+      _feedStatuses[feedId] = FeedStatusEntity(
+        isLiked: status?.isLiked ?? false,
+        isBookmarked: !isCurrentlyBookmarked,
+      );
+      notifyListeners();
     });
   }
 

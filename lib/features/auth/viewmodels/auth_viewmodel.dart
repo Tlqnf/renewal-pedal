@@ -1,25 +1,31 @@
 import 'package:flutter/foundation.dart';
 import 'package:pedal/domain/auth/entities/auth_result_entity.dart';
 import 'package:pedal/domain/auth/entities/user_entity.dart';
-import 'package:pedal/domain/auth/repositories/auth_repository.dart';
 import 'package:pedal/domain/auth/use_cases/delete_account_usecase.dart';
 import 'package:pedal/domain/auth/use_cases/get_me_usecase.dart';
+import 'package:pedal/domain/auth/use_cases/get_cached_access_token_usecase.dart';
+import 'package:pedal/domain/auth/use_cases/get_cached_user_id_usecase.dart';
+import 'package:pedal/domain/auth/use_cases/clear_tokens_usecase.dart';
 // import 'package:pedal/domain/use_cases/my/update_fcm_token_usecase.dart';
 // import 'package:pedal/services/fcm/fcm_service.dart';
 
 enum AuthState { initial, loading, loggedOut, needsProfileSetup, loggedIn }
 
 class AuthViewModel extends ChangeNotifier {
-  final AuthRepository _authRepository;
   final DeleteAccountUseCase _deleteAccountUseCase;
   final GetMeUseCase _getMeUseCase;
+  final GetCachedAccessTokenUseCase _getCachedAccessTokenUseCase;
+  final GetCachedUserIdUseCase _getCachedUserIdUseCase;
+  final ClearTokensUseCase _clearTokensUseCase;
   // final UpdateFcmTokenUseCase _updateFcmTokenUseCase;
   // final FcmService _fcmService;
 
   AuthViewModel(
-    this._authRepository,
     this._deleteAccountUseCase,
     this._getMeUseCase,
+    this._getCachedAccessTokenUseCase,
+    this._getCachedUserIdUseCase,
+    this._clearTokensUseCase,
     // this._updateFcmTokenUseCase,
     // this._fcmService,
   );
@@ -67,10 +73,10 @@ class AuthViewModel extends ChangeNotifier {
     _state = AuthState.loading;
     notifyListeners();
 
-    final token = await _authRepository.getCachedAccessToken();
+    final token = await _getCachedAccessTokenUseCase.execute();
     if (token != null) {
       _accessToken = token;
-      _userId = await _authRepository.getCachedUserId();
+      _userId = await _getCachedUserIdUseCase.execute();
       _state = AuthState.loggedIn;
       // await _registerFcmToken();
     } else {
@@ -80,31 +86,34 @@ class AuthViewModel extends ChangeNotifier {
   }
 
   /// 소셜 로그인 성공 후 OnboardingViewModel에서 호출
-  void onLoginSuccess(AuthResultEntity result) {
+  Future<void> onLoginSuccess(AuthResultEntity result) async {
     _accessToken = result.accessToken;
     _errorMessage = null;
 
     if (result.isNewUser) {
       _signupToken = result.signupToken;
       _state = AuthState.needsProfileSetup;
+      notifyListeners();
     } else {
       _signupToken = null;
       _state = AuthState.loggedIn;
       // _registerFcmToken();
+      notifyListeners();
+      await loadMe();
     }
-    notifyListeners();
   }
 
   /// 프로필 초기 설정 완료 후 호출
-  void completeProfileSetup() {
+  Future<void> completeProfileSetup() async {
     _state = AuthState.loggedIn;
     // _registerFcmToken();
     notifyListeners();
+    await loadMe();
   }
 
   /// 프로필 설정 취소 — signupToken 폐기 후 loggedOut 전환
   Future<void> cancelProfileSetup() async {
-    await _authRepository.clearTokens();
+    await _clearTokensUseCase.execute();
     _accessToken = null;
     _signupToken = null;
     _errorMessage = null;
@@ -114,7 +123,7 @@ class AuthViewModel extends ChangeNotifier {
 
   /// 로그아웃 — SecureStorage 전체 삭제(토큰 + user_id) 후 loggedOut 상태 전환
   Future<void> logout() async {
-    await _authRepository.clearTokens();
+    await _clearTokensUseCase.execute();
     _accessToken = null;
     _userId = null;
     _signupToken = null;

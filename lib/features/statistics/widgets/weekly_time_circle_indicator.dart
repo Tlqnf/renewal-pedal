@@ -28,7 +28,7 @@ class WeeklyTimeCircleIndicator extends StatelessWidget {
         borderRadius: AppRadius.lgAll,
         boxShadow: [
           BoxShadow(
-            color: AppColors.gray200,
+            color: AppColors.gray300,
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),
@@ -46,7 +46,7 @@ class WeeklyTimeCircleIndicator extends StatelessWidget {
             height: 100,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: AppColors.primary200, width: 3),
+              border: Border.all(color: AppColors.primary400, width: 3),
             ),
             child: Center(
               child: Text(

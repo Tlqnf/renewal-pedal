@@ -41,7 +41,7 @@ class CancelButton extends StatelessWidget {
         child: Center(
           child: Text(
             label,
-            style: AppTextStyles.titMd.copyWith(color: AppColors.primary),
+            style: AppTextStyles.titMdMedium.copyWith(color: AppColors.primary),
           ),
         ),
       ),
